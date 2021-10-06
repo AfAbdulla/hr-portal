@@ -1,0 +1,2535 @@
+import React, {useState, useEffect} from 'react';
+import Aux from "../../../hoc/Auxiliary";
+import {Button, Container, Row, Col, Form, Tabs, Tab} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import Select from 'react-select';
+import {mainAxios} from "../../../components/Axios/axios";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import Swal from 'sweetalert2';
+
+const WorkModeOptions = [
+    {value: 'DAILY', label: 'Gündəlik'},
+    {value: 'ALTERNATELY', label: 'Növbəli'},
+]
+
+
+function CreateOperation() {
+    const [operationName, setOperationName] = useState([]);
+    const [staff, setStaff] = useState([]);
+    const [position, setPosition] = useState([])
+
+
+    const [selectedOperationName, setSelectedOperationName] = useState(null);
+    const [selectedStaff, setSelectedStaff] = useState(null);
+    const [selectedPosition, setSelectedPosition] = useState(null);
+    const [selectedNewWorkMode, setSelectedNewWorkMode] = useState(null);
+
+    const [key, setKey] = useState('')
+    const [noteArr, setNoteArr] = useState([""]);
+    const [firedDate, setFiredDate] = useState(null);
+    const [joinDate, setJoinDate] = useState(null);
+    const [changeDate, setChangeDate] = useState(null);
+    const [save, setSave] = useState(false)
+
+    const [firedReason, setFiredReason] = useState('');
+    const [compensation, setCompensation] = useState('');
+    const [department, setDepartment] = useState('')
+    const [subDepartment, setSubDepartment] = useState('');
+    const [employeeId, setEmployeeId] = useState('');
+    const [positionId, setPositionId] = useState('');
+    const [tab, setTab] = useState('')
+    //const [staffId, setStaffId] = useState('');
+    const [documentId, setDocumentId] = useState('');
+    const [salary, setSalary] = useState('');
+    //const [vacancyCategory, setVacancyCategory] = useState('');
+    //const [vacancyCount, setVacancyCount] = useState('');
+    const [vacancyName, setVacancyName] = useState('');
+    const [workMode, setWorkMode] = useState('');
+    //const [workPlace, setWorkPlace] = useState('');
+    const [mainOfOrder, setMainOfOrder] = useState('');
+    const [testPeriod, setTestPeriod] = useState('');
+    const [additionalSalary, setAdditionalSalary] = useState('');
+    const [ownAdditionalSalary, setOwnAdditionalSalary] = useState('');
+    const [newSalary, setNewSalary] = useState('');
+    const [newAdditionalSalary, setNewAdditionalSalary] = useState('');
+    const [newOwnAdditionalSalary, setNewOwnAdditionalSalary] = useState('');
+    //const [newDepartmentName, setNewDepartmentName] = useState('');
+    //const [newVacancyName, setNewVacancyName] = useState('');
+    const [financialHelp, setFinancialHelp] = useState('');
+    const [achievement, setAchievement] = useState('');
+    const [changePeriod, setChangePeriod] = useState('');
+
+    /*position*/
+    const [positionDepartment, setPositionDepartment] = useState('')
+    const [positionSubDepartment, setPositionSubDepartment] = useState('');
+    const [positionVacancyName, setPositionVacancyName] = useState('');
+    const [positionSalary, setPositionSalary] = useState('');
+    const [positionAdditionalSalary, setPositionAdditionalSalary] = useState('');
+    const [positionOwnAdditionalSalary, setPositionOwnAdditionalSalary] = useState('');
+    const [positionVacancyCount, setPositionVacancyCount] = useState('');
+    const [positionWorkMode, setPositionWorkMode] = useState('');
+    const [positionVacancyCategory, setPositionVacancyCategory] = useState('');
+    const [positionWorkPlace, setPositionWorkPlace] = useState('');
+
+
+    const getOperationName = () => {
+        mainAxios({
+            method: 'get',
+            url: '/document/types',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            setOperationName(res.data.data);
+        });
+    }
+
+    const getStaff = (value) => {
+        if (value == "EMPLOYEE") {
+            mainAxios({
+                method: 'get',
+                url: '/employee',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+            }).then((res) => {
+                setStaff(res.data.data.data);
+            });
+        } else if (value == "STUFF") {
+            mainAxios({
+                method: 'get',
+                url: '/position',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+            }).then((res) => {
+                setStaff(res.data.data.data);
+            });
+        }
+    }
+
+    const getEmployee = (id) => {
+        mainAxios({
+            method: 'get',
+            url: 'document/employee/' + id,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            let data = res.data.data
+            setDepartment(data.departmentName);
+            setSubDepartment(data.subDepartmentName);
+            setVacancyName(data.vacancyName);
+            setSalary(data.salary)
+            setOwnAdditionalSalary(data.ownAdditionalSalary);
+            setAdditionalSalary(data.additionalSalary);
+            setWorkMode(data.workMode)
+        });
+    }
+
+    const getPosition = () => {
+        mainAxios({
+            method: 'get',
+            url: '/document/position',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            let data = res.data.data;
+            let arr = [];
+            data.forEach(function (element) {
+                arr.push({label: element, value: element})
+            });
+            setPosition(arr)
+        });
+    }
+
+    const getPositionIdData = (id) => {
+        mainAxios({
+            method: 'get',
+            url: '/document/position/' + id,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            let data = res.data.data
+            setPositionDepartment(data.departmentName);
+            setPositionSubDepartment(data.subDepartmentName);
+            setPositionSalary(data.salary);
+            setPositionVacancyName(data.vacancyName);
+            setPositionVacancyCount(data.vacancyCount);
+            setPositionVacancyCategory(data.vacancyCategory);
+            setPositionWorkMode(data.workMode);
+            setPositionWorkPlace(data.workPlace);
+            setPositionAdditionalSalary(data.additionalSalary)
+        });
+    }
+
+    const addNote = () => {
+        setNoteArr(noteArr => [...noteArr, " "])
+    }
+
+    const resetData = () => {
+        setSelectedStaff(null);
+        setSelectedPosition(null);
+        setMainOfOrder('');
+        setDepartment('');
+        setSubDepartment('');
+        setSalary('');
+        setAdditionalSalary('');
+        setOwnAdditionalSalary('');
+        setPositionSalary('');
+        setPositionVacancyCount('');
+        setPositionSubDepartment('');
+        setPositionDepartment('');
+        setPositionVacancyCategory('');
+        setPositionAdditionalSalary('');
+        setPositionWorkMode('');
+        setPositionWorkPlace('');
+        setPositionVacancyName('');
+        setOwnAdditionalSalary(null);
+        setNewOwnAdditionalSalary('');
+        setChangePeriod('');
+        setNewAdditionalSalary('');
+        setJoinDate(null);
+        setChangeDate(null);
+        setTestPeriod('');
+        setNoteArr([""])
+    }
+
+    const senData = () => {
+        const data = {
+            "achievement": achievement !== "" ? parseFloat(achievement) : null,
+            "compensation": compensation !== "" ? parseFloat(compensation) : null,
+            "demandedSalary": null,
+            "dismissalDate": firedDate !== null ? moment(firedDate).format("MM-DD-YYYY") : null,
+            "dismissalReason": firedReason !== "" ? firedReason : null,
+            "documentType": documentId ? documentId : null,
+            "employeeId": employeeId ? employeeId : null,
+            "notes": noteArr.length > 0 ? noteArr : null,
+            "positionId": positionId ? positionId : null,
+            "mainOfOrder": mainOfOrder !== "" ? mainOfOrder : null,
+            "changeDate": changeDate !== null ? moment(changeDate).format("MM-DD-YYYY") : null,
+            "changePeriod": changePeriod !== "" ? parseFloat(changePeriod) : null,
+            "joinDate": joinDate !== null ? moment(joinDate).format("MM-DD-YYYY") : null,
+            "newAdditionalSalary": newAdditionalSalary !== "" ? newAdditionalSalary : null,
+            "newOwnAdditionalSalary": newOwnAdditionalSalary !== '' ? newOwnAdditionalSalary : null,
+            "newSalary": newSalary !== "" ? newSalary : null,
+            "ownAdditionalSalary": ownAdditionalSalary !== "" ? parseFloat(ownAdditionalSalary) : null,
+            "testPeriod": testPeriod !== "" ? parseFloat(testPeriod) : null,
+            "titleDepartment": null,
+            "titleFullName": null,
+            "newWorkMode": selectedNewWorkMode !== null ? selectedNewWorkMode.value : null,
+            "financialHelp": financialHelp !== "" ? parseFloat(financialHelp) : null,
+        }
+
+        mainAxios({
+            method: 'post',
+            url: '/document',
+            data: data,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        }).then((res) => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Məlumatlar qeyd edildi!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setSelectedOperationName('');
+            setTab('');
+            resetData();
+            setSave(false)
+        });
+    }
+
+    const customStyles = {
+        option: (provided, state) => ({
+            ...provided,
+            color: '#040647',
+            backgroundColor: state.isSelected ? '#F3F8FF' : 'transparent',
+            padding: '10px',
+            margin: '0',
+            fontSize: '16px',
+            "&:first-of-type": {
+                borderRadius: '2px 2px 0 0',
+            },
+            "&:hover": {
+                backgroundColor: '#FAFCFF',
+            },
+            "&:last-child": {
+                borderBottom: 'none',
+                borderRadius: '0 0 2px 2px',
+            },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative'
+
+        }),
+
+        indicatorSeparator: () => {
+        },
+
+        indicatorsContainer: (provided, state) => ({
+            ...provided,
+        }),
+
+        control: (provided) => ({
+            ...provided,
+            minHeight: '43px',
+            fontSize: '14px',
+            padding: '0',
+            margin: '0',
+            color: '#66615b',
+            backgroundColor: '#FAFCFF',
+            boxShadow: 'none',
+            border: '1px solid rgba(4, 6, 71, 0.1)',
+            "&:hover": {
+                borderColor: 'rgba(4, 6, 71, 0.1)',
+            },
+
+        }),
+
+        container: (provided) => ({
+            ...provided,
+            width: '100%'
+        }),
+
+        menu: (provided) => ({
+            ...provided,
+            borderRadius: '2px',
+            padding: '0',
+            margin: '0',
+            borderColor: 'red',
+            width: '100%'
+        }),
+
+        dropdownIndicator: defaultStyles => ({
+            ...defaultStyles,
+            'svg path': {
+                fill: 'rgba(24,24,24, .8)',
+            },
+
+            'svg': {
+                width: '18px'
+            },
+        }),
+
+        menuList: base => ({
+            ...base,
+            padding: 0,
+            borderColor: 'red'
+
+        })
+
+    };
+
+    useEffect(() => {
+        getOperationName();
+        getPosition()
+    }, []);
+
+    return (
+        <Aux>
+            <div className="create-operation">
+                <Container fluid>
+                    <div className="title-block flex">
+                        <div className="title flex-center">
+                            <Link to="/operationSchedule" className="flex">
+                                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M23.3333 14H7.58333M12.25 8.75L7 14L12.25 19.25" stroke="#193651"
+                                          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </Link>
+                            Kadr əməliyyatı yarat
+                        </div>
+                    </div>
+                    <div className="block">
+                        <Form className="form-list">
+                            <Row>
+                                <Col xs={12}>
+                                    <Form.Group>
+                                        <span className="input-title">Əmrin adı *</span>
+                                        <Select
+                                            placeholder="Vəzifə dəyişikliyi"
+                                            value={selectedOperationName}
+                                            onChange={(val) => {
+                                                setSelectedOperationName(val);
+                                                resetData()
+                                                setDocumentId(val.value)
+                                                getStaff(val.label);
+                                                setSave(true);
+                                                setTab(val.value)
+                                                setKey(val.label)
+                                            }}
+                                            options={operationName}
+                                            getOptionLabel={(option) => (option.key)}
+                                            styles={customStyles}
+                                        />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <div className="operation-tab">
+                                <Tabs activeKey={tab}>
+
+                                    <Tab eventKey="1" title="" disabled={tab !== "1"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşçinin nömrəsi</span>
+                                                    <Select
+                                                        placeholder="İşçinin nömrəsini seç"
+                                                        value={selectedPosition}
+                                                        onChange={(val) => {
+                                                            setSelectedPosition(val);
+                                                            getPositionIdData(val.value);
+                                                            setPositionId(val.value)
+                                                        }}
+                                                        options={position}
+                                                        getOptionLabel={(option) => option.value}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əmrin əsası</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Əmrin əsası daxil edin"
+                                                                      value={mainOfOrder}
+                                                                      onChange={(e) => setMainOfOrder(e.target.value)}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştat cədvəli dəyişiklik edilən struktur bölmə: </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="Ştat cədvəli dəyişiklik edilən struktur bölmə adı daxil edin"
+                                                            value={positionDepartment} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Tabe struktur bölmənin adı </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Tabe struktur bölmənin adı"
+                                                                      value={positionSubDepartment} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştat vahidinin adı (vəzifə) </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Ştat vahidinin adı (vəzifə)"
+                                                                      value={positionVacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştat vahidi (say) </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Ştat vahidi (say)  "
+                                                                      value={positionVacancyCount} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əmək haqqı AZN(vergilər və digər ödənişlər daxil olmaqla)</span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="Əmək haqqı AZN(vergilər və digər ödənişlər daxil olmaqla)"
+                                                            value={positionSalary} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İş rejimi</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İş rejimi"
+                                                                      value={positionWorkMode} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">Təsis edilən vəzifənin kateqoriyası</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Təsis edilən vəzifənin kateqoriyası"
+                                                                      value={positionVacancyCategory} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İş yerinin ünvanı</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İş yerinin ünvanı"
+                                                                      value={positionWorkPlace} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </Tab>
+
+                                    <Tab eventKey="2" title="" disabled={tab !== "2"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşçinin nömrəsi</span>
+                                                    <Select
+                                                        placeholder="İşçinin nömrəsini seç"
+                                                        value={selectedPosition}
+                                                        onChange={(val) => {
+                                                            setSelectedPosition(val);
+                                                            getPositionIdData(val.value);
+                                                            setPositionId(val.value)
+                                                        }}
+                                                        options={position}
+                                                        getOptionLabel={(option) => option.value}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əmrin əsası</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Əmrin əsası daxil edin"
+                                                                      value={mainOfOrder}
+                                                                      onChange={(e) => setMainOfOrder(e.target.value)}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştat cədvəli dəyişiklik edilən struktur bölmə: </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="Ştat cədvəli dəyişiklik edilən struktur bölmə adı daxil edin"
+                                                            value={positionDepartment} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Tabe struktur bölmənin adı </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Tabe struktur bölmənin adı"
+                                                                      value={positionSubDepartment} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştat vahidinin adı (vəzifə) </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Ştat vahidinin adı (vəzifə)"
+                                                                      value={positionVacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştat vahidi (say) </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Ştat vahidi (say)  "
+                                                                      value={positionVacancyCount} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əmək haqqı AZN(vergilər və digər ödənişlər daxil olmaqla)</span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="Əmək haqqı AZN(vergilər və digər ödənişlər daxil olmaqla)"
+                                                            value={positionSalary} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İş rejimi</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İş rejimi"
+                                                                      value={positionWorkMode} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İş yerinin ünvanı</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İş yerinin ünvanı"
+                                                                      value={positionWorkPlace} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </Tab>
+
+                                    <Tab eventKey="7" title="" disabled={tab !== "7"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əsaslandırma</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Əmrin əsası daxil edin"
+                                                                      value={mainOfOrder}
+                                                                      onChange={(e) => setMainOfOrder(e.target.value)}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin adı, soyadı, atasının adı *</span>
+                                                    <Select
+                                                        placeholder="Vəzifə dəyişikliyi"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştatın nömrəsi</span>
+                                                    <Select
+                                                        placeholder="İşçinin nömrəsini seç"
+                                                        value={selectedPosition}
+                                                        onChange={(val) => {
+                                                            setSelectedPosition(val);
+                                                            getPositionIdData(val.value);
+                                                            setPositionId(val.value);
+                                                        }}
+                                                        options={position}
+                                                        getOptionLabel={(option) => option.value}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşə qəbul olduğu struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşə qəbul olduğu struktur bölmə daxil edin"
+                                                            value={positionDepartment} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşə qəbul olduğu alt struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Tabe struktur bölmənin adı"
+                                                                      value={positionSubDepartment} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşə qəbul olduğu vəzifə </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşə qəbul olduğu vəzifə"
+                                                                      value={positionVacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşə qəbul tarixi *</span>
+                                                    <Form.Label className="relative m-0">
+                                                        <DatePicker selected={joinDate}
+                                                                    dateFormat="dd-MM-yyyy"
+                                                                    placeholderText="DD-MM-YYYY"
+                                                                    showMonthDropdown
+                                                                    showYearDropdown
+                                                                    dropdownMode="select"
+                                                                    onChange={(date) => setJoinDate(date)}/>
+                                                        <Button className="btn-transparent">
+                                                            <svg width="18" height="18"
+                                                                 viewBox="0 0 18 18" fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <g opacity="0.8"
+                                                                   clipPath="url(#clip0)">
+                                                                    <path
+                                                                        d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
+                                                                        fill="#181818"/>
+                                                                </g>
+                                                                <defs>
+                                                                    <clipPath id="clip0">
+                                                                        <rect width="17.399"
+                                                                              height="18"
+                                                                              fill="white"
+                                                                              transform="translate(0.449219)"/>
+                                                                    </clipPath>
+                                                                </defs>
+                                                            </svg>
+                                                        </Button>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Sınaq müddəti </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Sınaq müddəti"
+                                                                      value={testPeriod}
+                                                                      onChange={(e) => setTestPeriod(e.target.value)}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                      value={positionSalary} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əmək şəraitinə görə əlavə </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Əmək şəraitinə görə əlavə"
+                                                                      value={positionAdditionalSalary} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Digər fərdi əlavə </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Digər fərdi əlavə"
+                                                                      value={newOwnAdditionalSalary}
+                                                                      onChange={(e) => setNewOwnAdditionalSalary(e.target.value)}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </Tab>
+
+                                    <Tab eventKey="8" title="" disabled={tab !== "8"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əmrin əsası</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Əmrin əsası daxil edin"
+                                                                      value={mainOfOrder}
+                                                                      onChange={(e) => setMainOfOrder(e.target.value)}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin adı, soyadı, atasının adı *</span>
+                                                    <Select
+                                                        placeholder="İşçinin adı, soyadı, atasının adı"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi struktur bölmənin adı</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Struktur bölmənin adı daxil edin"
+                                                                      value={department} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi alt struktur bölmənin adı *</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Alt struktur bölmənin adı daxil edin"
+                                                                      value={subDepartment} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşçinin vəzifəsi *</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Alt struktur bölmənin adı daxil edin"
+                                                                      value={vacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşdən azad olma tarixi *</span>
+                                                    <Form.Label className="relative m-0">
+                                                        <DatePicker selected={firedDate}
+                                                                    dateFormat="dd-MM-yyyy"
+                                                                    placeholderText="DD-MM-YYYY"
+                                                                    showMonthDropdown
+                                                                    showYearDropdown
+                                                                    dropdownMode="select"
+                                                                    onChange={(date) => setFiredDate(date)}/>
+                                                        <Button className="btn-transparent">
+                                                            <svg width="18" height="18"
+                                                                 viewBox="0 0 18 18" fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <g opacity="0.8"
+                                                                   clipPath="url(#clip0)">
+                                                                    <path
+                                                                        d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
+                                                                        fill="#181818"/>
+                                                                </g>
+                                                                <defs>
+                                                                    <clipPath id="clip0">
+                                                                        <rect width="17.399"
+                                                                              height="18"
+                                                                              fill="white"
+                                                                              transform="translate(0.449219)"/>
+                                                                    </clipPath>
+                                                                </defs>
+                                                            </svg>
+                                                        </Button>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşdən azad olma səbəbi *</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşdən azad olma səbəbini daxil edin"
+                                                                      value={firedReason}
+                                                                      onChange={(e) => setFiredReason(e.target.value)}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İstifadə edilməmiş məzuniyyət gününə görə kompensasiya *</span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            type="number"
+                                                            placeholder="İstifadə edilməmiş məzuniyyət gününə görə kompensasiya daxil edin"
+                                                            value={compensation}
+                                                            disabled={true}
+                                                            onChange={(e) => setCompensation(e.target.value)}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <div className="addition-content">
+                                            {
+                                                noteArr.map((item, index) =>
+                                                    <div key={index} className={index === 0 ? '' : 'add-item'}>
+                                                        {
+                                                            index === 0 ? null :
+                                                                <div className="add-item-top">
+                                                                    <p className="m-0"> #{index + 1}. Digər </p>
+                                                                    <Button
+                                                                        className="btn-transparent btn-remove flex-center"
+                                                                        onClick={() => {
+                                                                            noteArr.splice(index, 1);
+                                                                            setNoteArr([...noteArr], noteArr)
+                                                                        }}>
+                                                                        <svg width="14" height="14"
+                                                                             viewBox="0 0 14 14" fill="none"
+                                                                             xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M11.1665 2.69336L10.2739 12.8645H3.7302L2.8378 2.69336L1.70703 2.79248L2.61572 13.1481C2.66354 13.6254 3.07769 13.9997 3.5588 13.9997H10.4453C10.9262 13.9997 11.3405 13.6256 11.3892 13.1413L12.2973 2.79248L11.1665 2.69336Z"
+                                                                                fill="#CF3131"/>
+                                                                            <path
+                                                                                d="M9.08077 0H4.91861C4.397 0 3.97266 0.424348 3.97266 0.945957V2.74326H5.10778V1.13512H8.89155V2.74323H10.0267V0.94593C10.0267 0.424348 9.60238 0 9.08077 0Z"
+                                                                                fill="#CF3131"/>
+                                                                            <path
+                                                                                d="M13.0507 2.17578H0.942574C0.629078 2.17578 0.375 2.42986 0.375 2.74336C0.375 3.05685 0.629078 3.31093 0.942574 3.31093H13.0507C13.3642 3.31093 13.6183 3.05685 13.6183 2.74336C13.6183 2.42986 13.3642 2.17578 13.0507 2.17578Z"
+                                                                                fill="#CF3131"/>
+                                                                        </svg>
+                                                                        <span>Sil</span>
+                                                                    </Button>
+                                                                </div>
+                                                        }
+                                                        <Row>
+                                                            <Col xs={12}>
+                                                                <Form.Group>
+                                                                    <span className="input-title">Qeyd</span>
+                                                                    <Form.Label>
+                                                                        <Form.Control as="textarea"
+                                                                                      onChange={(e) => {
+                                                                                          noteArr[index] = e.target.value;
+                                                                                          setNoteArr([...noteArr], noteArr);
+                                                                                      }}
+                                                                                      value={item}
+                                                                                      placeholder="Text..."
+                                                                        />
+                                                                    </Form.Label>
+                                                                </Form.Group>
+                                                            </Col>
+                                                        </Row>
+                                                    </div>
+                                                )
+                                            }
+                                            <div className="flex-end">
+                                                <button className="btn-color"
+                                                        type="button"
+                                                        onClick={() => addNote()}>
+                                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M0.46875 5.53125H5.53125V0.46875C5.53125 0.209859 5.74111 0 6 0C6.25889 0 6.46875 0.209859 6.46875 0.46875V5.53125H11.5312C11.7901 5.53125 12 5.74111 12 6C12 6.25889 11.7901 6.46875 11.5312 6.46875H6.46875V11.5312C6.46875 11.7901 6.25889 12 6 12C5.74111 12 5.53125 11.7901 5.53125 11.5312V6.46875H0.46875C0.209859 6.46875 0 6.25889 0 6C0 5.74111 0.209859 5.53125 0.46875 5.53125Z"
+                                                            fill="#3083DC"/>
+                                                    </svg>
+                                                    əlavə et
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </Tab>
+
+                                    <Tab eventKey="9" title="" disabled={tab !== "9"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin adı, soyadı, atasının adı *</span>
+                                                    <Select
+                                                        placeholder="İşçinin adı, soyadı, atasının adı"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştatın nömrəsi</span>
+                                                    <Select
+                                                        placeholder="İşçinin nömrəsini seç"
+                                                        value={selectedPosition}
+                                                        onChange={(val) => {
+                                                            setSelectedPosition(val);
+                                                            getPositionIdData(val.value);
+                                                            setPositionId(val.value)
+                                                        }}
+                                                        options={position}
+                                                        getOptionLabel={(option) => option.value}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi struktur bölmə</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Struktur bölmənin adı daxil edin"
+                                                                      value={department || ''} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi vəzifəsi</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Alt struktur bölmənin adı daxil edin"
+                                                                      value={vacancyName || ''} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Dəyişiklik tarixi *</span>
+                                                    <Form.Label className="relative m-0">
+                                                        <DatePicker selected={changeDate}
+                                                                    dateFormat="dd-MM-yyyy"
+                                                                    placeholderText="DD-MM-YYYY"
+                                                                    showMonthDropdown
+                                                                    showYearDropdown
+                                                                    dropdownMode="select"
+                                                                    onChange={(date) => setChangeDate(date)}/>
+                                                        <Button className="btn-transparent">
+                                                            <svg width="18" height="18"
+                                                                 viewBox="0 0 18 18" fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <g opacity="0.8"
+                                                                   clipPath="url(#clip0)">
+                                                                    <path
+                                                                        d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
+                                                                        fill="#181818"/>
+                                                                </g>
+                                                                <defs>
+                                                                    <clipPath id="clip0">
+                                                                        <rect width="17.399"
+                                                                              height="18"
+                                                                              fill="white"
+                                                                              transform="translate(0.449219)"/>
+                                                                    </clipPath>
+                                                                </defs>
+                                                            </svg>
+                                                        </Button>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Keçirildiyi struktur bölmə</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi struktur bölmə"
+                                                                      value={positionDepartment}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Keçirildiyi vəzifə</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi vəzifə"
+                                                                      value={positionVacancyName}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <div>
+                                            <div className="block-title">
+                                                Faktiki əmək haqqı: AZN (vergilər və digər ödənişlər daxil olmaqla)
+                                            </div>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                          value={salary} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Əmək şəraitinə görə əlavə </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmək şəraitinə görə əlavə"
+                                                                          value={additionalSalary} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Digər fərdi əlavə</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Digər fərdi əlavə daxil edin"
+                                                                          value={ownAdditionalSalary}
+                                                                          disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                        <div>
+                                            <div className="block-title">
+                                                Keçirildiyi əmək haqqı (AZN) vergilər və digər ödənişlər daxil olmaqla):
+                                            </div>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                          value={newSalary}
+                                                                          type="number"
+                                                                          onChange={(e) => setNewSalary(e.target.value)}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Əmək şəraitinə görə əlavə </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmək şəraitinə görə əlavə"
+                                                                          value={newAdditionalSalary}
+                                                                          type="number"
+                                                                          onChange={(e) => setNewAdditionalSalary(e.target.value)}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Digər fərdi əlavə</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Digər fərdi əlavə daxil edin"
+                                                                          value={newOwnAdditionalSalary}
+                                                                          type="number"
+                                                                          onChange={(e) => setNewOwnAdditionalSalary(e.target.value)}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                    </Tab>
+
+                                    <Tab eventKey="10" title="" disabled={tab !== "10"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin adı, soyadı, atasının adı *</span>
+                                                    <Select
+                                                        placeholder="İşçinin adı, soyadı, atasının adı"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={department} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi vəzifəsi </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşlədiyi vəzifəsi"
+                                                                      value={vacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Dəyişiklik tarixi *</span>
+                                                    <Form.Label className="relative m-0">
+                                                        <DatePicker selected={changeDate}
+                                                                    dateFormat="dd-MM-yyyy"
+                                                                    placeholderText="DD-MM-YYYY"
+                                                                    showMonthDropdown
+                                                                    showYearDropdown
+                                                                    dropdownMode="select"
+                                                                    onChange={(date) => setChangeDate(date)}/>
+                                                        <Button className="btn-transparent">
+                                                            <svg width="18" height="18"
+                                                                 viewBox="0 0 18 18" fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <g opacity="0.8"
+                                                                   clipPath="url(#clip0)">
+                                                                    <path
+                                                                        d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
+                                                                        fill="#181818"/>
+                                                                </g>
+                                                                <defs>
+                                                                    <clipPath id="clip0">
+                                                                        <rect width="17.399"
+                                                                              height="18"
+                                                                              fill="white"
+                                                                              transform="translate(0.449219)"/>
+                                                                    </clipPath>
+                                                                </defs>
+                                                            </svg>
+                                                        </Button>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <div>
+                                            <div className="block-title">
+                                                Faktiki əmək haqqı: AZN (vergilər və digər ödənişlər daxil olmaqla)
+                                            </div>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                          value={salary} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Əmək şəraitinə görə əlavə </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmək şəraitinə görə əlavə"
+                                                                          value={additionalSalary} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Digər fərdi əlavə</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Digər fərdi əlavə daxil edin"
+                                                                          value={ownAdditionalSalary}
+                                                                          disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                        <div>
+                                            <div className="block-title">
+                                                Keçirildiyi əmək haqqı (AZN) vergilər və digər ödənişlər daxil olmaqla):
+                                            </div>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                          value={newSalary}
+                                                                          type="number"
+                                                                          onChange={(e) => setNewSalary(e.target.value)}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Əmək şəraitinə görə əlavə </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmək şəraitinə görə əlavə"
+                                                                          value={newAdditionalSalary}
+                                                                          type="number"
+                                                                          onChange={(e) => setNewAdditionalSalary(e.target.value)}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Digər fərdi əlavə</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Digər fərdi əlavə daxil edin"
+                                                                          value={newOwnAdditionalSalary}
+                                                                          type="number"
+                                                                          onChange={(e) => setNewOwnAdditionalSalary(e.target.value)}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                    </Tab>
+
+                                    <Tab eventKey="11" title="" disabled={tab !== "11"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin adı, soyadı, atasının adı *</span>
+                                                    <Select
+                                                        placeholder="İşçinin adı, soyadı, atasının adı"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={department} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi vəzifəsi </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşlədiyi vəzifəsi"
+                                                                      value={vacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Dəyişiklik tarixi *</span>
+                                                    <Form.Label className="relative m-0">
+                                                        <DatePicker selected={changeDate}
+                                                                    dateFormat="dd-MM-yyyy"
+                                                                    placeholderText="DD-MM-YYYY"
+                                                                    showMonthDropdown
+                                                                    showYearDropdown
+                                                                    dropdownMode="select"
+                                                                    onChange={(date) => setChangeDate(date)}/>
+                                                        <Button className="btn-transparent">
+                                                            <svg width="18" height="18"
+                                                                 viewBox="0 0 18 18" fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <g opacity="0.8"
+                                                                   clipPath="url(#clip0)">
+                                                                    <path
+                                                                        d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
+                                                                        fill="#181818"/>
+                                                                </g>
+                                                                <defs>
+                                                                    <clipPath id="clip0">
+                                                                        <rect width="17.399"
+                                                                              height="18"
+                                                                              fill="white"
+                                                                              transform="translate(0.449219)"/>
+                                                                    </clipPath>
+                                                                </defs>
+                                                            </svg>
+                                                        </Button>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <div>
+                                            <div className="block-title">
+                                                Faktiki əmək haqqı: AZN (vergilər və digər ödənişlər daxil olmaqla)
+                                            </div>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                          value={salary} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Əmək şəraitinə görə əlavə </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmək şəraitinə görə əlavə"
+                                                                          value={additionalSalary} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                        <div>
+                                            <div className="block-title">
+                                                Keçirildiyi əmək haqqı (AZN) vergilər və digər ödənişlər daxil olmaqla):
+                                            </div>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                          value={newSalary}
+                                                                          type="number"
+                                                                          onChange={(e) => setNewSalary(e.target.value)}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Əmək şəraitinə görə əlavə </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmək şəraitinə görə əlavə"
+                                                                          value={newAdditionalSalary}
+                                                                          type="number"
+                                                                          onChange={(e) => setNewAdditionalSalary(e.target.value)}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                    </Tab>
+
+                                    <Tab eventKey="12" title="" disabled={tab !== "12"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin soyadı, adı, ata adı *</span>
+                                                    <Select
+                                                        placeholder="İşçinin adı, soyadı, atasının adı"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={department} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin işlədiyi alt struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={subDepartment} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi vəzifəsi </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşlədiyi vəzifəsi"
+                                                                      value={vacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                            <span
+                                                                className="input-title">İşçinin faktiki iş rejimi *</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşçinin faktiki iş rejimi"
+                                                                      value={workMode} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                            <span
+                                                                className="input-title">İşçinin keçirildiyi iş rejimi *</span>
+                                                    <Select
+                                                        placeholder="İş rejimini seçin"
+                                                        value={selectedNewWorkMode}
+                                                        onChange={setSelectedNewWorkMode}
+                                                        options={WorkModeOptions}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title"> Faktiki əmək haqqı: AZN (vergilər və digər ödənişlər daxil olmaqla)</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder=" Faktiki əmək haqqı"
+                                                                      value={salary} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Dəyişiklik edilən əmək haqqı Azn (vergilər və digər ödənişlər daxil olmaqla</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Dəyişiklik edilən əmək haqqı"
+                                                                      value={newSalary}
+                                                                      type="number"
+                                                                      onChange={(e) => setNewSalary(e.target.value)}
+                                                        />
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </Tab>
+
+                                    <Tab eventKey="13" title="" disabled={tab !== "13"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin soyadı, adı, ata adı *</span>
+                                                    <Select
+                                                        placeholder="İşçinin adı, soyadı, atasının adı"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştatın nömrəsi</span>
+                                                    <Select
+                                                        placeholder="İşçinin nömrəsini seç"
+                                                        value={selectedPosition}
+                                                        onChange={(val) => {
+                                                            setSelectedPosition(val);
+                                                            getPositionIdData(val.value);
+                                                            setPositionId(val.value)
+                                                        }}
+                                                        options={position}
+                                                        getOptionLabel={(option) => option.value}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={department} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi vəzifəsi </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşlədiyi vəzifəsi"
+                                                                      value={vacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Dəyişiklik tarixi *</span>
+                                                    <Form.Label className="relative m-0">
+                                                        <DatePicker selected={changeDate}
+                                                                    dateFormat="dd-MM-yyyy"
+                                                                    placeholderText="DD-MM-YYYY"
+                                                                    showMonthDropdown
+                                                                    showYearDropdown
+                                                                    dropdownMode="select"
+                                                                    onChange={(date) => setChangeDate(date)}/>
+                                                        <Button className="btn-transparent">
+                                                            <svg width="18" height="18"
+                                                                 viewBox="0 0 18 18" fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <g opacity="0.8"
+                                                                   clipPath="url(#clip0)">
+                                                                    <path
+                                                                        d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
+                                                                        fill="#181818"/>
+                                                                </g>
+                                                                <defs>
+                                                                    <clipPath id="clip0">
+                                                                        <rect width="17.399"
+                                                                              height="18"
+                                                                              fill="white"
+                                                                              transform="translate(0.449219)"/>
+                                                                    </clipPath>
+                                                                </defs>
+                                                            </svg>
+                                                        </Button>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Keçirildiyi struktur bölmə</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi struktur bölmə"
+                                                                      value={positionDepartment}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Keçirildiyi alt struktur bölmə</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi struktur bölmə"
+                                                                      value={positionSubDepartment}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Keçirildiyi iş yeri</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi iş yeri"
+                                                                      value={positionWorkPlace}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <div>
+                                            <div className="block-title">
+                                                Faktiki əmək haqqı: AZN (vergilər və digər ödənişlər daxil olmaqla)
+                                            </div>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                          value={salary} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Əmək şəraitinə görə əlavə </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmək şəraitinə görə əlavə"
+                                                                          value={additionalSalary} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Digər fərdi əlavə</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Digər fərdi əlavə daxil edin"
+                                                                          value={ownAdditionalSalary}
+                                                                          disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                        <div>
+                                            <div className="block-title">
+                                                Keçirildiyi əmək haqqı (AZN) vergilər və digər ödənişlər daxil olmaqla):
+                                            </div>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                          value={positionSalary}
+                                                                          disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Əmək şəraitinə görə əlavə </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmək şəraitinə görə əlavə"
+                                                                          value={positionAdditionalSalary}
+                                                                          disabled={true}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Digər fərdi əlavə</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Digər fərdi əlavə daxil edin"
+                                                                          value={newOwnAdditionalSalary}
+                                                                          type="number"
+                                                                          onChange={(e) => setNewOwnAdditionalSalary(e.target.value)}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                    </Tab>
+
+                                    <Tab eventKey="14" title="" disabled={tab !== "14"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin adı, soyadı, atasının adı *</span>
+                                                    <Select
+                                                        placeholder="İşçinin adı, soyadı, atasının adı"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştatın nömrəsi</span>
+                                                    <Select
+                                                        placeholder="İşçinin nömrəsini seç"
+                                                        value={selectedPosition}
+                                                        onChange={(val) => {
+                                                            setSelectedPosition(val);
+                                                            getPositionIdData(val.value);
+                                                            setPositionId(val.value)
+                                                        }}
+                                                        options={position}
+                                                        getOptionLabel={(option) => option.value}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi struktur bölmə</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Struktur bölmənin adı daxil edin"
+                                                                      value={department || ''} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi vəzifəsi</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Alt struktur bölmənin adı daxil edin"
+                                                                      value={vacancyName || ''} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Dəyişiklik tarixi *</span>
+                                                    <Form.Label className="relative m-0">
+                                                        <DatePicker selected={changeDate}
+                                                                    dateFormat="dd-MM-yyyy"
+                                                                    placeholderText="DD-MM-YYYY"
+                                                                    showMonthDropdown
+                                                                    showYearDropdown
+                                                                    dropdownMode="select"
+                                                                    onChange={(date) => setChangeDate(date)}/>
+                                                        <Button className="btn-transparent">
+                                                            <svg width="18" height="18"
+                                                                 viewBox="0 0 18 18" fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <g opacity="0.8"
+                                                                   clipPath="url(#clip0)">
+                                                                    <path
+                                                                        d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
+                                                                        fill="#181818"/>
+                                                                </g>
+                                                                <defs>
+                                                                    <clipPath id="clip0">
+                                                                        <rect width="17.399"
+                                                                              height="18"
+                                                                              fill="white"
+                                                                              transform="translate(0.449219)"/>
+                                                                    </clipPath>
+                                                                </defs>
+                                                            </svg>
+                                                        </Button>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Keçirildiyi müddət</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi müddət"
+                                                                      value={changePeriod}
+                                                                      type="number"
+                                                                      onChange={(e) => setChangePeriod(e.target.value)}
+                                                        />
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Keçirildiyi struktur bölmə</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi struktur bölmə"
+                                                                      value={positionDepartment}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Keçirildiyi alt struktur bölmə</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi struktur bölmə"
+                                                                      value={positionSubDepartment}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Keçirildiyi iş yeri</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi iş yeri"
+                                                                      value={positionWorkPlace}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <div>
+                                            <div className="block-title">
+                                                Faktiki əmək haqqı: AZN (vergilər və digər ödənişlər daxil olmaqla)
+                                            </div>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                          value={salary} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Əmək şəraitinə görə əlavə </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmək şəraitinə görə əlavə"
+                                                                          value={additionalSalary} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Digər fərdi əlavə</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Digər fərdi əlavə daxil edin"
+                                                                          value={ownAdditionalSalary}
+                                                                          disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                        <div>
+                                            <div className="block-title">
+                                                Keçirildiyi əmək haqqı (AZN) vergilər və digər ödənişlər daxil olmaqla):
+                                            </div>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                          value={positionSalary}
+                                                                          disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Əmək şəraitinə görə əlavə </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmək şəraitinə görə əlavə"
+                                                                          value={positionAdditionalSalary}
+                                                                          disabled={true}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Digər fərdi əlavə</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Digər fərdi əlavə daxil edin"
+                                                                          value={newOwnAdditionalSalary}
+                                                                          type="number"
+                                                                          onChange={(e) => setNewOwnAdditionalSalary(e.target.value)}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                    </Tab>
+
+                                    <Tab eventKey="16" title="" disabled={tab !== "16"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin soyadı, adı, atasının adı *</span>
+                                                    <Select
+                                                        placeholder="İşçinin adı, soyadı, atasının adı"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Ştatın nömrəsi</span>
+                                                    <Select
+                                                        placeholder="İşçinin nömrəsini seç"
+                                                        value={selectedPosition}
+                                                        onChange={(val) => {
+                                                            setSelectedPosition(val);
+                                                            getPositionIdData(val.value);
+                                                            setPositionId(val.value)
+                                                        }}
+                                                        options={position}
+                                                        getOptionLabel={(option) => option.value}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={department} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi Vəzifəsi </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşlədiyi vəzifəsi"
+                                                                      value={vacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Dəyişiklik tarixi *</span>
+                                                    <Form.Label className="relative m-0">
+                                                        <DatePicker selected={changeDate}
+                                                                    dateFormat="dd-MM-yyyy"
+                                                                    placeholderText="DD-MM-YYYY"
+                                                                    showMonthDropdown
+                                                                    showYearDropdown
+                                                                    dropdownMode="select"
+                                                                    onChange={(date) => setChangeDate(date)}/>
+                                                        <Button className="btn-transparent">
+                                                            <svg width="18" height="18"
+                                                                 viewBox="0 0 18 18" fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <g opacity="0.8"
+                                                                   clipPath="url(#clip0)">
+                                                                    <path
+                                                                        d="M5.34327 8.75391H4.25583C3.97432 8.75391 3.74609 8.99002 3.74609 9.28125C3.74609 9.57248 3.97432 9.80859 4.25583 9.80859H5.34327C5.62478 9.80859 5.853 9.57248 5.853 9.28125C5.853 8.99002 5.62478 8.75391 5.34327 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 11.0039H4.25583C3.97432 11.0039 3.74609 11.24 3.74609 11.5312C3.74609 11.8225 3.97432 12.0586 4.25583 12.0586H5.34327C5.62478 12.0586 5.853 11.8225 5.853 11.5312C5.853 11.24 5.62478 11.0039 5.34327 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M5.34327 13.2539H4.25583C3.97432 13.2539 3.74609 13.49 3.74609 13.7812C3.74609 14.0725 3.97432 14.3086 4.25583 14.3086H5.34327C5.62478 14.3086 5.853 14.0725 5.853 13.7812C5.853 13.49 5.62478 13.2539 5.34327 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 8.75391H8.60349C8.32198 8.75391 8.09375 8.99002 8.09375 9.28125C8.09375 9.57248 8.32198 9.80859 8.60349 9.80859H9.69092C9.97243 9.80859 10.2007 9.57248 10.2007 9.28125C10.2007 8.99002 9.97243 8.75391 9.69092 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 11.0039H8.60349C8.32198 11.0039 8.09375 11.24 8.09375 11.5312C8.09375 11.8225 8.32198 12.0586 8.60349 12.0586H9.69092C9.97243 12.0586 10.2007 11.8225 10.2007 11.5312C10.2007 11.24 9.97243 11.0039 9.69092 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M9.69092 13.2539H8.60349C8.32198 13.2539 8.09375 13.49 8.09375 13.7812C8.09375 14.0725 8.32198 14.3086 8.60349 14.3086H9.69092C9.97243 14.3086 10.2007 14.0725 10.2007 13.7812C10.2007 13.49 9.97243 13.2539 9.69092 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 8.75391H12.955C12.6735 8.75391 12.4453 8.99002 12.4453 9.28125C12.4453 9.57248 12.6735 9.80859 12.955 9.80859H14.0425C14.324 9.80859 14.5522 9.57248 14.5522 9.28125C14.5522 8.99002 14.324 8.75391 14.0425 8.75391Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 11.0039H12.955C12.6735 11.0039 12.4453 11.24 12.4453 11.5312C12.4453 11.8225 12.6735 12.0586 12.955 12.0586H14.0425C14.324 12.0586 14.5522 11.8225 14.5522 11.5312C14.5522 11.24 14.324 11.0039 14.0425 11.0039Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M14.0425 13.2539H12.955C12.6735 13.2539 12.4453 13.49 12.4453 13.7812C12.4453 14.0725 12.6735 14.3086 12.955 14.3086H14.0425C14.324 14.3086 14.5522 14.0725 14.5522 13.7812C14.5522 13.49 14.324 13.2539 14.0425 13.2539Z"
+                                                                        fill="#181818"/>
+                                                                    <path
+                                                                        d="M16.319 2.28516H15.0956V1.40625C15.0956 1.11502 14.8674 0.878906 14.5859 0.878906C14.3044 0.878906 14.0762 1.11502 14.0762 1.40625V2.28516H9.65845V1.40625C9.65845 1.11502 9.43023 0.878906 9.14872 0.878906C8.86721 0.878906 8.63898 1.11502 8.63898 1.40625V2.28516H4.22127V1.40625C4.22127 1.11502 3.99304 0.878906 3.71153 0.878906C3.43002 0.878906 3.20179 1.11502 3.20179 1.40625V2.28516H1.97843C1.13522 2.28516 0.449219 2.99486 0.449219 3.86719V15.5391C0.449219 16.4114 1.13522 17.1211 1.97843 17.1211H16.319C17.1622 17.1211 17.8482 16.4114 17.8482 15.5391C17.8482 15.1987 17.8482 4.16338 17.8482 3.86719C17.8482 2.99486 17.1622 2.28516 16.319 2.28516ZM1.46869 3.86719C1.46869 3.57641 1.69736 3.33984 1.97843 3.33984H3.20179V4.21875C3.20179 4.50998 3.43002 4.74609 3.71153 4.74609C3.99304 4.74609 4.22127 4.50998 4.22127 4.21875V3.33984H8.63898V4.21875C8.63898 4.50998 8.86721 4.74609 9.14872 4.74609C9.43023 4.74609 9.65845 4.50998 9.65845 4.21875V3.33984H14.0762V4.21875C14.0762 4.50998 14.3044 4.74609 14.5859 4.74609C14.8674 4.74609 15.0956 4.50998 15.0956 4.21875V3.33984H16.319C16.6001 3.33984 16.8287 3.57641 16.8287 3.86719V5.94141H1.46869V3.86719ZM16.319 16.0664H1.97843C1.69736 16.0664 1.46869 15.8298 1.46869 15.5391V6.99609H16.8287V15.5391C16.8287 15.8298 16.6001 16.0664 16.319 16.0664Z"
+                                                                        fill="#181818"/>
+                                                                </g>
+                                                                <defs>
+                                                                    <clipPath id="clip0">
+                                                                        <rect width="17.399"
+                                                                              height="18"
+                                                                              fill="white"
+                                                                              transform="translate(0.449219)"/>
+                                                                    </clipPath>
+                                                                </defs>
+                                                            </svg>
+                                                        </Button>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əvəzetmə müddəti</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Əvəzetmə müddəti"
+                                                                      value={changePeriod}
+                                                                      type="number"
+                                                                      onChange={(e) => setChangePeriod(e.target.value)}
+                                                        />
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əvəz olunan vəzifə</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi vəzifə"
+                                                                      value={positionVacancyName}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əvəz olunan vəzifənin aid olduğu struktur bölmə</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi struktur bölmə"
+                                                                      value={positionDepartment}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əvəz olunan vəzifənin aid olduğu alt struktur bölmə</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi struktur bölmə"
+                                                                      value={positionSubDepartment}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əvəz edən işçinin əmək haqqı</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi struktur bölmə"
+                                                                      value={salary}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əvəz edən vəzifənin  əmək haqqı</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Keçirildiyi struktur bölmə"
+                                                                      value={positionSalary}
+                                                                      disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </Tab>
+
+                                    <Tab eventKey="33" title="" disabled={tab !== "33"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əsaslandırma</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Əmrin əsası daxil edin"
+                                                                      value={mainOfOrder}
+                                                                      onChange={(e) => setMainOfOrder(e.target.value)}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin soyadı, adı, ata adı *</span>
+                                                    <Select
+                                                        placeholder="İşçinin adı, soyadı, atasının adı"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={department} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin işlədiyi alt struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={subDepartment} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi vəzifəsi </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşlədiyi vəzifəsi"
+                                                                      value={vacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Maddi yardımın məbləği (vergilər və digər ödənişər xaric olmaqla) </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Maddi yardımın məbləği "
+                                                                      value={financialHelp}
+                                                                      type="number"
+                                                                      onChange={(e) => setFinancialHelp(e.target.value)}
+                                                        />
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </Tab>
+
+                                    <Tab eventKey="34" title="" disabled={tab !== "34"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əsaslandırma</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Əmrin əsası daxil edin"
+                                                                      value={mainOfOrder}
+                                                                      onChange={(e) => setMainOfOrder(e.target.value)}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">Mükafatlandırılan işçinin soyadı, adı, atasının adı *</span>
+                                                    <Select
+                                                        placeholder="İşçinin adı, soyadı, atasının adı"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={department} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi alt struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={subDepartment} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Vəzifəsi </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşlədiyi vəzifəsi"
+                                                                      value={vacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Mükafatın məbləği Azn (vergilər və digər ödənişlər daxil olmaqla və ya xaric olmaqla):  </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Mükafatın məbləği  məbləği "
+                                                                      value={achievement}
+                                                                      type="number"
+                                                                      onChange={(e) => setAchievement(e.target.value)}
+                                                        />
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </Tab>
+
+                                    <Tab eventKey="35" title="" disabled={tab !== "35"}>
+                                        <Row>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Əsaslandırma</span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="Əmrin əsası daxil edin"
+                                                                      value={mainOfOrder}
+                                                                      onChange={(e) => setMainOfOrder(e.target.value)}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin soyadı, adı, atasının adı *</span>
+                                                    <Select
+                                                        placeholder="İşçinin adı, soyadı, atasının adı"
+                                                        value={selectedStaff}
+                                                        onChange={(val) => {
+                                                            let id = val.id
+                                                            setEmployeeId(id)
+                                                            getEmployee(id)
+                                                            setSelectedStaff(val);
+                                                        }}
+                                                        options={staff}
+                                                        getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        styles={customStyles}
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={department} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi alt struktur bölmə </span>
+                                                    <Form.Label>
+                                                        <Form.Control
+                                                            placeholder="İşlədiyi struktur bölmə"
+                                                            value={subDepartment} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">İşlədiyi vəzifəsi </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="İşlədiyi vəzifəsi"
+                                                                      value={vacancyName} disabled={true}/>
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={6}>
+                                                <Form.Group>
+                                                    <span className="input-title">Fərdi əlavənin məbləği Azn:  </span>
+                                                    <Form.Label>
+                                                        <Form.Control placeholder="300 AZN"
+                                                                      value={newOwnAdditionalSalary}
+                                                                      type="number"
+                                                                      onChange={(e) => setNewOwnAdditionalSalary(e.target.value)}
+                                                        />
+                                                    </Form.Label>
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </Tab>
+                                </Tabs>
+                            </div>
+                            {
+                                save ?
+                                    <div className="flex-vertical-center btn-block">
+                                        <Button className="btn-effect" onClick={() => senData()}>
+                                            Yadda saxla
+                                        </Button>
+                                    </div>
+
+                                    : ""
+                            }
+                        </Form>
+                    </div>
+                </Container>
+            </div>
+        </Aux>
+
+    );
+}
+
+export default CreateOperation
