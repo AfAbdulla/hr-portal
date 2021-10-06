@@ -601,7 +601,7 @@ function CreateEmployee() {
 
         mainAxios({
             method: 'put',
-            url: '/employee/' + id,
+            url: '/employee/general-info/' + id,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -701,7 +701,7 @@ function CreateEmployee() {
     const getDocument = () => {
         mainAxios({
             method: 'get',
-            url: 'employee/document/' + id,
+            url: '/employee/document/' + id,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -2915,6 +2915,7 @@ function CreateEmployee() {
                                         document  ?
                                             document.map((item, index) =>
                                                 <tr key={index}>
+                                                    <td>{item.id}</td>
                                                     <td>{item.documentType}</td>
                                                     <td>{item.createDate}</td>
                                                     <td>{item.status}</td>

@@ -4,17 +4,17 @@ import {Nav, Button} from 'react-bootstrap';
 import {NavLink} from 'react-router-dom';
 
 
-function Sidebar() {
+function Sidebar(props) {
     const [active, setActive] = useState('default');
-    const [toggle, setToggle] = useState(false);
+ /*   const [toggle, setToggle] = useState(false);
 
     const toggleDrawer = () => {
         setToggle(!toggle)
-    }
+    }*/
 
     return (
         <Aux>
-            <div className={[toggle ? 'active' : '', 'sidebar relative'].join(' ')}>
+            <div className={[props.toggle ? 'active' : '', 'sidebar relative'].join(' ')}>
                 <Nav variant="pills" defaultActiveKey={active}
                      onSelect={(selectedKey) => setActive(selectedKey)}>
                     <Nav.Item>
@@ -128,7 +128,7 @@ function Sidebar() {
                         </Nav.Link>
                     </Nav.Item>
                 </Nav>
-                <div className="trapezium" onClick={() => toggleDrawer()}>
+                <div className="trapezium" onClick={props.click}>
                     <svg width="19" height="85" viewBox="0 0 19 85" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M15.5957 17.4868L0 0V85L14.7724 71.3854C17.2376 69.1134 18.64 65.9138 18.64 62.5613V25.474C18.64 22.5282 17.5564 19.6853 15.5957 17.4868Z"

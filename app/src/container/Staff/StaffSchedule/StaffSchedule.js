@@ -1,47 +1,46 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {Table, Container} from 'react-bootstrap';
-/*
-import Pagination from 'react-bootstrap/Pagination'
-*/
 import {Link} from 'react-router-dom';
-import Header from "../../../components/Header/Header";
-import Sidebar from "../../../components/Sidebar/Sidebar";
 import {mainAxios} from "../../../components/Axios/axios";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
+import Paginate from "../../../components/Pagination/Pagination";
 
 function StaffSchedule() {
     const history = useHistory();
-    const [position, setPosition] = useState([])
+    const [position, setPosition] = useState([]);
+    const [totalRecord, setTotalRecord] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [recordSize, setRecordSize] = useState(5)
+
 
     const handleRowClick = (item) => {
         history.push(`/editStaff/${item.id}`);
     }
 
-    const getPosition = () => {
+    const getPosition = (page) => {
+        console.log(currentPage , 'before')
         mainAxios({
             method: 'get',
             url: '/position',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-            params: {
-                size: 5
             }
         }).then((res) => {
+            setCurrentPage(page);
             setPosition(res.data.data.data);
+            setTotalRecord(res.data.data.totalElement);
+            console.log(currentPage)
         });
     }
 
     useEffect(() => {
-        getPosition()
+        getPosition(1)
     }, []);
 
     return (
         <Aux>
-         {/*   <Header/>
-            <Sidebar/>*/}
             <div className="staff">
                 <Container fluid>
                     <div className="title-block flex">
@@ -56,8 +55,11 @@ function StaffSchedule() {
                                     Filters
                                 </Button>*/}
                             <Link to="/createStaff" className="btn-main">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.8346 10.8337H10.8346V15.8337H9.16797V10.8337H4.16797V9.16699H9.16797V4.16699H10.8346V9.16699H15.8346V10.8337Z" fill="white"/>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.8346 10.8337H10.8346V15.8337H9.16797V10.8337H4.16797V9.16699H9.16797V4.16699H10.8346V9.16699H15.8346V10.8337Z"
+                                        fill="white"/>
                                 </svg>
 
                                 Əlavə et
@@ -65,7 +67,7 @@ function StaffSchedule() {
                         </div>
                     </div>
                     <div className="block">
-                        <Table responsive="sm" hover >
+                        <Table responsive="sm" hover>
                             <thead>
                             <tr>
                                 <th>Struktur vahidinin adı</th>
@@ -77,8 +79,8 @@ function StaffSchedule() {
                             </thead>
                             <tbody>
                             {
-                                position.map( (item, index) =>
-                                    <tr onClick={()=> handleRowClick(item)} key={index}>
+                                position.map((item, index) =>
+                                    <tr onClick={() => handleRowClick(item)} key={index}>
                                         <td>{item.departmentName}</td>
                                         <td>{item.subDepartmentName}</td>
                                         <td>{item.vacancyName}</td>
@@ -90,18 +92,7 @@ function StaffSchedule() {
                             </tbody>
                         </Table>
                     </div>
-
-                    {/* <div className="pagination-block flex-vertical-center">
-                            <Pagination>
-                                <Pagination.Prev disabled />
-                                <Pagination.Item active>{1}</Pagination.Item>
-                                <Pagination.Item>{2}</Pagination.Item>
-                                <Pagination.Ellipsis />
-                                <Pagination.Item>{9}</Pagination.Item>
-                                <Pagination.Item>{10}</Pagination.Item>
-                                <Pagination.Next />
-                            </Pagination>
-                        </div>*/}
+                    <Paginate count={totalRecord} recordSize = {recordSize} currentPage={currentPage} click={(page) => getPosition(page)}/>
                 </Container>
             </div>
         </Aux>

@@ -11,12 +11,13 @@ function OperationSchedule() {
     const [document, setDocument] = useState([]);
     const [totalRecord, setTotalRecord] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const [recordSize, setRecordSize] = useState(5)
 
     const handleRowClick = (item) => {
         history.push(`/operationView/${item.id}`);
     }
 
-    const getDocument = () => {
+    const getDocument = (page) => {
         mainAxios({
             method: 'get',
             url: '/document',
@@ -25,17 +26,18 @@ function OperationSchedule() {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
             params: {
-                page: currentPage - 1
+                page: page - 1,
+                size: recordSize
             }
         }).then((res) => {
+            setCurrentPage(page)
             setDocument(res.data.data.data);
             setTotalRecord(res.data.data.totalElement);
         });
     }
 
-
     useEffect(() => {
-        getDocument()
+        getDocument(1)
     }, []);
 
     return (
@@ -88,7 +90,8 @@ function OperationSchedule() {
                             </tbody>
                         </Table>
                     </div>
-                    {/*<Paginate count={totalRecord}  currentPage={currentPage}/>*/}
+                    <Paginate count={totalRecord} recordSize = {recordSize} currentPage={currentPage}
+                              click={(page) => getDocument(page)}/>
                 </Container>
             </div>
         </Aux>

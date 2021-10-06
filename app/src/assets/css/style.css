@@ -545,6 +545,10 @@ label {
     padding: 125px 25px 50px 200px;
 }
 
+.main.active {
+    padding: 125px 25px 50px 100px;
+}
+
 .table > :not(caption) > * > * {
     border: none;
     padding: 13px 13px 13px 60px;
@@ -577,6 +581,7 @@ td {
 
 .staff .block {
     padding-bottom: 40px;
+    min-height: 400px;
 }
 
 .staff .btn-main {

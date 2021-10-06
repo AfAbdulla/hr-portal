@@ -89,15 +89,16 @@ function OperationView() {
             url: 'document/export/' + id,
             responseType: 'arraybuffer',
             headers: {
-                'Content-Type': 'application/pdf',
+                'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
 
-        }).then((response) => {
-            const url = window.URL.createObjectURL(new Blob([response.data]));
+        }).then((res) => {
+            console.log(res)
+            const url = window.URL.createObjectURL(new Blob([res.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', 'file.pdf'); //or any other extension
+            link.setAttribute('download', `${operationName}.pdf`);
             document.body.appendChild(link);
             link.click();
         })

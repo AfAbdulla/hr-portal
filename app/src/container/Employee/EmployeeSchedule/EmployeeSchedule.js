@@ -1,41 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {Container, Image} from 'react-bootstrap';
-import Pagination from 'react-bootstrap/Pagination'
 import {Link} from 'react-router-dom';
-import Header from "../../../components/Header/Header";
-import Sidebar from "../../../components/Sidebar/Sidebar";
 import {mainAxios} from "../../../components/Axios/axios";
 import userImage from '../../../assets/img/user.png'
 import {useHistory} from "react-router-dom";
-import ReactPaginate from 'react-paginate';
-import {useBetween} from "use-between";
-
-const useFormState = () => {
-    const [active, setActive] = useState('default');
-    const [toggle, setToggle] = useState(false);
-    return {
-        active, toggle, setActive, setToggle
-    };
-};
+import Paginate from "../../../components/Pagination/Pagination";
 
 function EmployeeSchedule() {
     const history = useHistory();
     const [employee, setEmployee] = useState([])
     const token = localStorage.getItem('token');
-    const [offset, setOffset] = useState(0);
-    const [perPage] = useState(10);
-    const [pageCount, setPageCount] = useState(0);
-    const {toggle} = useBetween(useFormState);
-
-    console.log(toggle)
-
+    const [totalRecord, setTotalRecord] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [recordSize, setRecordSize] = useState(5)
 
     const handleRowClick = (item) => {
         history.push(`/editEmployee/${item.id}`);
     }
 
-    const getEmployee = () => {
+    const getEmployee = (page) => {
         mainAxios({
             method: 'get',
             url: '/employee',
@@ -44,22 +28,22 @@ function EmployeeSchedule() {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
             params: {
-                size: 5
+                page: page - 1,
+                size: recordSize
             }
         }).then((res) => {
-            console.log(res)
+            setCurrentPage(page)
             setEmployee(res.data.data.data);
+            setTotalRecord(res.data.data.totalElement);
         });
     }
 
     useEffect(() => {
-        getEmployee()
-    }, [offset]);
+        getEmployee(1)
+    }, []);
 
     return (
         <Aux>
-            {/* <Header/>
-            <Sidebar/>*/}
             <div>
                 <div className="staff">
                     <Container fluid>
@@ -141,6 +125,7 @@ function EmployeeSchedule() {
                                 )
                             }
                         </div>
+                        <Paginate count={totalRecord} recordSize = {recordSize} currentPage={currentPage} click={(page) => getEmployee(page)}/>
                     </Container>
                 </div>
             </div>

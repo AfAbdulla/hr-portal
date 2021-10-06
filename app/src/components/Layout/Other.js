@@ -17,29 +17,35 @@ import OperationView from "../../container/Operation/OperationView/OperationView
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 
-export default class Other extends React.Component {
-    render() {
-        return (
-            <Aux>
-                <Router>
-                    <Header/>
-                    <Sidebar/>
-                        <main className="main">
-                            <Switch>
-                                <ProtectedRoute path="/employeeSchedule" component={EmployeeSchedule}/>
-                                <ProtectedRoute path="/createEmployee" component={CreateEmployee}/>
-                                <ProtectedRoute path="/editEmployee" component={EditEmployee}/>
-                                <ProtectedRoute path="/staffSchedule" component={StaffSchedule}/>
-                                <ProtectedRoute path="/editStaff" component={EditStaff}/>
-                                <ProtectedRoute path="/createStaff" component={CreateStaff}/>
-                                <ProtectedRoute path="/createOperation" component={CreateOperation}/>
-                                <ProtectedRoute path="/operationSchedule" component={OperationSchedule}/>
-                                <ProtectedRoute path="/operationView" component={OperationView}/>
-                            </Switch>
-                        </main>
+function Other () {
+    const [toggle, setToggle] = useState(false);
 
-                </Router>
-            </Aux>
-        )
+    const toggleDrawer = () => {
+        setToggle(!toggle)
     }
+
+    return (
+        <Aux>
+            <Router>
+                <Header/>
+                <Sidebar click ={toggleDrawer} toggle ={toggle} />
+                <main className={['main', toggle ? 'active' : ''].join(' ')}>
+                    <Switch>
+                        <ProtectedRoute path="/employeeSchedule" component={EmployeeSchedule}/>
+                        <ProtectedRoute path="/createEmployee" component={CreateEmployee}/>
+                        <ProtectedRoute path="/editEmployee" component={EditEmployee}/>
+                        <ProtectedRoute path="/staffSchedule" component={StaffSchedule}/>
+                        <ProtectedRoute path="/editStaff" component={EditStaff}/>
+                        <ProtectedRoute path="/createStaff" component={CreateStaff}/>
+                        <ProtectedRoute path="/createOperation" component={CreateOperation}/>
+                        <ProtectedRoute path="/operationSchedule" component={OperationSchedule}/>
+                        <ProtectedRoute path="/operationView" component={OperationView}/>
+                    </Switch>
+                </main>
+
+            </Router>
+        </Aux>
+    )
 }
+
+export default Other

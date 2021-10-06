@@ -600,7 +600,6 @@ function EditStaff() {
 
         let arrProgram = []
         for (let i of skillProgramArr) {
-            console.log(skillProgramArr)
             let obj = {name: i.name.value, level: i.level.value}
             arrProgram.push(obj)
         }
@@ -1483,6 +1482,7 @@ function EditStaff() {
                                         document ?
                                             document.map((item, index) =>
                                                 <tr key={index}>
+                                                    <td>{item.id}</td>
                                                     <td>{item.documentType}</td>
                                                     <td>{item.createDate}</td>
                                                     <td>{item.status}</td>
