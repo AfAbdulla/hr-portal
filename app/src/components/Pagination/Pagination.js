@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Pagination from "react-bootstrap/Pagination";
 
 function Paginate(props) {
@@ -6,7 +6,7 @@ function Paginate(props) {
     const amountPages = Math.ceil(props.count / props.recordSize);
     for (let i = 1; i <= amountPages; i++) {
         paginationItems.push(
-            <Pagination.Item active={i === props.currentPage} onClick={() => {
+            <Pagination.Item active={i === props.currentPage} key={i} onClick={() => {
                 props.click(i)
             }}>
                 {i}

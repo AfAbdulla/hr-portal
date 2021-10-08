@@ -103,7 +103,7 @@ function CreateEmployee() {
     const [academicDegreeNumber, setAcademicDegreeNumber] = useState('');
     const [academicDegreeOrganization, setAcademicDegreeOrganization] = useState('');
     const [dataVal, setDataVal] = useState('');
-    const [uploadFile, setUploadFile] = useState();
+    const [uploadFile, setUploadFile] = useState('');
     const [photo, setPhoto] = useState();
 
 
@@ -157,7 +157,6 @@ function CreateEmployee() {
         endDate: '',
         name: ''
     }]);
-
     const [rewardArr, setRewardArr] = useState([{
         name: '',
         organization: '',
@@ -416,7 +415,7 @@ function CreateEmployee() {
             setIdCardNumber(data.idcardNumber);
             setIdCardPin(data.idcardPin);
             for (let i of familyConditionOptions) {
-                if (data.familyCondition == i.label)
+                if (data.familyCondition === i.label)
                     setSelectedFamilyCondition(i);
             }
             setStartIdDate(new Date(data.idcardStartDate));
@@ -425,25 +424,25 @@ function CreateEmployee() {
             setStartBirthDate(new Date(data.birthday));
             setCountryBirth(data.birthplace);
             for (let i of genderOptions) {
-                if (data.gender == i.label)
+                if (data.gender === i.label)
                     setSelectedGender(i);
             }
 
             for (let i of bloodTypeOptions) {
-                if (data.bloodGroup == i.label)
+                if (data.bloodGroup === i.label)
                     setSelectedBloodType(i);
             }
             setLivePermission(data.permission);
             setSelectedCitizenControl({name: data.citizenCountry});
-            data.citizenCountry == 'Azərbaycan' ? setShowPermission(false) : setShowPermission(true)
+            data.citizenCountry === 'Azərbaycan' ? setShowPermission(false) : setShowPermission(true)
             setIdCardOrganization(data.idcardOrganization);
             setPassportSerial(data.foreignPassportSeries);
             setPassportNumber(data.foreignPassportNumber);
             setStartPassportDate(new Date(data.foreignPassportStartDate));
             setExpiredPassportDate(new Date(data.foreignPassportEndDate));
-            setSelectedCountry({key: data.addressCountry});
-            setSelectedCity({key: data.addressCity});
-            setSelectedRegion({key: data.addressDistrict});
+            setSelectedCountry({key: data.addressCountry.key, value: data.addressCountry.value});
+            setSelectedCity({key: data.addressCity.key, value: data.addressCity.value});
+            setSelectedRegion({key: data.addressDistrict.key, value: data.addressDistrict.value});
             setSettlement(data.addressVillage);
             setStreet(data.addressStreet);
             setBlock(data.addressBlock);
@@ -471,7 +470,7 @@ function CreateEmployee() {
                 obj.fullName = i.fullName;
                 obj.birthplace = i.birthplace;
                 for (let j of relationTypeOptions) {
-                    if (j.label == i.relationType)
+                    if (j.label === i.relationType)
                         obj.relationType = j;
                 }
                 tmpFamilyArr.push(obj)
@@ -480,8 +479,6 @@ function CreateEmployee() {
                 setFamilyMemberArr(tmpFamilyArr);
             data.photo !== null ?
                 setPhoto(`https://hr-portal-api.herokuapp.com/image/${data.photo}?token=${token}`) : setPhoto(userImage)
-
-
         });
     }
 
@@ -528,14 +525,14 @@ function CreateEmployee() {
             setGraduateFileNumber(data.graduateFileNumber);
             setStartGraduateFile(new Date(data.graduateFileDate));
             for (let i of educationTypeOptions) {
-                if (data.educationType == i.label)
+                if (data.educationType === i.label)
                     setSelectedEducationType(i);
             }
 
             setNostrificationNumber(data.nostrifikasiyaNumber)
             setExpiredDriverLicenceDate(new Date(data.driverCardEndDate));
             for (let i of driverLicenceOptions) {
-                if (data.driverCardCategory == i.label) {
+                if (data.driverCardCategory === i.label) {
                     setSelectedDriverLicence(i)
                 }
             }
@@ -558,7 +555,7 @@ function CreateEmployee() {
 
     const sendData = () => {
         for (let i of familyMemberArr) {
-            if (i.relationType !== "") {
+            if (i.relationType !== null) {
                 i.relationType = i.relationType.value
             }
         }
@@ -598,7 +595,6 @@ function CreateEmployee() {
             "ownMailAddress": email,
             "permission": livePermission
         }
-
         mainAxios({
             method: 'put',
             url: '/employee/general-info/' + id,
@@ -610,7 +606,7 @@ function CreateEmployee() {
         }).then((res) => {
             setKey('company');
             setDataVal(res.data.data);
-            SenDataImage(res.data.data)
+            if(uploadFile !== "") SenDataImage(res.data.data)
         });
 
     }
@@ -642,7 +638,6 @@ function CreateEmployee() {
             "section": section,
             "subSection": subSection
         }
-
         mainAxios({
             method: 'put',
             url: '/employee/business-info/' + id,
@@ -729,20 +724,18 @@ function CreateEmployee() {
 
     return (
         <Aux>
-            {/* <Header/>
-            <Sidebar/>*/}
             <div className="create-staff">
                 <Container fluid>
                     <div className="title-block flex">
                         <div className="title flex-center">
-                            <Link to="/employeeSchedule" className="flex">
+                            <Link to={`/viewEmployee/${id}`} className="flex">
                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M23.3333 14H7.58333M12.25 8.75L7 14L12.25 19.25" stroke="#193651"
                                           strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
                             </Link>
-                            İşçi əlavə et
+                            Redaktə et
                         </div>
                     </div>
                     <Tabs activeKey={key} onSelect={(k) => setKey(k)}>
@@ -761,8 +754,7 @@ function CreateEmployee() {
                                                 <div className="btn-block flex-center">
                                                     <button className="btn-border add-img" type="button">
                                                         Şəkil əlavə et
-                                                        <input type="file"
-                                                               onChange={(event) => uploadImage(event)}/>
+                                                        <input type="file" onChange={(event) => uploadImage(event)}/>
                                                     </button>
                                                     <button className="btn-border remove-img" type="button"
                                                             onClick={() => removeImage()}>
@@ -776,10 +768,10 @@ function CreateEmployee() {
                                                         <span className="input-title">Seriya və nömrə *</span>
                                                         <InputGroup>
                                                             <Form.Control className="input-add" placeholder="AZE"
-                                                                          value={idCardSerial}
+                                                                          value={idCardSerial || ''}
                                                                           onChange={(e => setIdCardSerial(e.target.value))}/>
                                                             <Form.Control placeholder="Nömrə daxil edin"
-                                                                          value={idCardNumber}
+                                                                          value={idCardNumber || ''}
                                                                           onChange={(e => setIdCardNumber(e.target.value))}/>
                                                         </InputGroup>
                                                     </Form.Group>
@@ -789,7 +781,7 @@ function CreateEmployee() {
                                                         <span className="input-title">FİN kod *</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="FIN kodu daxil edin"
-                                                                          value={idCardPin}
+                                                                          value={idCardPin || ''}
                                                                           onChange={(e => setIdCardPin(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -937,7 +929,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control type="text"
                                                                           placeholder="Ştat vahidinin saynı daxil edin"
-                                                                          value={fullName}
+                                                                          value={fullName || ''}
                                                                           onChange={(e => {
                                                                               setFullName(e.target.value);
                                                                           })}/>
@@ -1009,7 +1001,7 @@ function CreateEmployee() {
                                                         <span className="input-title">Doğum yeri *</span>
                                                         <Form.Control type="text"
                                                                       placeholder="Doğum yerini daxil edin"
-                                                                      value={countryBirth}
+                                                                      value={countryBirth || ''}
                                                                       onChange={(e) => setCountryBirth(e.target.value)}/>
                                                     </Form.Group>
                                                 </Col>
@@ -1021,7 +1013,7 @@ function CreateEmployee() {
                                                             placeholder="Vətəndaşlığı olduğu ölkəni seçin"
                                                             value={selectedCitizenControl}
                                                             onChange={(val) => {
-                                                                val.name == 'Azərbaycan' ? setShowPermission(false) : setShowPermission(true)
+                                                                val.name === 'Azərbaycan' ? setShowPermission(false) : setShowPermission(true)
                                                                 setSelectedCitizenControl(val)
                                                             }}
                                                             options={citizen}
@@ -1060,7 +1052,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control type="text"
                                                                           placeholder="Vəsiqə və ya müvəqqəti yaşamaq icazəsini daxil edin"
-                                                                          value={livePermission}
+                                                                          value={livePermission || ''}
                                                                           onChange={(e) => setLivePermission(e.target.value)}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1072,7 +1064,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control type="text"
                                                                           placeholder="Şəxsiy. vəs. verən orqanı daxil edin"
-                                                                          value={idCardOrganization}
+                                                                          value={idCardOrganization || ''}
                                                                           onChange={(e) => setIdCardOrganization(e.target.value)}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1109,11 +1101,11 @@ function CreateEmployee() {
                                                         <Col xs={4}>
                                                             <Form.Group>
                                                                 <span
-                                                                    className="input-title">İş icazəsinin müddəti * *</span>
+                                                                    className="input-title">İş icazəsinin müddəti *</span>
                                                                 <Form.Label className="relative m-0">
                                                                     <Form.Control placeholder="Müddəti daxil edin"
                                                                                   type="number"
-                                                                                  value={workPermissionPeriod}
+                                                                                  value={workPermissionPeriod || ''}
                                                                                   onChange={(e => setWorkPermissionPeriod(e.target.value))}/>
                                                                 </Form.Label>
                                                             </Form.Group>
@@ -1255,17 +1247,17 @@ function CreateEmployee() {
                                                         <span className="input-title">Seriya və nömrə *</span>
                                                         <InputGroup>
                                                             <Form.Control className="input-add" placeholder="AZE"
-                                                                          value={passportSerial}
+                                                                          value={passportSerial || ''}
                                                                           onChange={(e => setPassportSerial(e.target.value))}/>
                                                             <Form.Control placeholder="Seriya və nömrəni daxil edin"
-                                                                          value={passportNumber}
+                                                                          value={passportNumber || ''}
                                                                           onChange={(e => setPassportNumber(e.target.value))}/>
                                                         </InputGroup>
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
                                                     <Form.Group>
-                                                        <span className="input-title">Doğum tarixi *</span>
+                                                        <span className="input-title">Verilmə tarixi *</span>
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={startPassportDate}
                                                                         dateFormat="dd-MM-yyyy"
@@ -1325,7 +1317,7 @@ function CreateEmployee() {
                                                 </Col>
                                                 <Col xs={4}>
                                                     <Form.Group>
-                                                        <span className="input-title">Doğum tarixi *</span>
+                                                        <span className="input-title">Bitmə tarixi  *</span>
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={expiredPassportDate}
                                                                         dateFormat="dd-MM-yyyy"
@@ -1420,6 +1412,7 @@ function CreateEmployee() {
                                                         />
                                                     </Form.Group>
                                                 </Col>
+
                                                 <Col xs={4}>
                                                     <Form.Group>
                                                         <span className="input-title">Rayon *</span>
@@ -1435,13 +1428,14 @@ function CreateEmployee() {
                                                         />
                                                     </Form.Group>
                                                 </Col>
+
                                                 <Col xs={4}>
                                                     <Form.Group>
                                                         <span className="input-title">Qəsəbə *</span>
                                                         <Form.Label>
                                                             <Form.Control
                                                                 placeholder="Ölkəni daxil edin"
-                                                                value={settlement}
+                                                                value={settlement || ''}
                                                                 onChange={(e => setSettlement(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1452,7 +1446,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control
                                                                 placeholder="Küçə daxil edin"
-                                                                value={street}
+                                                                value={street || ''}
                                                                 onChange={(e => setStreet(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1463,7 +1457,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control
                                                                 placeholder="Məhəllə daxil edin"
-                                                                value={block}
+                                                                value={block || ''}
                                                                 onChange={(e => setBlock(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1474,7 +1468,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control
                                                                 placeholder="Mənzil daxil edin"
-                                                                value={apartment}
+                                                                value={apartment || ''}
                                                                 onChange={(e => setApartment(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1485,7 +1479,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control
                                                                 placeholder="Ev daxil edin"
-                                                                value={home}
+                                                                value={home || ''}
                                                                 onChange={(e => setHome(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1505,7 +1499,7 @@ function CreateEmployee() {
                                                             <Form.Control
                                                                 type="number"
                                                                 placeholder="Ev nömrəsi daxil edin"
-                                                                value={phoneNumber}
+                                                                value={phoneNumber || ''}
                                                                 onChange={(e => setPhoneNumber(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1517,7 +1511,7 @@ function CreateEmployee() {
                                                             <Form.Control
                                                                 type="number"
                                                                 placeholder="Mobil nömrəsi daxil edin"
-                                                                value={mobileNumber1}
+                                                                value={mobileNumber1 || ''}
                                                                 onChange={(e => setMobileNumber1(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1529,7 +1523,7 @@ function CreateEmployee() {
                                                             <Form.Control
                                                                 type="number"
                                                                 placeholder="Mobil nömrəsi daxil edin"
-                                                                value={mobileNumber2}
+                                                                value={mobileNumber2 || ''}
                                                                 onChange={(e => setMobileNumber2(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1541,7 +1535,7 @@ function CreateEmployee() {
                                                             <Form.Control
                                                                 type="number"
                                                                 placeholder="İş nömrəsi daxil edin"
-                                                                value={businessPhone}
+                                                                value={businessPhone || ''}
                                                                 onChange={(e => setBusinessPhone(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1553,7 +1547,7 @@ function CreateEmployee() {
                                                             <Form.Control
                                                                 type="number"
                                                                 placeholder="İş nömrəsi daxil edin"
-                                                                value={businessInternalPhone}
+                                                                value={businessInternalPhone || ''}
                                                                 onChange={(e => setBusinessInternalPhone(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1564,7 +1558,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control
                                                                 placeholder="E-mail ünvanı edin"
-                                                                value={email}
+                                                                value={email || ''}
                                                                 onChange={(e => setEmail(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1575,7 +1569,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control
                                                                 placeholder="E-mail ünvanı edin"
-                                                                value={emailBusiness}
+                                                                value={emailBusiness || ''}
                                                                 onChange={(e => setEmailBusiness(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1589,10 +1583,9 @@ function CreateEmployee() {
                                             <div className="addition-content">
                                                 {
                                                     familyMemberArr.map((item, index) =>
-                                                        <div key={uid(item, index)}
-                                                             className={index == 0 ? '' : 'add-item'}>
+                                                        <div key={uid(item, index)} className={index === 0 ? '' : 'add-item'}>
                                                             {
-                                                                index == 0 ? null :
+                                                                index === 0 ? null :
                                                                     <div className="add-item-top">
                                                                         <p className="m-0"> #{index + 1}. Digər </p>
                                                                         <Button
@@ -1644,9 +1637,8 @@ function CreateEmployee() {
                                                                         <Form.Label>
                                                                             <Form.Control
                                                                                 placeholder="Soyadı, adı, ata adı daxil edin"
-                                                                                value={item.fullName}
+                                                                                value={item.fullName || ''}
                                                                                 onChange={(e) => {
-                                                                                    //setFamilyMemberFullName(e.target.value);
                                                                                     familyMemberArr[index].fullName = e.target.value;
                                                                                     setFamilyMemberArr([...familyMemberArr], familyMemberArr)
                                                                                 }}/>
@@ -1727,9 +1719,8 @@ function CreateEmployee() {
                                                                         <Form.Label>
                                                                             <Form.Control
                                                                                 placeholder="Doğum yeri daxil edin"
-                                                                                value={item.birthplace}
+                                                                                value={item.birthplace || ''}
                                                                                 onChange={(e) => {
-                                                                                    //setFamilyMemberBirthPlace(e.target.value);
                                                                                     familyMemberArr[index].birthplace = e.target.value;
                                                                                     setFamilyMemberArr([...familyMemberArr], familyMemberArr)
                                                                                 }}/>
@@ -1742,7 +1733,7 @@ function CreateEmployee() {
                                                                         <Form.Label>
                                                                             <Form.Control
                                                                                 placeholder="Yeri daxil edin"
-                                                                                value={item.workPlace}
+                                                                                value={item.workPlace || ''}
                                                                                 onChange={(e) => {
                                                                                     familyMemberArr[index].workPlace = e.target.value;
                                                                                     setFamilyMemberArr([...familyMemberArr], familyMemberArr)
@@ -1757,9 +1748,8 @@ function CreateEmployee() {
                                                                         <Form.Label>
                                                                             <Form.Control
                                                                                 placeholder="Vəzifə daxil edin"
-                                                                                value={item.position}
+                                                                                value={item.position || ''}
                                                                                 onChange={(e) => {
-                                                                                    //setFamilyMemberProfession(e.target.value);
                                                                                     familyMemberArr[index].position = e.target.value;
                                                                                     setFamilyMemberArr([...familyMemberArr], familyMemberArr)
                                                                                 }}/>
@@ -1772,9 +1762,8 @@ function CreateEmployee() {
                                                                         <Form.Label>
                                                                             <Form.Control
                                                                                 placeholder="Yaşayış daxil edin"
-                                                                                value={item.address}
+                                                                                value={item.address || ''}
                                                                                 onChange={(e) => {
-                                                                                    // setFamilyMemberAddress(e.target.value);
                                                                                     familyMemberArr[index].address = e.target.value;
                                                                                     setFamilyMemberArr([...familyMemberArr], familyMemberArr)
                                                                                 }}/>
@@ -1822,7 +1811,7 @@ function CreateEmployee() {
                                                         <span className="input-title">İşçinin işlədiyi şirkət</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Şirkət daxil et"
-                                                                          value={company}
+                                                                          value={company || ''}
                                                                           onChange={(e => setCompany(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1832,7 +1821,7 @@ function CreateEmployee() {
                                                         <span className="input-title">Struktur bölmə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Struktur bölmə daxil et"
-                                                                          value={section}
+                                                                          value={section || ''}
                                                                           onChange={(e => setSection(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1842,7 +1831,7 @@ function CreateEmployee() {
                                                         <span className="input-title">Alt struktur bölmə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Alt struktur  bölmə daxil et"
-                                                                          value={subSection}
+                                                                          value={subSection || ''}
                                                                           onChange={(e => setSubSection(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1852,7 +1841,7 @@ function CreateEmployee() {
                                                         <span className="input-title">İşçinin işlədiyi vəzifə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Struktur bölmə daxil et"
-                                                                          value={employeePosition}
+                                                                          value={employeePosition || ''}
                                                                           onChange={(e => setEmployeePosition(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1983,7 +1972,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control
                                                                 placeholder="İşdən azad olma maddəsi  daxil et"
-                                                                value={firedReason}
+                                                                value={firedReason || ''}
                                                                 onChange={(e => setFiredReason(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -2099,7 +2088,7 @@ function CreateEmployee() {
                                                         <span className="input-title">Sənədin nömrəsi</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Sənədin nömrəsi daxil et"
-                                                                          value={academicDegreeNumber}
+                                                                          value={academicDegreeNumber || ''}
                                                                           onChange={(e => setAcademicDegreeNumber(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -2109,7 +2098,7 @@ function CreateEmployee() {
                                                         <span className="input-title">Verən orqan</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Verən orqan daxil et"
-                                                                          value={academicDegreeOrganization}
+                                                                          value={academicDegreeOrganization || ''}
                                                                           onChange={(e => setAcademicDegreeOrganization(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -2143,7 +2132,7 @@ function CreateEmployee() {
                                                         <span className="input-title">Fakültə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Fakültə daxil et"
-                                                                          value={faculty}
+                                                                          value={faculty || ''}
                                                                           onChange={(e => setFaculty(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -2153,7 +2142,7 @@ function CreateEmployee() {
                                                         <span className="input-title">İstiqamət</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="İstiqamət daxil et"
-                                                                          value={direction}
+                                                                          value={direction || ''}
                                                                           onChange={(e => setDirection(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -2164,7 +2153,7 @@ function CreateEmployee() {
                                                         <span className="input-title"> İxtisas</span>
                                                         <Form.Label className="relative m-0">
                                                             <Form.Control placeholder="İxtisas daxil et"
-                                                                          value={major}
+                                                                          value={major || ''}
                                                                           onChange={(e => setMajor(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -2295,7 +2284,7 @@ function CreateEmployee() {
                                                         <span className="input-title">Təhsil dərəcəsi</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Təhsil dərəcəsi daxil et"
-                                                                          value={degree}
+                                                                          value={degree || ''}
                                                                           onChange={(e => setDegree(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -2305,7 +2294,7 @@ function CreateEmployee() {
                                                         <span className="input-title">Sənədin nömrəsi</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Sənədin nömrəsi daxil et"
-                                                                          value={graduateFileNumber}
+                                                                          value={graduateFileNumber || ''}
                                                                           onChange={(e => setGraduateFileNumber(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -2393,7 +2382,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control
                                                                 placeholder="Nostrifikasiya şəhadətnaməsinin nömrəsi daxil et"
-                                                                value={nostrificationNumber}
+                                                                value={nostrificationNumber || ''}
                                                                 onChange={(e => setNostrificationNumber(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -2410,9 +2399,9 @@ function CreateEmployee() {
                                                 {
                                                     certificateArr.map((item, index) =>
                                                         <div key={uid(item, index)}
-                                                             className={index == 0 ? '' : 'add-item'}>
+                                                             className={index === 0 ? '' : 'add-item'}>
                                                             {
-                                                                index == 0 ? null :
+                                                                index === 0 ? null :
                                                                     <div className="add-item-top">
                                                                         <p className="m-0"> #{index + 1}. Digər </p>
                                                                         <Button
@@ -2445,7 +2434,7 @@ function CreateEmployee() {
                                                                         <Form.Label>
                                                                             <Form.Control
                                                                                 placeholder="Adı daxil edin"
-                                                                                value={item.name}
+                                                                                value={item.name || ''}
                                                                                 onChange={(e) => {
                                                                                     certificateArr[index].name = e.target.value;
                                                                                     setCertificateArr([...certificateArr], certificateArr)
@@ -2549,9 +2538,9 @@ function CreateEmployee() {
                                                 {
                                                     rewardArr.map((item, index) =>
                                                         <div key={uid(item, index)}
-                                                             className={index == 0 ? '' : 'add-item'}>
+                                                             className={index === 0 ? '' : 'add-item'}>
                                                             {
-                                                                index == 0 ? null :
+                                                                index === 0 ? null :
                                                                     <div className="add-item-top">
                                                                         <p className="m-0"> #{index + 1}. Digər </p>
                                                                         <Button
@@ -2802,7 +2791,7 @@ function CreateEmployee() {
                                                         <Form.Label>
                                                             <Form.Control
                                                                 placeholder="Nömrəni daxil edin"
-                                                                value={warrantyNumber}
+                                                                value={warrantyNumber || ''}
                                                                 onChange={(e => setWarrantyNumber(e.target.value))}/>
                                                         </Form.Label>
                                                     </Form.Group>

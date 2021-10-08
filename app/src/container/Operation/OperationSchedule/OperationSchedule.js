@@ -6,6 +6,12 @@ import {mainAxios} from "../../../components/Axios/axios";
 import {useHistory} from "react-router-dom";
 import Paginate from "../../../components/Pagination/Pagination";
 
+const statuses = {
+    'Təsdiq gözləyir' : 'pending',
+    'Təsdiqlənib': 'confirmed',
+    'Ləğv olunub': 'cancelled'
+};
+
 function OperationSchedule() {
     const history = useHistory();
     const [document, setDocument] = useState([]);
@@ -83,7 +89,11 @@ function OperationSchedule() {
                                         <td>{item.id}</td>
                                         <td>{item.documentType}</td>
                                         <td>{item.createDate}</td>
-                                        <td>{item.status}</td>
+                                        <td>
+                                            <span className={statuses[item.status]}>
+                                                {item.status}
+                                            </span>
+                                        </td>
                                     </tr>
                                 )
                             }

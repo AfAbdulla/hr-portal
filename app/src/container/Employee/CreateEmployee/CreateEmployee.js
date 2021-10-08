@@ -3,8 +3,6 @@ import Aux from "../../../hoc/Auxiliary";
 import {Button, Container, Row, Col, Form, Tabs, Tab, InputGroup, Image} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Select from 'react-select';
-import Header from "../../../components/Header/Header";
-import Sidebar from "../../../components/Sidebar/Sidebar";
 import {mainAxios} from "../../../components/Axios/axios";
 import DatePicker from "react-datepicker";
 import userImage from '../../../assets/img/user.png';
@@ -104,8 +102,8 @@ function CreateEmployee() {
     const [academicDegreeNumber, setAcademicDegreeNumber] = useState('');
     const [academicDegreeOrganization, setAcademicDegreeOrganization] = useState('');
     const [dataVal, setDataVal] = useState('');
-    const [file, setFile] = useState(userImage);
-    const [uploadFile, setUploadFile] = useState();
+    const [photo, setPhoto] = useState(userImage);
+    const [uploadFile, setUploadFile] = useState('');
     const [workPermissionSerial, setWorkPermissionSerial] = useState('');
     const [workPermissionNumber, setWorkPermissionNumber] = useState('');
     const [workPermissionPeriod, setWorkPermissionPeriod] = useState('');
@@ -261,12 +259,16 @@ function CreateEmployee() {
     };
 
     const uploadImage = (event) => {
-        setFile(URL.createObjectURL(event.target.files[0]));
-        setUploadFile(event.target.files[0])
+        let file = event.target.files[0]
+        console.log('first', file)
+        setPhoto(URL.createObjectURL(file));
+        setUploadFile(file);
+        console.log('second',photo);
+        console.log('third', uploadFile)
     }
 
     const removeImage = () => {
-        setFile(userImage)
+        setPhoto(userImage)
     }
 
     const getCity = () => {
@@ -402,6 +404,8 @@ function CreateEmployee() {
     }
 
     const sendData = () => {
+        SenDataImage(1)
+
         let data = {
             "addressApartment": apartment,
             "addressBlock": block,
@@ -455,7 +459,7 @@ function CreateEmployee() {
         }).then((res) => {
             setKey('company');
             setDataVal(res.data.data);
-            SenDataImage(res.data.data)
+            if(uploadFile !== "") SenDataImage(res.data.data)
         });
 
     }
@@ -556,8 +560,6 @@ function CreateEmployee() {
 
     return (
         <Aux>
-            {/*<Header/>
-            <Sidebar/>*/}
             <div className="create-staff">
                 <Container fluid>
                     <div className="title-block flex">
@@ -583,7 +585,7 @@ function CreateEmployee() {
                                             </div>
                                             <div className="upload-content flex-center">
                                                 <div className="upload-img">
-                                                    <Image src={file}/>
+                                                    <Image src={photo}/>
                                                 </div>
                                                 <div className="btn-block flex-center">
                                                     <button className="btn-border add-img" type="button">
@@ -852,7 +854,7 @@ function CreateEmployee() {
                                                             placeholder="Vətəndaşlığı olduğu ölkəni seçin"
                                                             value={selectedCitizenControl}
                                                             onChange={(val) => {
-                                                                val.name == 'Azərbaycan' ? setShowPermission(false) : setShowPermission(true)
+                                                                val.name === 'Azərbaycan' ? setShowPermission(false) : setShowPermission(true)
                                                                 setSelectedCitizenControl(val)
                                                             }}
                                                             options={citizen}
@@ -1423,9 +1425,9 @@ function CreateEmployee() {
                                                 {
                                                     familyMemberArr.map((item, index) =>
                                                         <div key={uid(item, index)}
-                                                             className={index == 0 ? '' : 'add-item'}>
+                                                             className={index === 0 ? '' : 'add-item'}>
                                                             {
-                                                                index == 0 ? null :
+                                                                index === 0 ? null :
                                                                     <div className="add-item-top">
                                                                         <p className="m-0"> #{index + 1}. Digər </p>
                                                                         <Button
@@ -1559,9 +1561,7 @@ function CreateEmployee() {
                                                                         <Form.Label>
                                                                             <Form.Control
                                                                                 placeholder="Doğum yeri daxil edin"
-                                                                                //value={familyMemberBirthPlace}
                                                                                 onChange={(e) => {
-                                                                                    //setFamilyMemberBirthPlace(e.target.value);
                                                                                     familyMemberArr[index].birthplace = e.target.value;
                                                                                     setFamilyMemberArr([...familyMemberArr], familyMemberArr)
                                                                                 }}/>
@@ -1588,9 +1588,7 @@ function CreateEmployee() {
                                                                         <Form.Label>
                                                                             <Form.Control
                                                                                 placeholder="Vəzifə daxil edin"
-                                                                                //value={familyMemberProfession}
                                                                                 onChange={(e) => {
-                                                                                    //setFamilyMemberProfession(e.target.value);
                                                                                     familyMemberArr[index].position = e.target.value;
                                                                                     setFamilyMemberArr([...familyMemberArr], familyMemberArr)
                                                                                 }}/>
@@ -1603,9 +1601,7 @@ function CreateEmployee() {
                                                                         <Form.Label>
                                                                             <Form.Control
                                                                                 placeholder="Yaşayış daxil edin"
-                                                                                //value={familyMemberAddress}
                                                                                 onChange={(e) => {
-                                                                                    // setFamilyMemberAddress(e.target.value);
                                                                                     familyMemberArr[index].address = e.target.value;
                                                                                     setFamilyMemberArr([...familyMemberArr], familyMemberArr)
                                                                                 }}/>
@@ -2247,9 +2243,9 @@ function CreateEmployee() {
                                                 {
                                                     certificateArr.map((item, index) =>
                                                         <div key={uid(item, index)}
-                                                             className={index == 0 ? '' : 'add-item'}>
+                                                             className={index === 0 ? '' : 'add-item'}>
                                                             {
-                                                                index == 0 ? null :
+                                                                index === 0 ? null :
                                                                     <div className="add-item-top">
                                                                         <p className="m-0"> #{index + 1}. Digər </p>
                                                                         <Button
@@ -2386,9 +2382,9 @@ function CreateEmployee() {
                                                 {
                                                     rewardArr.map((item, index) =>
                                                         <div key={uid(item, index)}
-                                                             className={index == 0 ? '' : 'add-item'}>
+                                                             className={index === 0 ? '' : 'add-item'}>
                                                             {
-                                                                index == 0 ? null :
+                                                                index === 0 ? null :
                                                                     <div className="add-item-top">
                                                                         <p className="m-0"> #{index + 1}. Digər </p>
                                                                         <Button

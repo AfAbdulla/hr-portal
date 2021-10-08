@@ -16,7 +16,7 @@ function EmployeeSchedule() {
     const [recordSize, setRecordSize] = useState(5)
 
     const handleRowClick = (item) => {
-        history.push(`/editEmployee/${item.id}`);
+        history.push(`/viewEmployee/${item.id}`);
     }
 
     const getEmployee = (page) => {

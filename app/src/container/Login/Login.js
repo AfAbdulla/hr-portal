@@ -3,24 +3,31 @@ import Aux from "../../hoc/Auxiliary";
 import {Container, Row, Col, Form, Button} from 'react-bootstrap';
 import {Link, useHistory} from 'react-router-dom';
 import {mainAxios} from "../../components/Axios/axios";
+import Spinner from 'react-bootstrap/Spinner'
 
 
 function Login() {
     const history = useHistory();
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [passwordBtn, setPasswordBtn] = useState(false)
+    const [passwordBtn, setPasswordBtn] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     const togglePassword = () => {
         setPasswordBtn(!passwordBtn)
     }
 
-    const sendData =  (event) => {
+    const sendData = (event) => {
         event.preventDefault();
-        let data =  JSON.stringify ({
+        let data = JSON.stringify({
             username: email,
             password: password
-        })
+        });
+
+        if (email.length > 0 && password.length > 0) {
+            setLoading(true)
+        }
+
         mainAxios({
             method: 'post',
             url: '/auth/login',
@@ -31,11 +38,12 @@ function Login() {
             },
             data: data
         }).then((res) => {
-            if(res.data.code == 200) {
+            setLoading(false)
+            if (res.data.code === 200) {
                 localStorage.setItem('token', res.data.data);
                 history.replace("/employeeSchedule");
 
-               // window.location.href='/employeeSchedule'
+                // window.location.href='/employeeSchedule'
             }
         });
     }
@@ -104,8 +112,15 @@ function Login() {
                                                     </Button>
                                                 </Form.Label>
                                             </Form.Group>
-                                            <Button className="btn-effect" type="submit">
-                                                Log in
+                                            <Button className={['btn-effect', loading ? 'loading' : ''].join(' ')}
+                                                    type="submit">
+                                                {
+                                                    loading ?
+                                                        <Spinner animation="border" role="status" size="sm">
+                                                            <span className="visually-hidden">Loading...</span>
+                                                        </Spinner> :
+                                                        <span>Log in</span>
+                                                }
                                             </Button>
                                         </Form>
                                     </Col>

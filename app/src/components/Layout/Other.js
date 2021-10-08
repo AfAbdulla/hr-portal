@@ -10,6 +10,7 @@ import CreateStaff from "../../container/Staff/CreateStaff/CreateStaff";
 import EditStaff from "../../container/Staff/EditStaff/EditStaff";
 import EmployeeSchedule from "../../container/Employee/EmployeeSchedule/EmployeeSchedule";
 import CreateEmployee from "../../container/Employee/CreateEmployee/CreateEmployee";
+import ViewEmployee from "../../container/Employee/ViewEmployee/ViewEmployee";
 import EditEmployee from "../../container/Employee/EditEmployee/EditEmployee";
 import CreateOperation from "../../container/Operation/CreateOperation/CreateOperation";
 import OperationSchedule from "../../container/Operation/OperationSchedule/OperationSchedule";
@@ -34,6 +35,7 @@ function Other () {
                         <ProtectedRoute path="/employeeSchedule" component={EmployeeSchedule}/>
                         <ProtectedRoute path="/createEmployee" component={CreateEmployee}/>
                         <ProtectedRoute path="/editEmployee" component={EditEmployee}/>
+                        <ProtectedRoute path="/viewEmployee" component={ViewEmployee}/>
                         <ProtectedRoute path="/staffSchedule" component={StaffSchedule}/>
                         <ProtectedRoute path="/editStaff" component={EditStaff}/>
                         <ProtectedRoute path="/createStaff" component={CreateStaff}/>
