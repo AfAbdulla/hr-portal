@@ -491,6 +491,10 @@ label {
     display: none;
 }
 
+.sidebar.active .trapezium .btn-transparent svg {
+    transform: rotate(180deg);
+}
+
 .sidebar.active .nav-pills .nav-link svg {
     margin: 0;
 }
@@ -554,16 +558,19 @@ label {
     padding: 13px 13px 13px 60px;
     background-color: #FFFFFF;
     text-align: left;
-    cursor: pointer;
-
 }
 
 .table-hover > tbody > tr {
     color: #193651;
+    cursor: pointer;
 }
 
 .table-hover > tbody > tr:hover {
     --bs-table-accent-bg: rgba(46, 208, 106, 0.1);
+}
+
+.table-hover > tbody > tr.disabled {
+    cursor: auto;
 }
 
 th {
@@ -1045,7 +1052,7 @@ td {
     margin-left: 35px;
 }
 
-.pending, .canceled, .confirmed {
+.pending, .cancelled, .confirmed {
     background: rgba(250, 158, 50, 0.1);
     border-radius: 4px;
     font-weight: 500;
@@ -1101,10 +1108,23 @@ td {
 
 .swal2-styled.swal2-confirm, .swal2-styled.swal2-confirm:hover {
     color: #fff;
-    background: #2ED06A;
 }
 
 .swal2-container.swal2-center>.swal2-popup {
     padding: 25px 30px 40px;
     width: 24em;
+}
+
+.loading-block {
+    height: calc(100vh - 175px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-block .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border: .25em solid rgba(24, 24, 24, .4);
+    border-right-color: transparent;
 }

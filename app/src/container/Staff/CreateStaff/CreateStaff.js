@@ -98,7 +98,7 @@ function CreateStaff() {
     const [employeePosition, setEmployeePosition] = useState([]);
     const [workAddress, setWorkAddress] = useState([]);
     const [obeyDepartment, setObeyDepartment] = useState('');
-    const [additionalSalary, setAdditionalSalary] = useState('');
+    //const [additionalSalary, setAdditionalSalary] = useState('');
     const [vacancyCount, setVacancyCount] = useState('');
     const [areaExperience, setAreaExperience] = useState('');
     const [leaderExperience, setLeaderExperience] = useState('');
@@ -388,7 +388,7 @@ function CreateStaff() {
 
     const sendData = () => {
         let data = {
-            "additionalSalary": parseFloat(additionalSalary),
+            //"additionalSalary": parseFloat(additionalSalary),
             "areaExperience": parseFloat(areaExperience),
             "departmentName": selectedDepartment !== null ? selectedDepartment.name : "",
             "educationDegree": selectedEducationDegree !== null ? selectedEducationDegree.value : "",
@@ -619,7 +619,7 @@ function CreateStaff() {
                                                         />
                                                     </Form.Group>
                                                 </Col>
-                                                <Col xs={4}>
+                                                <Col xs={6}>
                                                     <Form.Group>
                                                         <span className="input-title">Əmək şəraiti *</span>
                                                         <Select
@@ -631,7 +631,7 @@ function CreateStaff() {
                                                         />
                                                     </Form.Group>
                                                 </Col>
-                                                <Col xs={4}>
+                                               {/* <Col xs={4}>
                                                     <Form.Group>
                                                         <span className="input-title">Ştat üzrə əmək şəraitinə görə əlavə əmək haqqı</span>
                                                         <Form.Label>
@@ -640,8 +640,8 @@ function CreateStaff() {
                                                                           onChange={(e) => setAdditionalSalary(e.target.value)}/>
                                                         </Form.Label>
                                                     </Form.Group>
-                                                </Col>
-                                                <Col xs={4}>
+                                                </Col>*/}
+                                                <Col xs={6}>
                                                     <Form.Group>
                                                             <span
                                                                 className="input-title">Ştat vahidinin iş rejimi *</span>

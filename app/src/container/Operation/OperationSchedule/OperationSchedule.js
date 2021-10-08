@@ -9,7 +9,7 @@ import Paginate from "../../../components/Pagination/Pagination";
 const statuses = {
     'Təsdiq gözləyir' : 'pending',
     'Təsdiqlənib': 'confirmed',
-    'Ləğv olunub': 'cancelled'
+    'Ləğv edildi': 'cancelled'
 };
 
 function OperationSchedule() {
@@ -17,7 +17,7 @@ function OperationSchedule() {
     const [document, setDocument] = useState([]);
     const [totalRecord, setTotalRecord] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [recordSize, setRecordSize] = useState(5)
+    const [recordSize, setRecordSize] = useState(4)
 
     const handleRowClick = (item) => {
         history.push(`/operationView/${item.id}`);
@@ -85,7 +85,7 @@ function OperationSchedule() {
                             <tbody>
                             {
                                 document.map((item, index) =>
-                                    <tr onClick={() => handleRowClick(item)} key={index}>
+                                    <tr onClick={item.status !== "Ləğv edildi" ? () => handleRowClick(item) : null} key={index} className={item.status === "Ləğv edildi" ? 'disabled' : ''}>
                                         <td>{item.id}</td>
                                         <td>{item.documentType}</td>
                                         <td>{item.createDate}</td>

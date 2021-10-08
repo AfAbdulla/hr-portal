@@ -6,11 +6,6 @@ import {NavLink} from 'react-router-dom';
 
 function Sidebar(props) {
     const [active, setActive] = useState('default');
- /*   const [toggle, setToggle] = useState(false);
-
-    const toggleDrawer = () => {
-        setToggle(!toggle)
-    }*/
 
     return (
         <Aux>
