@@ -937,6 +937,11 @@ td {
     height: 100px;
 }
 
+.create-operation textarea.form-control.resize {
+    resize: none;
+    height: 60px;
+}
+
 .create-operation .btn-block button {
     width: 150px;
 }
@@ -1127,4 +1132,17 @@ td {
     height: 3rem;
     border: .25em solid rgba(24, 24, 24, .4);
     border-right-color: transparent;
+}
+
+.break-line {
+    display: block;
+    margin: 10px;
+}
+
+.break-line:after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 1px;
+    background: #000;
 }

@@ -1,32 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {Table, Container} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 import {mainAxios} from "../../../components/Axios/axios";
-import {useHistory} from "react-router-dom";
 import Paginate from "../../../components/Pagination/Pagination";
 
-const statuses = {
-    'Təsdiq gözləyir' : 'pending',
-    'Təsdiqlənib': 'confirmed',
-    'Ləğv edildi': 'cancelled'
-};
-
-function OperationSchedule() {
-    const history = useHistory();
-    const [document, setDocument] = useState([]);
+function SalaryEmployee() {
+    const [salary, setSalary] = useState([]);
     const [totalRecord, setTotalRecord] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [recordSize, setRecordSize] = useState(4)
 
-    const handleRowClick = (item) => {
-        history.push(`/operationView/${item.id}`);
-    }
-
-    const getDocument = (page) => {
+    const getSalary = (page) => {
         mainAxios({
             method: 'get',
-            url: '/document',
+            url: '/employee-salary',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -37,13 +24,13 @@ function OperationSchedule() {
             }
         }).then((res) => {
             setCurrentPage(page)
-            setDocument(res.data.data.data);
+            setSalary(res.data.data.data);
             setTotalRecord(res.data.data.totalElement);
         });
     }
 
     useEffect(() => {
-        getDocument(1)
+        getSalary(1)
     }, []);
 
     return (
@@ -52,7 +39,7 @@ function OperationSchedule() {
                 <Container fluid>
                     <div className="title-block flex">
                         <div className="title">
-                            Kadr əməliyyatları
+                            Əmək haqqı cədvəli
                         </div>
                         <div className="btn-block flex-end">
                             {/* <Button className="btn-border">
@@ -61,7 +48,7 @@ function OperationSchedule() {
                                     </svg>
                                     Filters
                                 </Button>*/}
-                            <Link to="/createOperation" className="btn-main">
+                            {/*  <Link to="/createOperation" className="btn-main">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -69,7 +56,7 @@ function OperationSchedule() {
                                         fill="white"/>
                                 </svg>
                                 Əmr yarat
-                            </Link>
+                            </Link>*/}
                         </div>
                     </div>
                     <div className="block">
@@ -77,31 +64,31 @@ function OperationSchedule() {
                             <thead>
                             <tr>
                                 <th>İd</th>
-                                <th>Əmr</th>
-                                <th>Tarix</th>
-                                <th>Status</th>
+                                <th>Adı, soyadı, ata adı</th>
+                                <th>Vəzifə</th>
+                                <th>Net maaş</th>
+                                <th>Gross maaş</th>
                             </tr>
                             </thead>
                             <tbody>
                             {
-                                document.map((item, index) =>
-                                    <tr onClick={() => handleRowClick(item)} key={index} className={item.status === "Ləğv edildi" ? 'disabled' : ''}>
-                                        <td>{item.id}</td>
-                                        <td>{item.documentType}</td>
-                                        <td>{item.createDate}</td>
-                                        <td>
-                                            <span className={statuses[item.status]}>
-                                                {item.status}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                )
+                                salary.length > 0 ?
+                                    salary.map((item, index) =>
+                                        <tr key={index}>
+                                            <td>{item.id}</td>
+                                            <td>{item.fullName}</td>
+                                            <td>{item.vacancyName}</td>
+                                            <td>{item.netSalary}</td>
+                                            <td>{item.grossSalary}</td>
+                                        </tr>
+                                    )
+                                    : null
                             }
                             </tbody>
                         </Table>
                     </div>
-                    <Paginate count={totalRecord} recordSize = {recordSize} currentPage={currentPage}
-                              click={(page) => getDocument(page)}/>
+                    <Paginate count={totalRecord} recordSize={recordSize} currentPage={currentPage}
+                              click={(page) => getSalary(page)}/>
                 </Container>
             </div>
         </Aux>
@@ -109,4 +96,4 @@ function OperationSchedule() {
     );
 }
 
-export default OperationSchedule
+export default SalaryEmployee

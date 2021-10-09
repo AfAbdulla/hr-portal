@@ -12,6 +12,7 @@ import EmployeeSchedule from "../../container/Employee/EmployeeSchedule/Employee
 import CreateEmployee from "../../container/Employee/CreateEmployee/CreateEmployee";
 import ViewEmployee from "../../container/Employee/ViewEmployee/ViewEmployee";
 import EditEmployee from "../../container/Employee/EditEmployee/EditEmployee";
+import SalaryEmployee from "../../container/Employee/SalaryEmployee/SalaryEmployee";
 import CreateOperation from "../../container/Operation/CreateOperation/CreateOperation";
 import OperationSchedule from "../../container/Operation/OperationSchedule/OperationSchedule";
 import OperationView from "../../container/Operation/OperationView/OperationView";
@@ -36,6 +37,7 @@ function Other () {
                         <ProtectedRoute path="/createEmployee" component={CreateEmployee}/>
                         <ProtectedRoute path="/editEmployee" component={EditEmployee}/>
                         <ProtectedRoute path="/viewEmployee" component={ViewEmployee}/>
+                        <ProtectedRoute path="/salaryEmployee" component={SalaryEmployee}/>
                         <ProtectedRoute path="/staffSchedule" component={StaffSchedule}/>
                         <ProtectedRoute path="/editStaff" component={EditStaff}/>
                         <ProtectedRoute path="/createStaff" component={CreateStaff}/>
