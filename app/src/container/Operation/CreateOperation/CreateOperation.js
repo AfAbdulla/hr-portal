@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {Button, Container, Row, Col, Form, Tabs, Tab} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import Select from 'react-select';
 import {mainAxios} from "../../../components/Axios/axios";
 import DatePicker from "react-datepicker";
@@ -20,6 +20,9 @@ const disciplineOptions = [
 
 
 function CreateOperation() {
+    let history = useHistory();
+
+
     const [operationName, setOperationName] = useState([]);
     const [staff, setStaff] = useState([]);
     const [position, setPosition] = useState([])
@@ -27,6 +30,7 @@ function CreateOperation() {
 
     const [selectedOperationName, setSelectedOperationName] = useState(null);
     const [selectedStaff, setSelectedStaff] = useState(null);
+    const [selectedStaffArr, setSelectedStaffArr] = useState(null);
     const [selectedPosition, setSelectedPosition] = useState(null);
     const [selectedNewWorkMode, setSelectedNewWorkMode] = useState(null);
     const [selectedDiscipline, setSelectedDiscipline] = useState(null);
@@ -47,6 +51,7 @@ function CreateOperation() {
     const [subDepartment, setSubDepartment] = useState('');
     const [employeeId, setEmployeeId] = useState('');
     const [positionId, setPositionId] = useState('');
+    const [employeeIds, setEmployeeIds] = useState([]);
     const [tab, setTab] = useState('')
     //const [staffId, setStaffId] = useState('');
     const [documentId, setDocumentId] = useState('');
@@ -226,11 +231,9 @@ function CreateOperation() {
             "dismissalReason": firedReason !== "" ? firedReason : null,
             "documentType": documentId ? documentId : null,
             "employeeId": employeeId ? employeeId : null,
-            "employeeIds": [
-                0
-            ],
+            "employeeIds": employeeIds,
             "eventFrom": startDate !== null ? moment(startDate).format("MM-DD-YYYY") : null,
-            "eventName": eventName !=="" ? eventName : null,
+            "eventName": eventName !== "" ? eventName : null,
             "eventTo": endDate !== null ? moment(endDate).format("MM-DD-YYYY") : null,
             "financialHelp": financialHelp !== "" ? parseFloat(financialHelp) : null,
             "joinDate": joinDate !== null ? moment(joinDate).format("MM-DD-YYYY") : null,
@@ -268,7 +271,8 @@ function CreateOperation() {
             setSelectedOperationName('');
             setTab('');
             resetData();
-            setSave(false)
+            setSave(false);
+            history.push("/operationSchedule")
         });
     }
 
@@ -438,7 +442,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="Ştat cədvəli dəyişiklik edilən struktur bölmə adı daxil edin"
-                                                            value={positionDepartment} disabled={true}/>
+                                                            value={positionDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -447,7 +451,8 @@ function CreateOperation() {
                                                     <span className="input-title">Tabe struktur bölmənin adı </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Tabe struktur bölmənin adı"
-                                                                      value={positionSubDepartment} disabled={true}/>
+                                                                      value={positionSubDepartment || ''}
+                                                                      disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -456,7 +461,8 @@ function CreateOperation() {
                                                     <span className="input-title">Ştat vahidinin adı (vəzifə) </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Ştat vahidinin adı (vəzifə)"
-                                                                      value={positionVacancyName} disabled={true}/>
+                                                                      value={positionVacancyName || ''}
+                                                                      disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -465,7 +471,8 @@ function CreateOperation() {
                                                     <span className="input-title">Ştat vahidi (say) </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Ştat vahidi (say)  "
-                                                                      value={positionVacancyCount} disabled={true}/>
+                                                                      value={positionVacancyCount || ''}
+                                                                      disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -475,7 +482,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="Əmək haqqı AZN(vergilər və digər ödənişlər daxil olmaqla)"
-                                                            value={positionSalary} disabled={true}/>
+                                                            value={positionSalary || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -484,7 +491,7 @@ function CreateOperation() {
                                                     <span className="input-title">İş rejimi</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İş rejimi"
-                                                                      value={positionWorkMode} disabled={true}/>
+                                                                      value={positionWorkMode || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -494,7 +501,8 @@ function CreateOperation() {
                                                         className="input-title">Təsis edilən vəzifənin kateqoriyası</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Təsis edilən vəzifənin kateqoriyası"
-                                                                      value={positionVacancyCategory} disabled={true}/>
+                                                                      value={positionVacancyCategory || ''}
+                                                                      disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -503,7 +511,7 @@ function CreateOperation() {
                                                     <span className="input-title">İş yerinin ünvanı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İş yerinin ünvanı"
-                                                                      value={positionWorkPlace} disabled={true}/>
+                                                                      value={positionWorkPlace || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -545,7 +553,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="Ştat cədvəli dəyişiklik edilən struktur bölmə adı daxil edin"
-                                                            value={positionDepartment} disabled={true}/>
+                                                            value={positionDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -554,7 +562,8 @@ function CreateOperation() {
                                                     <span className="input-title">Tabe struktur bölmənin adı </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Tabe struktur bölmənin adı"
-                                                                      value={positionSubDepartment} disabled={true}/>
+                                                                      value={positionSubDepartment || ''}
+                                                                      disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -563,7 +572,8 @@ function CreateOperation() {
                                                     <span className="input-title">Ştat vahidinin adı (vəzifə) </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Ştat vahidinin adı (vəzifə)"
-                                                                      value={positionVacancyName} disabled={true}/>
+                                                                      value={positionVacancyName || ''}
+                                                                      disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -572,7 +582,8 @@ function CreateOperation() {
                                                     <span className="input-title">Ştat vahidi (say) </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Ştat vahidi (say)  "
-                                                                      value={positionVacancyCount} disabled={true}/>
+                                                                      value={positionVacancyCount || ''}
+                                                                      disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -582,7 +593,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="Əmək haqqı AZN(vergilər və digər ödənişlər daxil olmaqla)"
-                                                            value={positionSalary} disabled={true}/>
+                                                            value={positionSalary || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -591,7 +602,7 @@ function CreateOperation() {
                                                     <span className="input-title">İş rejimi</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İş rejimi"
-                                                                      value={positionWorkMode} disabled={true}/>
+                                                                      value={positionWorkMode || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -600,7 +611,7 @@ function CreateOperation() {
                                                     <span className="input-title">İş yerinin ünvanı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İş yerinin ünvanı"
-                                                                      value={positionWorkPlace} disabled={true}/>
+                                                                      value={positionWorkPlace || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -662,7 +673,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşə qəbul olduğu struktur bölmə daxil edin"
-                                                            value={positionDepartment} disabled={true}/>
+                                                            value={positionDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -672,7 +683,8 @@ function CreateOperation() {
                                                         className="input-title">İşə qəbul olduğu alt struktur bölmə </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Tabe struktur bölmənin adı"
-                                                                      value={positionSubDepartment} disabled={true}/>
+                                                                      value={positionSubDepartment || ''}
+                                                                      disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -681,7 +693,8 @@ function CreateOperation() {
                                                     <span className="input-title">İşə qəbul olduğu vəzifə </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşə qəbul olduğu vəzifə"
-                                                                      value={positionVacancyName} disabled={true}/>
+                                                                      value={positionVacancyName || ''}
+                                                                      disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -761,7 +774,7 @@ function CreateOperation() {
                                                     <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
-                                                                      value={positionSalary} disabled={true}/>
+                                                                      value={positionSalary || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -770,7 +783,8 @@ function CreateOperation() {
                                                     <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmək şəraitinə görə əlavə"
-                                                                      value={positionAdditionalSalary} disabled={true}/>
+                                                                      value={positionAdditionalSalary || ''}
+                                                                      disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -823,7 +837,7 @@ function CreateOperation() {
                                                     <span className="input-title">İşlədiyi struktur bölmənin adı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Struktur bölmənin adı daxil edin"
-                                                                      value={department} disabled={true}/>
+                                                                      value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -833,7 +847,7 @@ function CreateOperation() {
                                                         className="input-title">İşlədiyi alt struktur bölmənin adı *</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Alt struktur bölmənin adı daxil edin"
-                                                                      value={subDepartment} disabled={true}/>
+                                                                      value={subDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -842,7 +856,7 @@ function CreateOperation() {
                                                     <span className="input-title">İşçinin vəzifəsi *</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Alt struktur bölmənin adı daxil edin"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1107,7 +1121,7 @@ function CreateOperation() {
                                                     <span className="input-title">Keçirildiyi struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
-                                                                      value={positionDepartment}
+                                                                      value={positionDepartment || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -1117,7 +1131,7 @@ function CreateOperation() {
                                                     <span className="input-title">Keçirildiyi vəzifə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi vəzifə"
-                                                                      value={positionVacancyName}
+                                                                      value={positionVacancyName || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -1133,7 +1147,7 @@ function CreateOperation() {
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
-                                                                          value={salary} disabled={true}/>
+                                                                          value={salary || ''} disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
                                                 </Col>
@@ -1142,7 +1156,8 @@ function CreateOperation() {
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
-                                                                          value={additionalSalary} disabled={true}/>
+                                                                          value={additionalSalary || ''}
+                                                                          disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
                                                 </Col>
@@ -1151,7 +1166,7 @@ function CreateOperation() {
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
-                                                                          value={ownAdditionalSalary}
+                                                                          value={ownAdditionalSalary || ''}
                                                                           disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1229,7 +1244,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1238,7 +1253,7 @@ function CreateOperation() {
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1314,7 +1329,7 @@ function CreateOperation() {
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
-                                                                          value={salary} disabled={true}/>
+                                                                          value={salary || ''} disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
                                                 </Col>
@@ -1323,7 +1338,8 @@ function CreateOperation() {
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
-                                                                          value={additionalSalary} disabled={true}/>
+                                                                          value={additionalSalary || ''}
+                                                                          disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
                                                 </Col>
@@ -1332,7 +1348,7 @@ function CreateOperation() {
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
-                                                                          value={ownAdditionalSalary}
+                                                                          value={ownAdditionalSalary || ''}
                                                                           disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1410,7 +1426,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1419,7 +1435,7 @@ function CreateOperation() {
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1495,7 +1511,7 @@ function CreateOperation() {
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
-                                                                          value={salary} disabled={true}/>
+                                                                          value={salary || ''} disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
                                                 </Col>
@@ -1504,7 +1520,8 @@ function CreateOperation() {
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
-                                                                          value={additionalSalary} disabled={true}/>
+                                                                          value={additionalSalary || ''}
+                                                                          disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
                                                 </Col>
@@ -1569,7 +1586,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1580,7 +1597,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={subDepartment} disabled={true}/>
+                                                            value={subDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1589,7 +1606,7 @@ function CreateOperation() {
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1599,7 +1616,7 @@ function CreateOperation() {
                                                                 className="input-title">İşçinin faktiki iş rejimi *</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşçinin faktiki iş rejimi"
-                                                                      value={workMode} disabled={true}/>
+                                                                      value={workMode || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1621,7 +1638,7 @@ function CreateOperation() {
                                                     <span className="input-title"> Faktiki əmək haqqı: AZN (vergilər və digər ödənişlər daxil olmaqla)</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder=" Faktiki əmək haqqı"
-                                                                      value={salary} disabled={true}/>
+                                                                      value={salary || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1685,7 +1702,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1694,7 +1711,7 @@ function CreateOperation() {
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -1764,7 +1781,7 @@ function CreateOperation() {
                                                     <span className="input-title">Keçirildiyi struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
-                                                                      value={positionDepartment}
+                                                                      value={positionDepartment || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -1774,7 +1791,7 @@ function CreateOperation() {
                                                     <span className="input-title">Keçirildiyi alt struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
-                                                                      value={positionSubDepartment}
+                                                                      value={positionSubDepartment || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -1784,7 +1801,7 @@ function CreateOperation() {
                                                     <span className="input-title">Keçirildiyi iş yeri</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi iş yeri"
-                                                                      value={positionWorkPlace}
+                                                                      value={positionWorkPlace || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -1800,7 +1817,7 @@ function CreateOperation() {
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
-                                                                          value={salary} disabled={true}/>
+                                                                          value={salary || ''} disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
                                                 </Col>
@@ -1809,7 +1826,8 @@ function CreateOperation() {
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
-                                                                          value={additionalSalary} disabled={true}/>
+                                                                          value={additionalSalary || ''}
+                                                                          disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
                                                 </Col>
@@ -1818,7 +1836,7 @@ function CreateOperation() {
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
-                                                                          value={ownAdditionalSalary}
+                                                                          value={ownAdditionalSalary || ''}
                                                                           disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1835,7 +1853,7 @@ function CreateOperation() {
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
-                                                                          value={positionSalary}
+                                                                          value={positionSalary || ''}
                                                                           disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -1845,7 +1863,7 @@ function CreateOperation() {
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
-                                                                          value={positionAdditionalSalary}
+                                                                          value={positionAdditionalSalary || ''}
                                                                           disabled={true}
                                                             />
                                                         </Form.Label>
@@ -2001,7 +2019,7 @@ function CreateOperation() {
                                                     <span className="input-title">Keçirildiyi struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
-                                                                      value={positionDepartment}
+                                                                      value={positionDepartment || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -2011,7 +2029,7 @@ function CreateOperation() {
                                                     <span className="input-title">Keçirildiyi alt struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
-                                                                      value={positionSubDepartment}
+                                                                      value={positionSubDepartment || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -2021,7 +2039,7 @@ function CreateOperation() {
                                                     <span className="input-title">Keçirildiyi iş yeri</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi iş yeri"
-                                                                      value={positionWorkPlace}
+                                                                      value={positionWorkPlace || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -2037,7 +2055,7 @@ function CreateOperation() {
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
-                                                                          value={salary} disabled={true}/>
+                                                                          value={salary || ''} disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
                                                 </Col>
@@ -2046,7 +2064,8 @@ function CreateOperation() {
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
-                                                                          value={additionalSalary} disabled={true}/>
+                                                                          value={additionalSalary || ''}
+                                                                          disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
                                                 </Col>
@@ -2055,7 +2074,7 @@ function CreateOperation() {
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
-                                                                          value={ownAdditionalSalary}
+                                                                          value={ownAdditionalSalary || ''}
                                                                           disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -2072,7 +2091,7 @@ function CreateOperation() {
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
-                                                                          value={positionSalary}
+                                                                          value={positionSalary || ''}
                                                                           disabled={true}/>
                                                         </Form.Label>
                                                     </Form.Group>
@@ -2082,7 +2101,7 @@ function CreateOperation() {
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
-                                                                          value={positionAdditionalSalary}
+                                                                          value={positionAdditionalSalary || ''}
                                                                           disabled={true}
                                                             />
                                                         </Form.Label>
@@ -2149,7 +2168,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2158,7 +2177,7 @@ function CreateOperation() {
                                                     <span className="input-title">İşlədiyi Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2240,7 +2259,7 @@ function CreateOperation() {
                                                     <span className="input-title">Əvəz olunan vəzifə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi vəzifə"
-                                                                      value={positionVacancyName}
+                                                                      value={positionVacancyName || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -2250,7 +2269,7 @@ function CreateOperation() {
                                                     <span className="input-title">Əvəz olunan vəzifənin aid olduğu struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
-                                                                      value={positionDepartment}
+                                                                      value={positionDepartment || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -2260,7 +2279,7 @@ function CreateOperation() {
                                                     <span className="input-title">Əvəz olunan vəzifənin aid olduğu alt struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
-                                                                      value={positionSubDepartment}
+                                                                      value={positionSubDepartment || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -2270,7 +2289,7 @@ function CreateOperation() {
                                                     <span className="input-title">Əvəz edən işçinin əmək haqqı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
-                                                                      value={salary}
+                                                                      value={salary || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -2280,7 +2299,7 @@ function CreateOperation() {
                                                     <span className="input-title">Əvəz edən vəzifənin  əmək haqqı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
-                                                                      value={positionSalary}
+                                                                      value={positionSalary || ''}
                                                                       disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -2295,9 +2314,10 @@ function CreateOperation() {
                                                 <Form.Group>
                                                     <span className="input-title">Təlimə göndərilmə zərurəti </span>
                                                     <Form.Label>
-                                                        <Form.Control placeholder="Təlimə göndərilmə zərurəti daxil edin"
-                                                                      value={mainOfOrder}
-                                                                      onChange={(e) => setMainOfOrder(e.target.value)}/>
+                                                        <Form.Control
+                                                            placeholder="Təlimə göndərilmə zərurəti daxil edin"
+                                                            value={mainOfOrder}
+                                                            onChange={(e) => setMainOfOrder(e.target.value)}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2327,7 +2347,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2338,7 +2358,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={subDepartment} disabled={true}/>
+                                                            value={subDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2347,7 +2367,7 @@ function CreateOperation() {
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2560,7 +2580,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2571,7 +2591,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={subDepartment} disabled={true}/>
+                                                            value={subDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2580,7 +2600,7 @@ function CreateOperation() {
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2637,7 +2657,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2648,7 +2668,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={subDepartment} disabled={true}/>
+                                                            value={subDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2657,7 +2677,7 @@ function CreateOperation() {
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2714,7 +2734,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2725,7 +2745,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={subDepartment} disabled={true}/>
+                                                            value={subDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2734,7 +2754,7 @@ function CreateOperation() {
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2792,7 +2812,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2803,7 +2823,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={subDepartment} disabled={true}/>
+                                                            value={subDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -2812,13 +2832,14 @@ function CreateOperation() {
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
                                                 <Form.Group>
-                                                    <span className="input-title">Seçkidə iştirak edəcəyi tarixlər</span>
+                                                    <span
+                                                        className="input-title">Seçkidə iştirak edəcəyi tarixlər</span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={startDate}
@@ -2947,7 +2968,8 @@ function CreateOperation() {
                                             </Col>
                                             <Col xs={6}>
                                                 <Form.Group>
-                                                    <span className="input-title">Seçkidə iştirak edəcəyi müddət (gün)  </span>
+                                                    <span
+                                                        className="input-title">Seçkidə iştirak edəcəyi müddət (gün)  </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder=""
                                                                       value={dayInEvent}
@@ -2999,7 +3021,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -3010,7 +3032,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={subDepartment} disabled={true}/>
+                                                            value={subDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -3019,7 +3041,7 @@ function CreateOperation() {
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -3172,7 +3194,8 @@ function CreateOperation() {
                                         <Row>
                                             <Col xs={6}>
                                                 <Form.Group>
-                                                    <span className="input-title">İşçiyə xəbərdarlıq edilməsinin səbəbi </span>
+                                                    <span
+                                                        className="input-title">İşçiyə xəbərdarlıq edilməsinin səbəbi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
                                                                       value={mainOfOrder}
@@ -3186,16 +3209,20 @@ function CreateOperation() {
                                                         className="input-title">Xəbərdarlıq edilən işçinin və ya işçilərin soyadı, adı, atasının adı: *</span>
                                                     <Select
                                                         placeholder="İşçinin adı, soyadı, atasının adı"
-                                                        value={selectedStaff}
+                                                        value={selectedStaffArr}
                                                         isMulti
-                                                        onChange={(val) => {
-                                                            let id = val.id
-                                                            setEmployeeId(id)
+                                                        onChange={(arr) => {
+                                                            let ids = [];
+                                                            arr.map((item) => ids.push(item.id));
+                                                            let id = ids.slice(-1).pop()
+                                                            console.log(ids)
+                                                            setEmployeeIds(ids)
                                                             getEmployee(id)
-                                                            setSelectedStaff(val);
+                                                            setSelectedStaffArr(arr);
                                                         }}
                                                         options={staff}
                                                         getOptionLabel={(option) => (key == 'EMPLOYEE' ? option.fullName : option.vacancyName)}
+                                                        getOptionValue={(option) => (key == 'EMPLOYEE' ? option.id : option.vacancyName)}
                                                         styles={customStyles}
                                                     />
                                                 </Form.Group>
@@ -3207,16 +3234,17 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
                                                 <Form.Group>
-                                                    <span className="input-title">İşçinin və ya işçilərin vəzifəsi </span>
+                                                    <span
+                                                        className="input-title">İşçinin və ya işçilərin vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
-                                                                      value={vacancyName} disabled={true}/>
+                                                                      value={vacancyName || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -3224,9 +3252,10 @@ function CreateOperation() {
                                                 <Form.Group>
                                                     <span className="input-title">Təqdimat sahibinin soyadı, adı, atasının adı  </span>
                                                     <Form.Label>
-                                                        <Form.Control placeholder="Təqdimat sahibinin soyadı, adı, atasının adı daxil edin"
-                                                                      value={presentationFullName}
-                                                                      onChange={(e) => setPresentationFullName(e.target.value)}
+                                                        <Form.Control
+                                                            placeholder="Təqdimat sahibinin soyadı, adı, atasının adı daxil edin"
+                                                            value={presentationFullName}
+                                                            onChange={(e) => setPresentationFullName(e.target.value)}
                                                         />
                                                     </Form.Label>
                                                 </Form.Group>
@@ -3295,7 +3324,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={department} disabled={true}/>
+                                                            value={department || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -3306,7 +3335,7 @@ function CreateOperation() {
                                                     <Form.Label>
                                                         <Form.Control
                                                             placeholder="İşlədiyi struktur bölmə"
-                                                            value={subDepartment} disabled={true}/>
+                                                            value={subDepartment || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
                                             </Col>
@@ -3335,9 +3364,10 @@ function CreateOperation() {
                                                 <Form.Group>
                                                     <span className="input-title">Təqdimat sahibinin soyadı, adı, atasının adı  </span>
                                                     <Form.Label>
-                                                        <Form.Control placeholder="Təqdimat sahibinin soyadı, adı, atasının adı daxil edin"
-                                                                      value={presentationFullName}
-                                                                      onChange={(e) => setPresentationFullName(e.target.value)}
+                                                        <Form.Control
+                                                            placeholder="Təqdimat sahibinin soyadı, adı, atasının adı daxil edin"
+                                                            value={presentationFullName}
+                                                            onChange={(e) => setPresentationFullName(e.target.value)}
                                                         />
                                                     </Form.Label>
                                                 </Form.Group>

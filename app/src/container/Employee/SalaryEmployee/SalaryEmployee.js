@@ -13,7 +13,7 @@ function SalaryEmployee() {
     const getSalary = (page) => {
         mainAxios({
             method: 'get',
-            url: '/employee-salary',
+            url: '/employee-salary/calculate',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
