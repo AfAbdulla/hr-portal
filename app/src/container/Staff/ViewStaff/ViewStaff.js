@@ -1,22 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
-import {Container, Row, Col, Tabs, Tab, Image, Table} from 'react-bootstrap';
+import {Container, Tabs, Tab, Table} from 'react-bootstrap';
 import {Link, useRouteMatch} from 'react-router-dom';
 import {mainAxios} from "../../../components/Axios/axios";
-import userImage from '../../../assets/img/user.png'
-
-import "react-datepicker/dist/react-datepicker.css";
 
 function ViewStaff() {
     const {params: {id}} = useRouteMatch('/viewStaff/:id');
 
     const [key, setKey] = useState('home');
-    const token = localStorage.getItem('token');
 
     /*General*/
-
-    const [selectedOption, setSelectedOption] = useState(null);
-
     const [institution, setInstitution] = useState([]);
     const [department, setDepartment] = useState([]);
     const [subDepartment, setSubDepartment] = useState([]);
@@ -503,7 +496,7 @@ function ViewStaff() {
                                         </div>
                                         <div className="card">
                                             {
-                                                skillProgramArr.map((item, index) =>
+                                                skillLegalArr.map((item, index) =>
                                                     <div className="card-in " key={index}>
                                                         {
                                                             index === 0 ? null :
