@@ -232,7 +232,7 @@ function ViewEmployee() {
 
     return (
         <Aux>
-            <div className="view-staff">
+            <div className="view">
                 <Container fluid>
                     <div className="title-block flex">
                         <div className="title flex-center">

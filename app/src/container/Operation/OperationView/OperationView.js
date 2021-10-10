@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {Button, Container, Row, Col, Form, Tabs, Tab} from 'react-bootstrap';
-import {Link, useRouteMatch} from 'react-router-dom';
+import {Link, useRouteMatch, useHistory} from 'react-router-dom';
 import {mainAxios} from "../../../components/Axios/axios";
 import "react-datepicker/dist/react-datepicker.css";
 import Loading from "../../../components/Loading/Loading";
 import Swal from 'sweetalert2';
-import Select from "react-select";
 
 function OperationView() {
     const {params: {id}} = useRouteMatch('/operationView/:id');
+    let history = useHistory();
 
     const [tab, setTab] = useState('');
     const [operationName, setOperationName] = useState('');
@@ -124,7 +124,6 @@ function OperationView() {
             link.setAttribute('download', `${operationName}.pdf`);
             document.body.appendChild(link);
             link.click();
-            //changeLoading()
         })
     }
 
@@ -192,6 +191,7 @@ function OperationView() {
                         status: status
                     }
                 }).then((res) => {
+                    history.push("/operationSchedule")
                 });
             }
         })

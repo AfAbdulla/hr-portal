@@ -15,7 +15,7 @@ function StaffSchedule() {
 
 
     const handleRowClick = (item) => {
-        history.push(`/editStaff/${item.id}`);
+        history.push(`/viewStaff/${item.id}`);
     }
 
     const getPosition = (page) => {

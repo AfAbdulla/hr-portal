@@ -970,18 +970,18 @@ td {
     margin-right: 10px;
 }
 
-.view-staff .card {
+.view .card {
     border-color: rgba(196, 196, 196, 0.29);
     border-width: 1px 0 0 0;
     padding: 20px 40px 0;
     border-radius: 0;
 }
 
-.view-staff .card-item {
+.view .card-item {
     margin-bottom: 20px;
 }
 
-.view-staff .card-text, .view-staff .card-title {
+.view .card-text, .view .card-title {
     font-weight: 300;
     font-size: 16px;
     color: #181818;
@@ -989,29 +989,28 @@ td {
     text-align: left;
 }
 
-.view-staff .card-title {
+.view .card-title {
     font-weight: 600;
     opacity: 0.6;
     width: 35%;
     margin: 0;
 }
 
-.view-staff .block-title {
+.view .block-title {
     margin: 0;
     padding: 0 40px 10px;
 }
 
-.view-staff .upload-img {
+.view .upload-img {
     border-radius: 6px;
     width: 90px;
     height: 85px;
     border: none;
 }
 
-.view-staff .view-top {
+.view .view-top {
     padding: 20px 40px 40px;
 }
-
 
 .view-top .btn-border, .view-top .btn-border:focus {
     border: 1px solid rgba(48, 131, 220, .15);
@@ -1036,24 +1035,24 @@ td {
     opacity: 0.3;
 }
 
-.view-staff .user-data .user-name, .view-staff .user-data .user-position, .view-staff .user-data .user-department {
+.view .user-data .user-name, .view .user-data .user-position, .view .user-data .user-department {
     font-size: 16px;
     line-height: 20px;
     color: #193651;
     margin-bottom: 8px;
 }
 
-.view-staff .user-data .user-name {
+.view .user-data .user-name {
     font-weight: 500;
     font-size: 24px;
     line-height: 30px;
 }
 
-.view-staff .user-data .user-department {
+.view .user-data .user-department {
     opacity: 0.8;
 }
 
-.view-staff .user-data {
+.view .user-data {
     margin-left: 35px;
 }
 

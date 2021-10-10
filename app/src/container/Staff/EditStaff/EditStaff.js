@@ -358,7 +358,7 @@ function EditStaff() {
     }
 
     const getHeight = (val) => {
-        val.value == 1 ? setShowHeight(true) : setShowHeight(false)
+        val.value === 1 ? setShowHeight(true) : setShowHeight(false)
     }
 
     const addSkill = () => {
@@ -668,7 +668,7 @@ function EditStaff() {
                 <Container fluid>
                     <div className="title-block flex">
                         <div className="title flex-center">
-                            <Link to="/staffSchedule" className="flex">
+                            <Link to={`/viewStaff/${id}`} className="flex">
                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M23.3333 14H7.58333M12.25 8.75L7 14L12.25 19.25" stroke="#193651"

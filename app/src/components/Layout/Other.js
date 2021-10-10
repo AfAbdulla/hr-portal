@@ -8,6 +8,7 @@ import {
 import StaffSchedule from "../../container/Staff/StaffSchedule/StaffSchedule";
 import CreateStaff from "../../container/Staff/CreateStaff/CreateStaff";
 import EditStaff from "../../container/Staff/EditStaff/EditStaff";
+import ViewStaff from "../../container/Staff/ViewStaff/ViewStaff";
 import EmployeeSchedule from "../../container/Employee/EmployeeSchedule/EmployeeSchedule";
 import CreateEmployee from "../../container/Employee/CreateEmployee/CreateEmployee";
 import ViewEmployee from "../../container/Employee/ViewEmployee/ViewEmployee";
@@ -41,6 +42,7 @@ function Other () {
                         <ProtectedRoute path="/staffSchedule" component={StaffSchedule}/>
                         <ProtectedRoute path="/editStaff" component={EditStaff}/>
                         <ProtectedRoute path="/createStaff" component={CreateStaff}/>
+                        <ProtectedRoute path="/viewStaff" component={ViewStaff}/>
                         <ProtectedRoute path="/createOperation" component={CreateOperation}/>
                         <ProtectedRoute path="/operationSchedule" component={OperationSchedule}/>
                         <ProtectedRoute path="/operationView" component={OperationView}/>
