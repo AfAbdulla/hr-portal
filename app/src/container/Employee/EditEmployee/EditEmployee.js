@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {Button, Container, Row, Col, Form, Tabs, Tab, InputGroup, Image, Table} from 'react-bootstrap';
-import {Link, useRouteMatch} from 'react-router-dom';
+import {Link, useParams, useRouteMatch} from 'react-router-dom';
 import Select from 'react-select';
 import {mainAxios} from "../../../components/Axios/axios";
 import DatePicker from "react-datepicker";
@@ -12,7 +12,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import {uid} from "react-uid";
 
 function CreateEmployee() {
-    const {params: {id}} = useRouteMatch('/editEmployee/:id');
+    let params = useParams();
+    let id = params.id;
 
     const familyConditionOptions = [
         {value: "MARRIED", label: "Evli"},
@@ -728,7 +729,7 @@ function CreateEmployee() {
                 <Container fluid>
                     <div className="title-block flex">
                         <div className="title flex-center">
-                            <Link to={`/viewEmployee/${id}`} className="flex">
+                            <Link to={`/employee/view/${id}`} className="flex">
                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M23.3333 14H7.58333M12.25 8.75L7 14L12.25 19.25" stroke="#193651"

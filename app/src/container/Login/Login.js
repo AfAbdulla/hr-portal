@@ -41,8 +41,7 @@ function Login() {
             setLoading(false)
             if (res.data.code === 200) {
                 localStorage.setItem('token', res.data.data);
-                history.replace("/employeeSchedule");
-
+                history.replace("/employee");
                 // window.location.href='/employeeSchedule'
             }
         });

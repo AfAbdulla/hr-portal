@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {Container, Image} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Link, useRouteMatch} from 'react-router-dom';
 import {mainAxios} from "../../../components/Axios/axios";
 import userImage from '../../../assets/img/user.png'
 import {useHistory} from "react-router-dom";
 import Paginate from "../../../components/Pagination/Pagination";
 
 function EmployeeSchedule() {
+    let match = useRouteMatch();
     const history = useHistory();
     const [employee, setEmployee] = useState([])
     const token = localStorage.getItem('token');
@@ -16,7 +17,7 @@ function EmployeeSchedule() {
     const [recordSize, setRecordSize] = useState(5)
 
     const handleRowClick = (item) => {
-        history.push(`/viewEmployee/${item.id}`);
+        history.push(`${match.path}/view/${item.id}`);
     }
 
     const getEmployee = (page) => {
@@ -58,7 +59,7 @@ function EmployeeSchedule() {
                                     </svg>
                                     Filters
                                 </Button>*/}
-                                <Link to="/createEmployee" className="btn-main">
+                                <Link to={`${match.path}/create`} className="btn-main">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path
