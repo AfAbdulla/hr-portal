@@ -35,7 +35,7 @@ function SalaryEmployee() {
 
     return (
         <Aux>
-            <div className="staff">
+            <div className="staff staff-salary">
                 <Container fluid>
                     <div className="title-block flex">
                         <div className="title">
@@ -63,11 +63,19 @@ function SalaryEmployee() {
                         <Table responsive="sm" hover>
                             <thead>
                             <tr>
-                                <th>İd</th>
-                                <th>Adı, soyadı, ata adı</th>
-                                <th>Vəzifə</th>
-                                <th>Net maaş</th>
-                                <th>Gross maaş</th>
+                                <th>Soyadı, adı, ata adı</th>
+                                <th>İşçinin vəzifəsi</th>
+                                <th>İş günlərinin sayı</th>
+                                <th>İşlədiyi günlərin sayı</th>
+                                <th>Yekun əmək haqqı</th>
+                                <th>M.D.S.S Müəssə 3%</th>
+                                <th>İTS Müəssə</th>
+                                <th>İşsizlik Müəssə</th>
+                                <th>Gəlir vergisi</th>
+                                <th>İşsizlik işçi</th>
+                                <th>M.D.S.S işçi</th>
+                                <th>İTS işçi</th>
+                                <th>Digər</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -75,11 +83,19 @@ function SalaryEmployee() {
                                 salary.length > 0 ?
                                     salary.map((item, index) =>
                                         <tr key={index}>
-                                            <td>{item.id}</td>
                                             <td>{item.fullName}</td>
                                             <td>{item.vacancyName}</td>
+                                            <td>{item.activeDayCount}</td>
+                                            <td>{item.employeeActiveDayCount}</td>
                                             <td>{item.netSalary}</td>
-                                            <td>{item.grossSalary}</td>
+                                            <td>{item.positionMDSS}</td>
+                                            <td>{item.positionITS}</td>
+                                            <td>{item.positionUnemploymentTax}</td>
+                                            <td>{item.incomingTax}</td>
+                                            <td>{item.employeeUnemploymentTax}</td>
+                                            <td>{item.employeeMDSS}</td>
+                                            <td>{item.employeeITS}</td>
+                                            <td>{item.other}</td>
                                         </tr>
                                     )
                                     : null

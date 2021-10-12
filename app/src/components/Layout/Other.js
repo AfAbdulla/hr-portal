@@ -19,8 +19,11 @@ import OperationSchedule from "../../container/Operation/OperationSchedule/Opera
 import OperationView from "../../container/Operation/OperationView/OperationView";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
+/*
 import EmployeeSchedule from "../../container/Employee/EmployeeSchedule/EmployeeSchedule";
+*/
 import EmployeeRoute from "../../container/Employee/EmployeeRoute/EmployeeRoute";
+import Calendar from "../../container/Setting/Calendar/Calendar";
 
 function Other () {
     const [toggle, setToggle] = useState(false);
@@ -53,6 +56,7 @@ function Other () {
                         <ProtectedRoute path="/createOperation" component={CreateOperation}/>
                         <ProtectedRoute path="/operationSchedule" component={OperationSchedule}/>
                         <ProtectedRoute path="/operationView" component={OperationView}/>
+                        <ProtectedRoute path="/setting" component={Calendar}/>
                     </Switch>
                 </main>
 

@@ -558,6 +558,7 @@ label {
     padding: 13px 13px 13px 60px;
     background-color: #FFFFFF;
     text-align: left;
+    vertical-align: middle;
 }
 
 .table-hover > tbody > tr {
@@ -1144,4 +1145,52 @@ td {
     width: 10px;
     height: 1px;
     background: #000;
+}
+
+.calendar .fc-theme-standard .fc-scrollgrid {
+    border: none;
+}
+
+.calendar .fc .fc-scrollgrid-liquid {
+    height: 60%;
+}
+
+.calendar th.fc-col-header-cell:first-child {
+    border-top-left-radius: 6px;
+}
+
+.calendar th.fc-col-header-cell:last-child {
+    border-top-right-radius: 6px;
+}
+
+.calendar th {
+    background-color: rgba(48, 131, 220, .1);
+    padding: 15px !important;
+    opacity: 1;
+}
+
+.calendar .fc .fc-col-header-cell-cushion {
+    display: inline-block;
+    padding: 2px 4px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    color: rgba(48, 131, 220, .9);
+}
+
+.staff-salary .block {
+    overflow-x: scroll;
+}
+
+
+.staff-salary .block::-webkit-scrollbar {
+    height: 6px;
+}
+
+.staff-salary .block::-webkit-scrollbar-thumb {
+    background-color: #C4C4C4;
+}
+
+.staff-salary .table > :not(caption) > * > *, .staff-salary th {
+    padding: 20px !important;
 }
