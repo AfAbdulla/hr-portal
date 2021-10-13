@@ -6,8 +6,6 @@ import {mainAxios} from "../../../components/Axios/axios";
 import "react-datepicker/dist/react-datepicker.css";
 import Loading from "../../../components/Loading/Loading";
 import Swal from 'sweetalert2';
-import Select from "react-select";
-import DatePicker from "react-datepicker";
 
 function OperationView() {
     const {params: {id}} = useRouteMatch('/operationView/:id');

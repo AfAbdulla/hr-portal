@@ -101,7 +101,7 @@ label {
     height: 44px;
     outline: none;
     box-shadow: none;
-    padding: 10px 20px;
+    padding: 10px 16px;
     font-size: 14px;
     color: #191919;
     width: 100%;
@@ -137,9 +137,15 @@ label {
 
 .form-group .btn-transparent {
     position: absolute;
-    right: 20px;
+    right: 16px;
     top: 50%;
     transform: translateY(-50%);
+    width: auto;
+    line-height: 0;
+}
+
+.form-group .btn-transparent svg {
+    margin: 0;
 }
 
 .btn-effect, .btn-effect:hover, .btn-effect:focus, .btn-border, .btn-main {
@@ -153,6 +159,8 @@ label {
     height: 40px;
     outline: none;
     box-shadow: none;
+    font-weight: 500;
+    font-size: 16px;
 }
 
 .btn-border, .btn-border:hover, .btn-border:focus {
@@ -963,7 +971,7 @@ td {
     width: auto;
 }
 
-.operation .btn-block li:not(:last-child) {
+.btn-block li:not(:last-child) {
     margin-right: 20px;
 }
 
@@ -1151,6 +1159,66 @@ td {
     border: none;
 }
 
+.staff-salary .block {
+    overflow-x: scroll;
+}
+
+.staff-salary .table.active {
+    opacity: .4;
+}
+
+.staff-salary .title-block .form-group {
+    width: 140px;
+}
+
+.staff-salary .block::-webkit-scrollbar {
+    height: 6px;
+}
+
+.staff-salary .block::-webkit-scrollbar-thumb {
+    background-color: #C4C4C4;
+}
+
+.staff-salary .table > :not(caption) > * > *, .staff-salary th {
+    padding: 20px !important;
+}
+
+.calendar .fc .fc-button-primary {
+    background-color: transparent;
+    padding: 5px;
+    border: none;
+    box-shadow: none !important;
+}
+
+.calendar .fc .fc-button-primary:not(:disabled):active, .calendar  .fc .fc-button-primary:not(:disabled).fc-button-active {
+    background-color: #fff;
+}
+
+.calendar .fc .fc-button .fc-icon {
+    font-size: 26px;
+    color: #3083dc;
+}
+
+.calendar .fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {
+    margin-right: 5px;
+}
+
+.calendar .fc .fc-button-group > .fc-button:hover {
+    background: rgba(48, 131, 220, .8);
+}
+
+.calendar .fc .fc-button-group > .fc-button:hover .fc-icon {
+    color: #fff;
+}
+
+.calendar .fc .fc-button-primary.fc-today-button  {
+    color: #3083dc;
+    background: #fff;
+    width: 90px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
 .calendar .fc .fc-scrollgrid-liquid {
     height: 60%;
 }
@@ -1164,7 +1232,7 @@ td {
 }
 
 .calendar th {
-    background-color: rgba(48, 131, 220, .1);
+    background-color: rgba(48, 131, 220, .08);
     padding: 15px !important;
     opacity: 1;
 }
@@ -1178,19 +1246,44 @@ td {
     color: rgba(48, 131, 220, .9);
 }
 
-.staff-salary .block {
-    overflow-x: scroll;
+.calendar .fc-theme-standard .fc-scrollgrid-section-body td {
+    background-color: #fff;
+}
+
+.calendar .fc .fc-daygrid-day-frame {
+    padding: 12px;
+}
+
+.calendar .fc .fc-daygrid-day-number {
+    padding: 0;
+    color: rgba(25, 54, 81, 0.9);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.calendar .fc-theme-standard td {
+    border: 1px solid rgba(220, 221, 223, .3);
+}
+
+.calendar .fc-theme-standard th  {
+    border: none;
+}
+
+.calendar .fc .fc-day-sat .fc-bg-event, .calendar .fc .fc-day-sun .fc-bg-event {
+    background-color: #FCFCFC;
+}
+
+.calendar .fc .fc-bg-event {
+    background-color: transparent;
+    opacity: 1;
+}
+
+.calendar .fc .fc-daygrid-day.fc-day-today {
+    background-color: rgba(46, 208, 106, 0.08);
+}
+
+.calendar .fc .fc-day-disabled {
+    border: none;
 }
 
 
-.staff-salary .block::-webkit-scrollbar {
-    height: 6px;
-}
-
-.staff-salary .block::-webkit-scrollbar-thumb {
-    background-color: #C4C4C4;
-}
-
-.staff-salary .table > :not(caption) > * > *, .staff-salary th {
-    padding: 20px !important;
-}
