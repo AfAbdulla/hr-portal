@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {Button, Container, Row, Col, Form, Tabs, Tab, InputGroup, Image, Table} from 'react-bootstrap';
-import {Link, useParams, useRouteMatch} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import Select from 'react-select';
 import {mainAxios} from "../../../components/Axios/axios";
 import DatePicker from "react-datepicker";
@@ -21,6 +21,16 @@ function CreateEmployee() {
         {value: 'WIDOW', label: 'Dul'},
         {value: 'DIVORCED', label: 'Boşanmış'},
     ];
+
+    const serialNumberOptions = [
+        {value: 'AZE', label: 'AZE'},
+        {value: 'AA', label: 'AA'},
+    ]
+
+    const passportSerialOptions = [
+        {value: 'AZE', label: 'AZE'},
+        {value: 'AA', label: 'AA'},
+    ]
 
     const educationTypeOptions = [
         {value: "VISUAL", label: "Əyani"},
@@ -57,38 +67,16 @@ function CreateEmployee() {
     const [key, setKey] = useState('home');
     const token = localStorage.getItem('token');
 
-
-    const [startIdDate, setStartIdDate] = useState(null);
-    const [expiredIdDate, setExpiredIdDate] = useState(null);
-    const [startBirthDate, setStartBirthDate] = useState(null);
-    const [startPassportDate, setStartPassportDate] = useState(null);
-    const [expiredPassportDate, setExpiredPassportDate] = useState(null);
-    const [startAcademicDegreeDate, setStartAcademicDegreeDate] = useState(null);
-    const [startWorkPermissionDate, setStartWorkPermissionDate] = useState(null);
-    const [expiredWorkPermissionDate, setExpiredWorkPermissionDate] = useState(null);
-
-    /*Company*/
-
-    const [startJobDate, setStartJobDate] = useState(null);
-    const [endJobDate, setEndJobDate] = useState(null);
-
-    /*Education*/
-
-    const [startGraduateDate, setStartGraduateDate] = useState(null);
-    const [endGraduateDate, setEndGraduateDate] = useState(null);
-    const [startGraduateFile, setStartGraduateFile] = useState(null);
-    const [expiredDriverLicenceDate, setExpiredDriverLicenceDate] = useState(null);
-
-
+    /*General*/
     const [idCardNumber, setIdCardNumber] = useState('');
     const [idCardPin, setIdCardPin] = useState('');
-    const [idCardSerial, setIdCardSerial] = useState('');
+    //const [idCardSerial, setIdCardSerial] = useState('');
     const [fullName, setFullName] = useState('');
     const [countryBirth, setCountryBirth] = useState('');
     const [livePermission, setLivePermission] = useState('');
     const [idCardOrganization, setIdCardOrganization] = useState('');
     const [passportNumber, setPassportNumber] = useState('');
-    const [passportSerial, setPassportSerial] = useState('');
+    //const [passportSerial, setPassportSerial] = useState('');
     const [settlement, setSettlement] = useState('');
     const [street, setStreet] = useState('');
     const [block, setBlock] = useState('');
@@ -107,6 +95,17 @@ function CreateEmployee() {
     const [uploadFile, setUploadFile] = useState('');
     const [photo, setPhoto] = useState();
 
+    const [selectedSerial, setSelectedSerial] = useState(null);
+    const [selectedPassportSerial, setSelectedPassportSerial] = useState(null);
+    const [startIdDate, setStartIdDate] = useState(null);
+    const [expiredIdDate, setExpiredIdDate] = useState(null);
+    const [startBirthDate, setStartBirthDate] = useState(null);
+    const [startPassportDate, setStartPassportDate] = useState(null);
+    const [expiredPassportDate, setExpiredPassportDate] = useState(null);
+    const [startAcademicDegreeDate, setStartAcademicDegreeDate] = useState(null);
+    const [startWorkPermissionDate, setStartWorkPermissionDate] = useState(null);
+    const [expiredWorkPermissionDate, setExpiredWorkPermissionDate] = useState(null);
+
 
     /*Company*/
 
@@ -118,7 +117,10 @@ function CreateEmployee() {
     const [checked, setChecked] = useState(true);
     const [checkPrisoner, setCheckPrisoner] = useState(true);
     const [checkColleague, setCheckColleague] = useState(true);
-    const [showPermission, setShowPermission] = useState(false)
+    const [showPermission, setShowPermission] = useState(false);
+
+    const [startJobDate, setStartJobDate] = useState(null);
+    const [endJobDate, setEndJobDate] = useState(null);
 
     /*Education*/
 
@@ -132,18 +134,6 @@ function CreateEmployee() {
     const [workPermissionSerial, setWorkPermissionSerial] = useState();
     const [workPermissionNumber, setWorkPermissionNumber] = useState();
     const [workPermissionPeriod, setWorkPermissionPeriod] = useState();
-
-
-    const [familyMemberArr, setFamilyMemberArr] = useState([{
-        address: '',
-        birthday: '',
-        birthplace: '',
-        fullName: '',
-        position: '',
-        relationType: '',
-        workPlace: ''
-    }]);
-
     const [city, setCity] = useState([]);
     const [region, setRegion] = useState([]);
     const [country, setCountry] = useState([]);
@@ -154,6 +144,16 @@ function CreateEmployee() {
     const [citizen, setCitizen] = useState([]);
     const [document, setDocument] = useState([]);
     const [rewardOrganization, setRewardOrganization] = useState([]);
+
+    const [familyMemberArr, setFamilyMemberArr] = useState([{
+        address: '',
+        birthday: '',
+        birthplace: '',
+        fullName: '',
+        position: '',
+        relationType: '',
+        workPlace: ''
+    }]);
     const [certificateArr, setCertificateArr] = useState([{
         endDate: '',
         name: ''
@@ -174,8 +174,11 @@ function CreateEmployee() {
     const [selectedEducationType, setSelectedEducationType] = useState(null);
     const [selectedDriverLicence, setSelectedDriverLicence] = useState(null);
     const [selectedQuota, setSelectedQuota] = useState(null);
-    const [selectedCitizenControl, setSelectedCitizenControl] = useState(null)
-
+    const [selectedCitizenControl, setSelectedCitizenControl] = useState(null);
+    const [startGraduateDate, setStartGraduateDate] = useState(null);
+    const [endGraduateDate, setEndGraduateDate] = useState(null);
+    const [startGraduateFile, setStartGraduateFile] = useState(null);
+    const [expiredDriverLicenceDate, setExpiredDriverLicenceDate] = useState(null);
 
     const customStyles = {
         option: (provided, state) => ({
@@ -259,6 +262,97 @@ function CreateEmployee() {
         })
 
     };
+    const customGroupStyles = {
+        option: (provided, state) => ({
+            ...provided,
+            color: '#040647',
+            backgroundColor: state.isSelected ? '#F3F8FF' : 'transparent',
+            padding: '10px',
+            margin: '0',
+            fontSize: '16px',
+            "&:first-of-type": {
+                borderRadius: '2px 2px 0 0',
+            },
+            "&:hover": {
+                backgroundColor: '#FAFCFF',
+            },
+            "&:last-child": {
+                borderBottom: 'none',
+                borderRadius: '0 0 2px 2px',
+            },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative'
+
+        }),
+
+        indicatorSeparator: () => {
+        },
+
+        indicatorsContainer: (provided) => ({
+            ...provided,
+            paddingRight: '8px'
+        }),
+
+        control: (provided) => ({
+            ...provided,
+            minHeight: '44px',
+            fontSize: '14px',
+            padding: '0',
+            margin: '0',
+            color: '#66615b',
+            backgroundColor: '#FAFCFF',
+            boxShadow: 'none',
+            border: '1px solid rgba(4, 6, 71, 0.1)',
+            borderTopRightRadius: 0,
+            borderBottomRightRadius : 0,
+            borderRight: 0,
+            "&:hover": {
+                borderColor: 'rgba(4, 6, 71, 0.1)',
+            },
+
+        }),
+
+        container: (provided) => ({
+            ...provided,
+            width: '100%',
+        }),
+
+        valueContainer: (provided) => ({
+            ...provided,
+            padding: '2px 8px 2px 16px'
+        }),
+
+        menu: (provided) => ({
+            ...provided,
+            borderRadius: '2px',
+            padding: '0',
+            margin: '0',
+            borderColor: 'red',
+            width: '100%'
+        }),
+
+        dropdownIndicator: defaultStyles => ({
+            ...defaultStyles,
+            'svg path': {
+                fill: 'rgba(24,24,24, .8)',
+            },
+
+            'svg': {
+                width: '18px'
+            },
+        }),
+
+        menuList: base => ({
+            ...base,
+            padding: 0,
+            borderColor: 'red'
+
+        })
+
+    };
+
 
     const uploadImage = (event) => {
         setPhoto('')
@@ -412,7 +506,11 @@ function CreateEmployee() {
             },
         }).then((res) => {
             let data = res.data.data;
-            setIdCardSerial(data.idcardSeries);
+            for (let i of serialNumberOptions) {
+                if(data.idcardSeries === i.label) {
+                    setSelectedSerial(i)
+                }
+            }
             setIdCardNumber(data.idcardNumber);
             setIdCardPin(data.idcardPin);
             for (let i of familyConditionOptions) {
@@ -437,7 +535,11 @@ function CreateEmployee() {
             setSelectedCitizenControl({name: data.citizenCountry});
             data.citizenCountry === 'Azərbaycan' ? setShowPermission(false) : setShowPermission(true)
             setIdCardOrganization(data.idcardOrganization);
-            setPassportSerial(data.foreignPassportSeries);
+            for (let i of passportSerialOptions) {
+                if(data.foreignPassportSeries === i.label) {
+                    setSelectedPassportSerial(i)
+                }
+            }
             setPassportNumber(data.foreignPassportNumber);
             setStartPassportDate(new Date(data.foreignPassportStartDate));
             setExpiredPassportDate(new Date(data.foreignPassportEndDate));
@@ -579,7 +681,7 @@ function CreateEmployee() {
             "familyMembers": familyMemberArr,
             "foreignPassportEndDate": moment(expiredPassportDate).format("MM-DD-YYYY"),
             "foreignPassportNumber": passportNumber,
-            "foreignPassportSeries": passportSerial,
+            "foreignPassportSeries": selectedPassportSerial !==null ? selectedPassportSerial : null,
             "foreignPassportStartDate": moment(startPassportDate).format("MM-DD-YYYY"),
             "fullName": fullName,
             "gender": selectedGender !== null ? selectedGender.value : "",
@@ -588,13 +690,15 @@ function CreateEmployee() {
             "idcardNumber": idCardNumber,
             "idcardOrganization": idCardOrganization,
             "idcardPin": idCardPin,
-            "idcardSeries": idCardSerial,
+            "idcardSeries": selectedSerial !== null ? selectedSerial : null,
             "idcardStartDate": moment(startIdDate).format("MM-DD-YYYY"),
             "internalBusinessPhone": businessInternalPhone,
             "mobilePhone1": mobileNumber1,
             "mobilePhone2": mobileNumber2,
             "ownMailAddress": email,
-            "permission": livePermission
+            "permission": livePermission,
+            "startWorkPermissionDate": startWorkPermissionDate !==null ? moment(startWorkPermissionDate).format("MM-DD-YYYY") : null,
+            "expiredWorkPermissionDate": expiredWorkPermissionDate!== null ? moment(expiredWorkPermissionDate).format("MM-DD-YYYY") : null
         }
         mainAxios({
             method: 'put',
@@ -658,20 +762,20 @@ function CreateEmployee() {
             arr.push(i.value)
         }
         let data = {
-            "academicDegreeDate": moment(startAcademicDegreeDate).format("DD-MM-YYYY"),
+            "academicDegreeDate": moment(startAcademicDegreeDate).format("MM-DD-YYYY"),
             "academicDegreeNumber": academicDegreeNumber,
             "academicDegreeOrganization": academicDegreeOrganization,
             "certificates": certificateArr,
             "degree": degree,
             "direction": direction,
             "driverCardCategory": selectedDriverLicence !== null ? selectedDriverLicence.value : "",
-            "driverCardEndDate": moment(expiredDriverLicenceDate).format("DD-MM-YYYY"),
+            "driverCardEndDate": moment(expiredDriverLicenceDate).format("MM-DD-YYYY"),
             "educationType": selectedEducationType !== null ? selectedEducationType.value : "",
-            "entranceDate": moment(startGraduateDate).format("DD-MM-YYYY"),
+            "entranceDate": moment(startGraduateDate).format("MM-DD-YYYY"),
             "faculty": faculty,
             "governmentAchievements": rewardArr,
-            "graduateDate": moment(endGraduateDate).format("DD-MM-YYYY"),
-            "graduateFileDate": moment(startGraduateFile).format("DD-MM-YYYY"),
+            "graduateDate": moment(endGraduateDate).format("MM-DD-YYYY"),
+            "graduateFileDate": moment(startGraduateFile).format("MM-DD-YYYY"),
             "graduateFileNumber": graduateFileNumber,
             "institution": selectedUniversity !== null ? selectedUniversity.name : "",
             "memberOfColleaguesAlliance": checkColleague,
@@ -768,9 +872,18 @@ function CreateEmployee() {
                                                     <Form.Group>
                                                         <span className="input-title">Seriya və nömrə *</span>
                                                         <InputGroup>
-                                                            <Form.Control className="input-add" placeholder="AZE"
-                                                                          value={idCardSerial || ''}
-                                                                          onChange={(e => setIdCardSerial(e.target.value))}/>
+                                                            <div className="input-add">
+                                                                <Select
+                                                                    placeholder="AZE"
+                                                                    value={selectedSerial}
+                                                                    onChange={(val) => {
+                                                                        setSelectedSerial(val);
+                                                                    }}
+                                                                    options={serialNumberOptions}
+                                                                    getOptionLabel={(option) => (option.label)}
+                                                                    styles={customGroupStyles}
+                                                                />
+                                                            </div>
                                                             <Form.Control placeholder="Nömrə daxil edin"
                                                                           value={idCardNumber || ''}
                                                                           onChange={(e => setIdCardNumber(e.target.value))}/>
@@ -1247,9 +1360,18 @@ function CreateEmployee() {
                                                     <Form.Group>
                                                         <span className="input-title">Seriya və nömrə *</span>
                                                         <InputGroup>
-                                                            <Form.Control className="input-add" placeholder="AZE"
-                                                                          value={passportSerial || ''}
-                                                                          onChange={(e => setPassportSerial(e.target.value))}/>
+                                                            <div className="input-add">
+                                                                <Select
+                                                                    placeholder="AZE"
+                                                                    value={selectedPassportSerial}
+                                                                    onChange={(val) => {
+                                                                        setSelectedPassportSerial(val);
+                                                                    }}
+                                                                    options={passportSerialOptions}
+                                                                    getOptionLabel={(option) => (option.label)}
+                                                                    styles={customGroupStyles}
+                                                                />
+                                                            </div>
                                                             <Form.Control placeholder="Seriya və nömrəni daxil edin"
                                                                           value={passportNumber || ''}
                                                                           onChange={(e => setPassportNumber(e.target.value))}/>
@@ -2457,7 +2579,7 @@ function CreateEmployee() {
                                                                                 showYearDropdown
                                                                                 dropdownMode="select"
                                                                                 onChange={(date) => {
-                                                                                    certificateArr[index].endDate = moment(date).format("DD-MM-YYYY");
+                                                                                    certificateArr[index].endDate = moment(date).format("MM-DD-YYYY");
                                                                                     setCertificateArr([...certificateArr], certificateArr)
                                                                                 }}/>
                                                                             <Button className="btn-transparent">
@@ -2618,7 +2740,7 @@ function CreateEmployee() {
                                                                                         showYearDropdown
                                                                                         dropdownMode="select"
                                                                                         onChange={(date) => {
-                                                                                            rewardArr[index].startDate = moment(date).format("DD-MM-YYYY");
+                                                                                            rewardArr[index].startDate = moment(date).format("MM-DD-YYYY");
                                                                                             setRewardArr([...rewardArr], rewardArr)
                                                                                         }}/>
                                                                             <Button className="btn-transparent">

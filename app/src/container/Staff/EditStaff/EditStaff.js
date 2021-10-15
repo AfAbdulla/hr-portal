@@ -3,8 +3,6 @@ import Aux from "../../../hoc/Auxiliary";
 import {Button, Container, Row, Col, Form, Tabs, Tab, Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Select from 'react-select';
-import Header from "../../../components/Header/Header";
-import Sidebar from "../../../components/Sidebar/Sidebar";
 import {mainAxios} from "../../../components/Axios/axios";
 import {useRouteMatch} from 'react-router-dom';
 import {uid} from "react-uid";

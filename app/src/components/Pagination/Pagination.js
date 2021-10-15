@@ -2,51 +2,9 @@ import React from 'react';
 import Pagination from "react-bootstrap/Pagination";
 
 function Paginate(props) {
-    //const paginationItems = [];
     const amountPages = Math.ceil(props.count / props.recordSize);
     let next = props.currentPage + 1;
     let prev = props.currentPage - 1
-    /* for (let i = 2; i < amountPages; i++) {
-         if (props.currentPage === i) {
-             let prev = props.currentPage - 1;
-             let next = props.currentPage + 1;
-             if(prev - 1 > 1) {
-                 paginationItems.unshift(
-                     <Pagination.Ellipsis/>
-                 )
-             }
-             if (prev !== 1) {
-                 paginationItems.push(
-                     <Pagination.Item active={prev === props.currentPage}  onClick={() => {
-                         props.click(prev)
-                     }}>
-                         {prev}
-                     </Pagination.Item>
-                 )
-             }
-             paginationItems.push(
-                 <Pagination.Item active={i === props.currentPage}  onClick={() => {
-                     props.click(i)
-                 }}>
-                     {i}
-                 </Pagination.Item>
-             )
-             if (next !== amountPages) {
-                 paginationItems.push(
-                     <Pagination.Item active={next === props.currentPage}  onClick={() => {
-                         props.click(next)
-                     }}>
-                         {next}
-                     </Pagination.Item>
-                 )
-             }
-             if(amountPages > next + 1) {
-                 paginationItems.push(
-                     <Pagination.Ellipsis/>
-                 )
-             }
-         }
-     }*/
 
     return (
         amountPages > 1 ?

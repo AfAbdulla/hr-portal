@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {Container, Row, Col, Tabs, Tab, Image, Table} from 'react-bootstrap';
-import {Link, useParams, useRouteMatch} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {mainAxios} from "../../../components/Axios/axios";
 import userImage from '../../../assets/img/user.png'
 
@@ -10,15 +10,11 @@ import "react-datepicker/dist/react-datepicker.css";
 function ViewEmployee() {
     let params = useParams();
     let id = params.id;
-    let match = useRouteMatch();
-/*    let match = useRouteMatch();
-    ///const {params: {id}} = useRouteMatch(`${match.path}/view/:id`);*/
 
     const [key, setKey] = useState('home');
     const token = localStorage.getItem('token');
 
     /*General*/
-
     const [idCardNumber, setIdCardNumber] = useState('');
     const [idCardPin, setIdCardPin] = useState('');
     const [idCardSerial, setIdCardSerial] = useState('');

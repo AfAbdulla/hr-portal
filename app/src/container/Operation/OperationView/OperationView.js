@@ -6,6 +6,8 @@ import {mainAxios} from "../../../components/Axios/axios";
 import "react-datepicker/dist/react-datepicker.css";
 import Loading from "../../../components/Loading/Loading";
 import Swal from 'sweetalert2';
+import Select from "react-select";
+import DatePicker from "react-datepicker";
 
 function OperationView() {
     const {params: {id}} = useRouteMatch('/operationView/:id');
@@ -54,6 +56,12 @@ function OperationView() {
     const [presentationPosition, setPresentationPosition] = useState('');
     const [presentationDepartment, setPresentationDepartment] = useState('');
     const [catchAmount, setCatchAmount] = useState('');
+    const [businessTripLocation, setBusinessTripLocation] = useState('');
+    const [businessTripPeriod, setBusinessTripPeriod] = useState('');
+    const [businessTripStart, setBusinessTripStart] = useState('');
+    const [businessTripEnd, setBusinessTripEnd] = useState('');
+    const [nonWorkDay, setNonWorkDay] = useState('');
+    const [givenNonWorkDay, setGivenNonWorkDay] = useState('');
 
 
     /*position*/
@@ -108,6 +116,10 @@ function OperationView() {
             setCallBackDate(data.callBackDate);
             setCallBackReason(data.callBackReason);
             setCatchAmount(data.catchAmount);
+            setBusinessTripPeriod(data.businessTripTerm);
+            setBusinessTripStart(data.evenFromBusinessTripDate);
+            setBusinessTripEnd(data.evenToBusinessTripDate);
+            setBusinessTripLocation(data.businessTripLocation)
             if (data.positionId !== null) getPosition(data.positionId)
             if (data.employeeId !== null) getEmployee(data.employeeId)
             changeLoading()
@@ -1724,7 +1736,252 @@ function OperationView() {
                                         </Tab>
 
                                         {/*new*/}
+                                        <Tab eventKey="18" title="" disabled={tab !== "18"}>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin soyadı, adı, atasının adı *</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder=" İşçinin soyadı, adı, ata adı "
+                                                                          value={fullName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={department || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi alt struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={subDepartment || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Vəzifəsi </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Vəzifəsi"
+                                                                          value={vacancyName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={12}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Təhsil (və ya yaradıcılıq) məzuniyyətinə buraxılma tarixləri </span>
+                                                        <div className="flex">
+                                                            <Form.Label>
+                                                                <Form.Control
+                                                                    value={eventFrom || ''} disabled={true}/>
+                                                            </Form.Label>
+
+                                                            <span className="break-line"></span>
+                                                            <Form.Label>
+                                                                <Form.Control value={eventTo || ''} disabled={true}/>
+                                                            </Form.Label>
+                                                        </div>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Təhsil (yaradıcılıq) məzuniyyətinin müddəti (gün) </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Məzuniyyət müddəti "
+                                                                          value={dayInEvent || ''} disabled={true}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">İşə başlama tarixi </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="İşə qəbul tarixi"
+                                                                          value={joinDate || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </Tab>
+
                                         <Tab eventKey="19" title="" disabled={tab !== "19"}>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin soyadı, adı, atasının adı *</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder=" İşçinin soyadı, adı, ata adı "
+                                                                          value={fullName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={department || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi alt struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={subDepartment || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Vəzifəsi </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Vəzifəsi"
+                                                                          value={vacancyName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Məzuniyyət müddəti</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Məzuniyyət müddəti "
+                                                                          value={dayInEvent || ''} disabled={true}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={12}>
+                                                    <Form.Group>
+                                                        <span
+                                                            className="input-title">Məzuniyyətə buraxılma tarixləri</span>
+                                                        <div className="flex">
+                                                            <Form.Label>
+                                                                <Form.Control
+                                                                    value={eventFrom || ''} disabled={true}/>
+                                                            </Form.Label>
+
+                                                            <span className="break-line"></span>
+                                                            <Form.Label>
+                                                                <Form.Control value={eventTo || ''} disabled={true}/>
+                                                            </Form.Label>
+                                                        </div>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">İşə başlama tarixi </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="İşə qəbul tarixi"
+                                                                          value={joinDate || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </Tab>
+
+                                        <Tab eventKey="20" title="" disabled={tab !== "20"}>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin soyadı, adı, atasının adı *</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder=" İşçinin soyadı, adı, ata adı "
+                                                                          value={fullName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={department || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi alt struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={subDepartment || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Vəzifəsi </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Vəzifəsi"
+                                                                          value={vacancyName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Məzuniyyət müddəti</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Məzuniyyət müddəti "
+                                                                          value={dayInEvent || ''} disabled={true}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={12}>
+                                                    <Form.Group>
+                                                        <span
+                                                            className="input-title">Məzuniyyətə buraxılma tarixləri</span>
+                                                        <div className="flex">
+                                                            <Form.Label>
+                                                                <Form.Control
+                                                                    value={eventFrom || ''} disabled={true}/>
+                                                            </Form.Label>
+
+                                                            <span className="break-line"></span>
+                                                            <Form.Label>
+                                                                <Form.Control value={eventTo || ''} disabled={true}/>
+                                                            </Form.Label>
+                                                        </div>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">İşə başlama tarixi </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="İşə qəbul tarixi"
+                                                                          value={joinDate || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </Tab>
+
+                                        <Tab eventKey="21" title="" disabled={tab !== "21"}>
                                             <Row>
                                                 <Col xs={6}>
                                                     <Form.Group>
@@ -2029,6 +2286,409 @@ function OperationView() {
                                             </Row>
                                         </Tab>
 
+
+                                        {/*new*/}
+                                        <Tab eventKey="30" title="" disabled={tab !== "30"}>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">Ezamiyyənin məqsədi  </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmrin əsası daxil edin"
+                                                                          value={docMainOfOrder || ''}  disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin soyadı, adı, atasının adı *</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder=" İşçinin soyadı, adı, ata adı "
+                                                                          value={fullName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={department || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi alt struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={subDepartment || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Vəzifəsi </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Vəzifəsi"
+                                                                          value={vacancyName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezam olunduğu ölkə\şəhər\rayon </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="Ezam olunduğu ölkə\şəhər\rayon"
+                                                                value={businessTripLocation || ''} disabled={true}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={12}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezam olunma tarixi  </span>
+                                                        <div className="flex">
+                                                            <Form.Label>
+                                                                <Form.Control placeholder="Vəzifəsi"
+                                                                              value={businessTripStart || ''} disabled={true}/>
+                                                            </Form.Label>
+                                                            <span className="break-line"></span>
+                                                            <Form.Label>
+                                                                <Form.Control value={businessTripEnd || ''} disabled={true}/>
+                                                            </Form.Label>
+                                                        </div>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezamiyyət müddəti </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="Ezamiyyət müddəti"
+                                                                value={businessTripPeriod || ''} disabled={true}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezamiyyə müddətində işçinin yolda keçirdiyiistirahət gününə təsadüf etdiyi tarix</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Tarix"
+                                                                          value={nonWorkDay || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezamiyyə müddətində yolda keçirilmiş istirahət gününün əvəzinə verilmiş istirahət günü</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Tarix"
+                                                                          value={givenNonWorkDay || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">İşçinin işə başlama tarixi</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="İşçinin işə başlama tarixi"
+                                                                          value={joinDate || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                            <div className="addition-content">
+                                                <Row>
+                                                    {
+                                                        noteArr.map((item, index) =>
+                                                            <Col xs={12} key={index}>
+                                                                <Form.Group>
+                                                                    <span className="input-title">Qeyd{index + 1}</span>
+                                                                    <Form.Label>
+                                                                        <Form.Control as="textarea"
+                                                                                      value={item || ''}
+                                                                                      disabled={true}
+                                                                        />
+                                                                    </Form.Label>
+                                                                </Form.Group>
+                                                            </Col>
+                                                        )
+                                                    }
+                                                </Row>
+                                            </div>
+                                        </Tab>
+
+                                        {/*new*/}
+                                        <Tab eventKey="31" title="" disabled={tab !== "31"}>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">Ezamiyyənin uzadılmasının məqsədi </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmrin əsası daxil edin"
+                                                                          value={docMainOfOrder || ''}  disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin soyadı, adı, atasının adı *</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder=" İşçinin soyadı, adı, ata adı "
+                                                                          value={fullName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={department || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi alt struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={subDepartment || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={4}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Vəzifəsi </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Vəzifəsi"
+                                                                          value={vacancyName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezam olunduğu ölkə\şəhər\rayon </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="Ezam olunduğu ölkə\şəhər\rayon"
+                                                                value={businessTripLocation} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={12}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezam olunma tarixi  </span>
+                                                        <div className="flex">
+                                                            <Form.Label>
+                                                                <Form.Control placeholder="Vəzifəsi"
+                                                                              value={businessTripStart || ''} disabled={true}/>
+                                                            </Form.Label>
+                                                            <span className="break-line"></span>
+                                                            <Form.Label>
+                                                                <Form.Control value={businessTripEnd || ''} disabled={true}/>
+                                                            </Form.Label>
+                                                        </div>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezamiyyət müddəti </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="Ezamiyyət müddəti"
+                                                                value={businessTripPeriod || ''} disabled={true}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezamiyyə müddətində işçinin yolda keçirdiyiistirahət gününə təsadüf etdiyi tarix</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Tarix"
+                                                                          value={nonWorkDay || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezamiyyə müddətində yolda keçirilmiş istirahət gününün əvəzinə verilmiş istirahət günü</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Tarix"
+                                                                          value={givenNonWorkDay || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">İşçinin işə başlama tarixi</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="İşçinin işə başlama tarixi"
+                                                                          value={joinDate || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                            <div className="addition-content">
+                                                <Row>
+                                                    {
+                                                        noteArr.map((item, index) =>
+                                                            <Col xs={12} key={index}>
+                                                                <Form.Group>
+                                                                    <span className="input-title">Qeyd{index + 1}</span>
+                                                                    <Form.Label>
+                                                                        <Form.Control as="textarea"
+                                                                                      value={item || ''}
+                                                                                      disabled={true}
+                                                                        />
+                                                                    </Form.Label>
+                                                                </Form.Group>
+                                                            </Col>
+                                                        )
+                                                    }
+                                                </Row>
+                                            </div>
+                                        </Tab>
+
+                                        <Tab eventKey="32" title="" disabled={tab !== "32"}>
+                                            <Row>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">Ezamiyyədən geri çağırılmanın məqsədi  </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Əmrin əsası daxil edin"
+                                                                          value={docMainOfOrder || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşçinin soyadı, adı, atasının adı *</span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder=" İşçinin soyadı, adı, ata adı "
+                                                                          value={fullName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={department || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                    <span
+                                                        className="input-title">İşlədiyi alt struktur bölmə </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="İşlədiyi struktur bölmə"
+                                                                value={subDepartment || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Vəzifəsi </span>
+                                                        <Form.Label>
+                                                            <Form.Control placeholder="Vəzifəsi"
+                                                                          value={vacancyName || ''} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezam olunduğu ölkə\şəhər\rayon </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="Ezam olunduğu ölkə\şəhər\rayon"
+                                                                value={businessTripLocation} disabled={true}/>
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={12}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezam olunma tarixi  </span>
+                                                        <div className="flex">
+                                                            <Form.Label>
+                                                                <Form.Control placeholder="Vəzifəsi"
+                                                                              value={businessTripStart || ''} disabled={true}/>
+                                                            </Form.Label>
+                                                            <span className="break-line"></span>
+                                                            <Form.Label>
+                                                                <Form.Control value={businessTripEnd || ''} disabled={true}/>
+                                                            </Form.Label>
+                                                        </div>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezamiyyət müddəti </span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="Ezamiyyət müddəti"
+                                                                value={businessTripPeriod || ''} disabled={true}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col xs={6}>
+                                                    <Form.Group>
+                                                        <span className="input-title">Ezamiyyətdən geri çağırıldığı və işə başladığı tarix:</span>
+                                                        <Form.Label>
+                                                            <Form.Control
+                                                                placeholder="Ezamiyyət müddəti"
+                                                                value={callBackDate || ''} disabled={true}
+                                                            />
+                                                        </Form.Label>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                            <div className="addition-content">
+                                                <Row>
+                                                    {
+                                                        noteArr.map((item, index) =>
+                                                            <Col xs={12} key={index}>
+                                                                <Form.Group>
+                                                                    <span className="input-title">Qeyd{index + 1}</span>
+                                                                    <Form.Label>
+                                                                        <Form.Control as="textarea"
+                                                                                      value={item || ''}
+                                                                                      disabled={true}
+                                                                        />
+                                                                    </Form.Label>
+                                                                </Form.Group>
+                                                            </Col>
+                                                        )
+                                                    }
+                                                </Row>
+                                            </div>
+                                        </Tab>
+
+
                                         <Tab eventKey="33" title="" disabled={tab !== "33"}>
                                             <Row>
                                                 <Col xs={6}>
@@ -2290,7 +2950,6 @@ function OperationView() {
                                                                 <Form.Control placeholder="Vəzifəsi"
                                                                               value={eventFrom || ''} disabled={true}/>
                                                             </Form.Label>
-
                                                             <span className="break-line"></span>
                                                             <Form.Label>
                                                                 <Form.Control value={eventTo || ''} disabled={true}/>

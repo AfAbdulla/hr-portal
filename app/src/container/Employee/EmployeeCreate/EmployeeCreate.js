@@ -20,6 +20,16 @@ function EmployeeCreate() {
         {value: 'DIVORCED', label: 'Boşanmış'},
     ];
 
+    const serialNumberOptions = [
+        {value: 'AZE', label: 'AZE'},
+        {value: 'AA', label: 'AA'},
+    ]
+
+    const passportSerialOptions = [
+        {value: 'AZE', label: 'AZE'},
+        {value: 'AA', label: 'AA'},
+    ]
+
     const educationTypeOptions = [
         {value: "VISUAL", label: "Əyani"},
         {value: 'CORRESPONDENCE', label: 'Qiyabi'},
@@ -79,13 +89,13 @@ function EmployeeCreate() {
 
     const [idCardNumber, setIdCardNumber] = useState('');
     const [idCardPin, setIdCardPin] = useState('');
-    const [idCardSerial, setIdCardSerial] = useState('');
+    //const [idCardSerial, setIdCardSerial] = useState('');
     const [fullName, setFullName] = useState('');
     const [countryBirth, setCountryBirth] = useState('');
     const [livePermission, setLivePermission] = useState('');
     const [idCardOrganization, setIdCardOrganization] = useState('');
     const [passportNumber, setPassportNumber] = useState('');
-    const [passportSerial, setPassportSerial] = useState('');
+    //const [passportSerial, setPassportSerial] = useState('');
     const [settlement, setSettlement] = useState('');
     const [street, setStreet] = useState('');
     const [block, setBlock] = useState('');
@@ -106,7 +116,9 @@ function EmployeeCreate() {
     const [workPermissionSerial, setWorkPermissionSerial] = useState('');
     const [workPermissionNumber, setWorkPermissionNumber] = useState('');
     const [workPermissionPeriod, setWorkPermissionPeriod] = useState('');
-    const [showPermission, setShowPermission] = useState(false)
+    const [showPermission, setShowPermission] = useState(false);
+    const [selectedSerial, setSelectedSerial] = useState(null);
+    const [selectedPassportSerial, setSelectedPassportSerial] = useState(null);
 
 
     /*Company*/
@@ -173,7 +185,6 @@ function EmployeeCreate() {
     const [selectedDriverLicence, setSelectedDriverLicence] = useState(null);
     const [selectedQuota, setSelectedQuota] = useState(null);
 
-
     const customStyles = {
         option: (provided, state) => ({
             ...provided,
@@ -202,13 +213,14 @@ function EmployeeCreate() {
         indicatorSeparator: () => {
         },
 
-        indicatorsContainer: (provided, state) => ({
+        indicatorsContainer: (provided) => ({
             ...provided,
+            paddingRight: '8px'
         }),
 
         control: (provided) => ({
             ...provided,
-            minHeight: '43px',
+            minHeight: '44px',
             fontSize: '14px',
             padding: '0',
             margin: '0',
@@ -227,6 +239,102 @@ function EmployeeCreate() {
             width: '100%',
         }),
 
+        valueContainer: (provided) => ({
+            ...provided,
+            padding: '2px 8px 2px 16px'
+        }),
+
+
+        menu: (provided) => ({
+            ...provided,
+            borderRadius: '2px',
+            padding: '0',
+            margin: '0',
+            borderColor: 'red',
+            width: '100%'
+        }),
+
+        dropdownIndicator: defaultStyles => ({
+            ...defaultStyles,
+            'svg path': {
+                fill: 'rgba(24,24,24, .8)',
+            },
+
+            'svg': {
+                width: '18px'
+            },
+        }),
+
+        menuList: base => ({
+            ...base,
+            padding: 0,
+            borderColor: 'red'
+
+        })
+
+    };
+
+    const customGroupStyles = {
+        option: (provided, state) => ({
+            ...provided,
+            color: '#040647',
+            backgroundColor: state.isSelected ? '#F3F8FF' : 'transparent',
+            padding: '10px',
+            margin: '0',
+            fontSize: '16px',
+            "&:first-of-type": {
+                borderRadius: '2px 2px 0 0',
+            },
+            "&:hover": {
+                backgroundColor: '#FAFCFF',
+            },
+            "&:last-child": {
+                borderBottom: 'none',
+                borderRadius: '0 0 2px 2px',
+            },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative'
+
+        }),
+
+        indicatorSeparator: () => {
+        },
+
+        indicatorsContainer: (provided) => ({
+            ...provided,
+            paddingRight: '8px'
+        }),
+
+        control: (provided) => ({
+            ...provided,
+            minHeight: '44px',
+            fontSize: '14px',
+            padding: '0',
+            margin: '0',
+            color: '#66615b',
+            backgroundColor: '#FAFCFF',
+            boxShadow: 'none',
+            border: '1px solid rgba(4, 6, 71, 0.1)',
+            borderTopRightRadius: 0,
+            borderBottomRightRadius : 0,
+            borderRight: 0,
+            "&:hover": {
+                borderColor: 'rgba(4, 6, 71, 0.1)',
+            },
+
+        }),
+
+        container: (provided) => ({
+            ...provided,
+            width: '100%',
+        }),
+
+        valueContainer: (provided) => ({
+            ...provided,
+            padding: '2px 8px 2px 16px'
+        }),
 
         menu: (provided) => ({
             ...provided,
@@ -262,8 +370,6 @@ function EmployeeCreate() {
         console.log('first', file)
         setPhoto(URL.createObjectURL(file));
         setUploadFile(file);
-        console.log('second',photo);
-        console.log('third', uploadFile)
     }
 
     const removeImage = () => {
@@ -403,8 +509,6 @@ function EmployeeCreate() {
     }
 
     const sendData = () => {
-        SenDataImage(1)
-
         let data = {
             "addressApartment": apartment,
             "addressBlock": block,
@@ -424,7 +528,7 @@ function EmployeeCreate() {
             "familyMembers": familyMemberArr,
             "foreignPassportEndDate": moment(expiredPassportDate).format("MM-DD-YYYY"),
             "foreignPassportNumber": passportNumber,
-            "foreignPassportSeries": passportSerial,
+            "foreignPassportSeries": selectedPassportSerial !==null ? selectedPassportSerial : null,
             "foreignPassportStartDate": moment(startPassportDate).format("MM-DD-YYYY"),
             "fullName": fullName,
             "gender": selectedGender !== null ? selectedGender.value : "",
@@ -433,7 +537,7 @@ function EmployeeCreate() {
             "idcardNumber": idCardNumber,
             "idcardOrganization": idCardOrganization,
             "idcardPin": idCardPin,
-            "idcardSeries": idCardSerial,
+            "idcardSeries": selectedSerial !== null ? selectedSerial : null,
             "idcardStartDate": moment(startIdDate).format("MM-DD-YYYY"),
             "internalBusinessPhone": businessInternalPhone,
             "mobilePhone1": mobileNumber1,
@@ -443,8 +547,8 @@ function EmployeeCreate() {
             "workPermissionSerial": workPermissionSerial,
             "workPermissionNumber": workPermissionNumber,
             "workPermissionPeriod": parseFloat(workPermissionPeriod),
-            "startWorkPermissionDate": moment(startWorkPermissionDate).format("MM-DD-YYYY"),
-            "expiredWorkPermissionDate": moment(expiredWorkPermissionDate).format("MM-DD-YYYY")
+            "startWorkPermissionDate": startWorkPermissionDate !==null ? moment(startWorkPermissionDate).format("MM-DD-YYYY") : null,
+            "expiredWorkPermissionDate": expiredWorkPermissionDate!== null ? moment(expiredWorkPermissionDate).format("MM-DD-YYYY") : null
         }
 
         mainAxios({
@@ -458,6 +562,7 @@ function EmployeeCreate() {
         }).then((res) => {
             setKey('company');
             setDataVal(res.data.data);
+            console.log(uploadFile)
             if(uploadFile !== "") SenDataImage(res.data.data)
         });
 
@@ -603,9 +708,18 @@ function EmployeeCreate() {
                                                     <Form.Group>
                                                         <span className="input-title">Seriya və nömrə *</span>
                                                         <InputGroup>
-                                                            <Form.Control className="input-add" placeholder="AZE"
-                                                                          value={idCardSerial}
-                                                                          onChange={(e => setIdCardSerial(e.target.value))}/>
+                                                               <div className="input-add">
+                                                                   <Select
+                                                                       placeholder="AZE"
+                                                                       value={selectedSerial}
+                                                                       onChange={(val) => {
+                                                                           setSelectedSerial(val);
+                                                                       }}
+                                                                       options={serialNumberOptions}
+                                                                       getOptionLabel={(option) => (option.label)}
+                                                                       styles={customGroupStyles}
+                                                                   />
+                                                               </div>
                                                             <Form.Control placeholder="Nömrə daxil edin"
                                                                           value={idCardNumber}
                                                                           onChange={(e => setIdCardNumber(e.target.value))}/>
@@ -1086,9 +1200,18 @@ function EmployeeCreate() {
                                                     <Form.Group>
                                                         <span className="input-title">Seriya və nömrə *</span>
                                                         <InputGroup>
-                                                            <Form.Control className="input-add" placeholder="AZE"
-                                                                          value={passportSerial}
-                                                                          onChange={(e => setPassportSerial(e.target.value))}/>
+                                                            <div className="input-add">
+                                                                <Select
+                                                                    placeholder="AZE"
+                                                                    value={selectedPassportSerial}
+                                                                    onChange={(val) => {
+                                                                        setSelectedPassportSerial(val);
+                                                                    }}
+                                                                    options={passportSerialOptions}
+                                                                    getOptionLabel={(option) => (option.label)}
+                                                                    styles={customGroupStyles}
+                                                                />
+                                                            </div>
                                                             <Form.Control placeholder="Seriya və nömrəni daxil edin"
                                                                           value={passportNumber}
                                                                           onChange={(e => setPassportNumber(e.target.value))}/>
@@ -1477,9 +1600,7 @@ function EmployeeCreate() {
                                                                         <Form.Label>
                                                                             <Form.Control
                                                                                 placeholder="Soyadı, adı, ata adı daxil edin"
-                                                                                //value={familyMemberFullName}
                                                                                 onChange={(e) => {
-                                                                                    //setFamilyMemberFullName(e.target.value);
                                                                                     familyMemberArr[index].fullName = e.target.value;
                                                                                     setFamilyMemberArr([...familyMemberArr], familyMemberArr)
                                                                                 }}/>
@@ -1500,7 +1621,7 @@ function EmployeeCreate() {
                                                                                 showIcon={false}
                                                                                 dropdownMode="select"
                                                                                 onChange={(date) => {
-                                                                                    familyMemberArr[index].birthday = moment(date).format("DD-MM-YYYY");
+                                                                                    familyMemberArr[index].birthday = moment(date).format("MM-DD-YYYY");
                                                                                     setFamilyMemberArr([...familyMemberArr], familyMemberArr)
                                                                                 }}/>
                                                                             <Button className="btn-transparent">
@@ -2299,7 +2420,7 @@ function EmployeeCreate() {
                                                                                 dropdownMode="select"
                                                                                 onChange={(date) => {
                                                                                     setExpiredCertificateDate(date);
-                                                                                    certificateArr[index].endDate = moment(date).format("DD-MM-YYYY");
+                                                                                    certificateArr[index].endDate = moment(date).format("MM-DD-YYYY");
                                                                                     setCertificateArr([...certificateArr], certificateArr)
                                                                                 }}/>
                                                                             <Button className="btn-transparent">
@@ -2459,7 +2580,7 @@ function EmployeeCreate() {
                                                                                         dropdownMode="select"
                                                                                         onChange={(date) => {
                                                                                             setStartRewardDate(date)
-                                                                                            rewardArr[index].startDate = moment(date).format("DD-MM-YYYY");
+                                                                                            rewardArr[index].startDate = moment(date).format("MM-DD-YYYY");
                                                                                             setRewardArr([...rewardArr], rewardArr)
                                                                                         }}/>
                                                                             <Button className="btn-transparent">

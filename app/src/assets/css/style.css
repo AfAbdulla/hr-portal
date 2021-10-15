@@ -148,7 +148,7 @@ label {
     margin: 0;
 }
 
-.btn-effect, .btn-effect:hover, .btn-effect:focus, .btn-border, .btn-main {
+.btn-effect, .btn-effect:hover, .btn-effect:focus, .btn-border, .btn-main, .btn-green-border {
     background: #2ED06A;
     border: none;
     border-radius: 2px;
@@ -161,6 +161,7 @@ label {
     box-shadow: none;
     font-weight: 500;
     font-size: 16px;
+    color: #fff;
 }
 
 .btn-border, .btn-border:hover, .btn-border:focus {
@@ -168,6 +169,13 @@ label {
     border-radius: 4px;
     border: 1px solid #E6E8E8;
     color: #193651;
+}
+
+.btn-green-border, .btn-green-border:focus, .btn-green-border:hover {
+    background: transparent;
+    border-radius: 4px;
+    border: 1px solid #2ED06A;
+    color: #2ED06A;
 }
 
 .btn-main, .btn-main:hover, .btn-border:focus {
@@ -582,12 +590,12 @@ label {
     cursor: auto;
 }
 
-th {
+.table th {
     letter-spacing: 0.03em;
     color: #193651;
     opacity: 0.6;
     font-weight: 600;
-    padding: 20px 13px 30px 60px !important;
+    padding: 20px 13px 30px 60px ;
 }
 
 td {
@@ -817,12 +825,12 @@ td {
     color: #DC2419;
 }
 
-.input-group .input-add.form-control, .input-group .input-add.form-control:focus {
-    width: 75px;
+.input-group .input-add {
+    width: 90px;
 }
 
 .input-group .form-control, .input-group .form-control:focus {
-    width: calc(100% - 75px);
+    width: calc(100% - 90px);
 }
 
 .upload-img {
@@ -1098,7 +1106,7 @@ td {
     color: #2ED06A;
 }
 
-.swal2-container.swal2-center>.swal2-popup {
+.swal2-container.swal2-center > .swal2-popup {
     padding: 25px 30px 40px;
 }
 
@@ -1123,7 +1131,7 @@ td {
     color: #fff;
 }
 
-.swal2-container.swal2-center>.swal2-popup {
+.swal2-container.swal2-center > .swal2-popup {
     padding: 25px 30px 40px;
     width: 24em;
 }
@@ -1190,7 +1198,7 @@ td {
     box-shadow: none !important;
 }
 
-.calendar .fc .fc-button-primary:not(:disabled):active, .calendar  .fc .fc-button-primary:not(:disabled).fc-button-active {
+.calendar .fc .fc-button-primary:not(:disabled):active, .calendar .fc .fc-button-primary:not(:disabled).fc-button-active {
     background-color: #fff;
 }
 
@@ -1211,7 +1219,7 @@ td {
     color: #fff;
 }
 
-.calendar .fc .fc-button-primary.fc-today-button  {
+.calendar .fc .fc-button-primary.fc-today-button {
     color: #3083dc;
     background: #fff;
     width: 90px;
@@ -1231,7 +1239,7 @@ td {
     border-top-right-radius: 6px;
 }
 
-.calendar th {
+.calendar .fc-col-header  th {
     background-color: rgba(48, 131, 220, .08);
     padding: 15px !important;
     opacity: 1;
@@ -1265,8 +1273,9 @@ td {
     border: 1px solid rgba(220, 221, 223, .3);
 }
 
-.calendar .fc-theme-standard th  {
+.calendar .fc-theme-standard th {
     border: none;
+    padding: 0 ;
 }
 
 .calendar .fc .fc-day-sat .fc-bg-event, .calendar .fc .fc-day-sun .fc-bg-event {
@@ -1276,6 +1285,11 @@ td {
 .calendar .fc .fc-bg-event {
     background-color: transparent;
     opacity: 1;
+    display: flex;
+    align-items: self-end;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 12px;
 }
 
 .calendar .fc .fc-daygrid-day.fc-day-today {
@@ -1286,4 +1300,44 @@ td {
     border: none;
 }
 
+.calendar .fc .fc-bg-event .fc-event-title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    color: #CF3131;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.modal-sure .modal-body {
+    padding: 40px 20px;
+}
+
+.modal-sure h4 {
+    font-size: 22px;
+    line-height: 28px;
+    text-align: center;
+    color: #193651;
+    margin-bottom: 40px;
+}
+
+.modal-sure.modal-calendar h4 {
+    text-align: left;
+    opacity: 0.7;
+    font-size: 24px;
+}
+
+.modal-sure .btn-block li:not(:last-child) {
+    margin-right: 15px;
+}
+
+@media (min-width: 992px) {
+    .modal-sure .modal-md {
+        max-width: 450px;
+    }
+}
 
