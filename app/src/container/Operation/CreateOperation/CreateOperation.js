@@ -249,6 +249,20 @@ function CreateOperation() {
 
     const senData = () => {
         const data = {
+
+   /*         "achievementAmount": 0,
+            "alternateWorkerSalary": 0,
+            "assignmentTerm": "string",
+            "dayInEvent2": 0,
+            "eventFrom2": "string",
+            "eventFromBusinessTripDate": "string",
+            "eventTo2": "string",
+            "eventToBusinessTripDate": "string",
+            "newTerm": 0,
+            "otherNotes": "string",
+            "reason": "string",
+            "year": 0,*/
+
             "achievement": achievement !== "" ? parseFloat(achievement) : null,
             "amount": amount !== "" ? parseFloat(amount) : null,
             "businessTripLocation": businessTripLocation !== "" ? businessTripLocation : null,
@@ -805,6 +819,7 @@ function CreateOperation() {
                                                     <span className="input-title">Sınaq müddəti </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Sınaq müddəti"
+                                                                      type="number"
                                                                       value={testPeriod}
                                                                       onChange={(e) => setTestPeriod(e.target.value)}/>
                                                     </Form.Label>
@@ -815,6 +830,7 @@ function CreateOperation() {
                                                     <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
+                                                                      type="number"
                                                                       value={positionSalary || ''} disabled={true}/>
                                                     </Form.Label>
                                                 </Form.Group>
@@ -834,6 +850,7 @@ function CreateOperation() {
                                                     <span className="input-title">Digər fərdi əlavə </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Digər fərdi əlavə"
+                                                                      type="number"
                                                                       value={newOwnAdditionalSalary}
                                                                       onChange={(e) => setNewOwnAdditionalSalary(e.target.value)}/>
                                                     </Form.Label>

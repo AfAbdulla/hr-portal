@@ -571,7 +571,7 @@ label {
 
 .table > :not(caption) > * > * {
     border: none;
-    padding: 13px 13px 13px 60px;
+    padding: 13px 30px 13px 30px;
     background-color: #FFFFFF;
     text-align: left;
     vertical-align: middle;
@@ -595,7 +595,7 @@ label {
     color: #193651;
     opacity: 0.6;
     font-weight: 600;
-    padding: 20px 13px 30px 60px ;
+    padding: 20px 30px 30px 30px ;
 }
 
 td {
@@ -709,7 +709,7 @@ td {
 }
 
 .title-block button {
-    width: 125px;
+    width: 150px;
 }
 
 .title-block button:not(:last-child) {
@@ -972,7 +972,7 @@ td {
     margin: 0;
 }
 
-.operation .title-block button {
+.btn-export, .btn-export:focus, .btn-export:hover {
     font-size: 16px;
     color: #040647;
     opacity: 0.9;
@@ -1333,6 +1333,12 @@ td {
 
 .modal-sure .btn-block li:not(:last-child) {
     margin-right: 15px;
+}
+
+@media only screen and (min-width: 1600px){
+    .export-block {
+        width: 80%;
+    }
 }
 
 @media (min-width: 992px) {

@@ -528,7 +528,7 @@ function EmployeeCreate() {
             "familyMembers": familyMemberArr,
             "foreignPassportEndDate": moment(expiredPassportDate).format("MM-DD-YYYY"),
             "foreignPassportNumber": passportNumber,
-            "foreignPassportSeries": selectedPassportSerial !==null ? selectedPassportSerial : null,
+            "foreignPassportSeries": selectedPassportSerial !==null ? selectedPassportSerial.value : null,
             "foreignPassportStartDate": moment(startPassportDate).format("MM-DD-YYYY"),
             "fullName": fullName,
             "gender": selectedGender !== null ? selectedGender.value : "",
@@ -537,7 +537,7 @@ function EmployeeCreate() {
             "idcardNumber": idCardNumber,
             "idcardOrganization": idCardOrganization,
             "idcardPin": idCardPin,
-            "idcardSeries": selectedSerial !== null ? selectedSerial : null,
+            "idcardSeries": selectedSerial !== null ? selectedSerial.value : null,
             "idcardStartDate": moment(startIdDate).format("MM-DD-YYYY"),
             "internalBusinessPhone": businessInternalPhone,
             "mobilePhone1": mobileNumber1,
@@ -647,7 +647,7 @@ function EmployeeCreate() {
             },
             data: data
         }).then((res) => {
-            window.location.href = "/employeeSchedule"
+            window.location.href = "/employee"
         });
     }
 
@@ -2083,7 +2083,7 @@ function EmployeeCreate() {
                                                                 setSelectedUniversity(val);
                                                             }}
                                                             options={university}
-                                                            getOptionLabel={(option) => (option.key)}
+                                                            getOptionLabel={(option) => (option.name)}
                                                             styles={customStyles}
                                                         />
                                                     </Form.Group>
