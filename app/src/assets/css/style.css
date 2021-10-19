@@ -813,16 +813,21 @@ td {
     font-size: 16px;
     color: #193651;
     cursor: pointer;
+    display: flex;
 }
 
-.block-item .block-user-name .active, .block-item .block-user-name .inactive {
+.block-item .block-user-name .in, .block-item .block-user-name .out,  .block-item .block-user-name .none {
     font-weight: 500;
     color: #2ED06A;
     margin-left: 10px;
 }
 
-.block-item .block-user-name .inactive {
+.block-item .block-user-name .out {
     color: #DC2419;
+}
+
+.block-item .block-user-name .none {
+    color: #3083dc;
 }
 
 .input-group .input-add {
@@ -972,11 +977,28 @@ td {
     margin: 0;
 }
 
-.btn-export, .btn-export:focus, .btn-export:hover {
-    font-size: 16px;
-    color: #040647;
-    opacity: 0.9;
-    width: auto;
+.btn-export, .btn-export:focus, .btn-export:hover, .table .btn-block .btn-confirm, .table .btn-block .btn-cancel {
+    background: rgba(25, 54, 81, 0.05);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table .btn-block {
+    width: 38%;
+}
+
+.table .btn-block .btn-confirm, .table .btn-block .btn-confirm:hover, .table .btn-block .btn-confirm:focus {
+    background: rgba(46, 208, 106, 0.08);
+}
+
+.table .btn-block .btn-cancel, .table .btn-block .btn-cancel:hover, .table .btn-block .btn-cancel:focus {
+    background: rgba(207, 49, 49, 0.08);
 }
 
 .btn-block li:not(:last-child) {
@@ -1270,7 +1292,7 @@ td {
 }
 
 .calendar .fc-theme-standard td {
-    border: 1px solid rgba(220, 221, 223, .3);
+    border: 1px solid rgba(25, 54, 81, 0.1);
 }
 
 .calendar .fc-theme-standard th {
@@ -1279,17 +1301,31 @@ td {
 }
 
 .calendar .fc .fc-day-sat .fc-bg-event, .calendar .fc .fc-day-sun .fc-bg-event {
-    background-color: #FCFCFC;
+    background-color: rgba(247, 247, 247, .7);
 }
 
 .calendar .fc .fc-bg-event {
-    background-color: transparent;
+    background-color: rgba(207, 49, 49, .15);
     opacity: 1;
     display: flex;
     align-items: self-end;
     width: 100%;
     justify-content: flex-end;
     padding: 12px;
+}
+
+.calendar .fc .fc-bg-event:before {
+    content: '';
+    height: 100%;
+    width: 4px;
+    background: rgba(207, 49, 49, .9);
+    left: 0;
+    position: absolute;
+    bottom: 0;
+}
+
+.calendar .fc .fc-day-sat .fc-bg-event:before, .calendar .fc .fc-day-sun .fc-bg-event:before {
+    content: unset;
 }
 
 .calendar .fc .fc-daygrid-day.fc-day-today {
@@ -1302,14 +1338,12 @@ td {
 
 .calendar .fc .fc-bg-event .fc-event-title {
     font-style: normal;
-    font-weight: 500;
     font-size: 16px;
     line-height: 20px;
     display: flex;
     align-items: center;
     text-align: right;
-    color: #CF3131;
-    opacity: 0.8;
+    color: #193651;
     margin: 0;
 }
 

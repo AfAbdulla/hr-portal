@@ -7,6 +7,12 @@ import userImage from '../../../assets/img/user.png'
 import {useHistory} from "react-router-dom";
 import Paginate from "../../../components/Pagination/Pagination";
 
+const statuses = {
+    'IN' : 'işləyir',
+    'OUT': 'işləmir',
+    'NONE': 'yeni işçi'
+};
+
 function EmployeeSchedule() {
     let match = useRouteMatch();
     const history = useHistory();
@@ -111,10 +117,8 @@ function EmployeeSchedule() {
                                                 <span className="user-fullName">
                                                     {item.fullName}
                                                 </span>
-                                                <span className={item.active ? "active" : "inactive"}>
-                                                     {
-                                                         item.active ? 'in' : 'out'
-                                                     }
+                                                <span className={item.employeeActivity.toLowerCase()}>
+                                                    {statuses[item.employeeActivity]}
                                                  </span>
                                             </div>
                                             <div className="profession">
