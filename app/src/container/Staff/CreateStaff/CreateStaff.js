@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import Select from 'react-select';
 import {mainAxios} from "../../../components/Axios/axios";
 import {uid} from "react-uid";
+import Indicator from "../../../components/Loading/Indicator";
 
 function CreateStaff() {
 
@@ -428,7 +429,8 @@ function CreateStaff() {
             url: '/position',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                "Accept-Language": "az"
             },
             data: data
         }).then((res) => {
@@ -1335,6 +1337,10 @@ function CreateStaff() {
                         </Tab>
                     </Tabs>
                 </Container>
+                {
+                    loadingIndicator ? <Indicator/> : null
+
+                }
             </div>
         </Aux>
 

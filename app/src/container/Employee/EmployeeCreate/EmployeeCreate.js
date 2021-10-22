@@ -3088,7 +3088,6 @@ function EmployeeCreate() {
             </div>
             {
                 loadingIndicator ? <Indicator/> : null
-
             }
         </Aux>
 
