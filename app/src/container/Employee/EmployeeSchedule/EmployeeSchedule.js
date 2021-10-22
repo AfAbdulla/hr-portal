@@ -23,7 +23,7 @@ function EmployeeSchedule() {
     const [recordSize, setRecordSize] = useState(15)
 
     const handleRowClick = (item) => {
-        history.push(`${match.path}/view/${item.id}`);
+        history.push(`/employee/view/${item.id}`);
     }
 
     const getEmployee = (page) => {
@@ -65,7 +65,7 @@ function EmployeeSchedule() {
                                     </svg>
                                     Filters
                                 </Button>*/}
-                                <Link to={`${match.path}/create`} className="btn-main">
+                                <Link to={`/employee/create`} className="btn-main">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path

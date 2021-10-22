@@ -15,7 +15,7 @@ function StaffSchedule() {
 
 
     const handleRowClick = (item) => {
-        history.push(`/viewStaff/${item.id}`);
+        history.push(`/staff/view/${item.id}`);
     }
 
     const getPosition = (page) => {
@@ -54,7 +54,7 @@ function StaffSchedule() {
                                     </svg>
                                     Filters
                                 </Button>*/}
-                            <Link to="/createStaff" className="btn-main">
+                            <Link to="/staff/create" className="btn-main">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path

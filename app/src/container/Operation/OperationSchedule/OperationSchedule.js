@@ -9,7 +9,8 @@ import Swal from "sweetalert2";
 const statuses = {
     'Təsdiq gözləyir': 'pending',
     'Təsdiqlənib': 'confirmed',
-    'Ləğv edildi': 'cancelled'
+    'Ləğv edildi': 'cancelled',
+    'Hesablandı': 'calculated'
 };
 
 function OperationSchedule() {
@@ -104,7 +105,7 @@ function OperationSchedule() {
                                     </svg>
                                     Filters
                                 </Button>*/}
-                            <Link to="/createOperation" className="btn-main">
+                            <Link to="/operation/create" className="btn-main">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path

@@ -1,16 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import Aux from "../../../hoc/Auxiliary";
 import {Container, Row, Col, Tabs, Tab, Image, Table} from 'react-bootstrap';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useParams, useRouteMatch} from 'react-router-dom';
 import {mainAxios} from "../../../components/Axios/axios";
 import userImage from '../../../assets/img/user.png'
 
 import "react-datepicker/dist/react-datepicker.css";
 
 function ViewEmployee() {
-    let params = useParams();
-    let id = params.id;
-
+    const {params: {id}} = useRouteMatch('/employee/view/:id');
     const [key, setKey] = useState('home');
     const token = localStorage.getItem('token');
 
@@ -697,7 +695,7 @@ function ViewEmployee() {
                                                 <p className="user-position">{employeePosition}</p>
                                             </div>
                                         </div>
-                                        <Link to={`/editEmployee/${id}`} className="btn-border">
+                                        <Link to={`/employee/edit/${id}`} className="btn-border">
                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <g opacity="0.8" clipPath="url(#clip0)">
@@ -817,7 +815,7 @@ function ViewEmployee() {
                                             <p className="user-position">{employeePosition}</p>
                                         </div>
                                     </div>
-                                    <Link to={`/editEmployee/${id}`} className="btn-border">
+                                    <Link to={`/employee/edit/${id}`} className="btn-border">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <g opacity="0.8" clipPath="url(#clip0)">

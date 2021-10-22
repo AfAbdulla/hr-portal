@@ -5,7 +5,7 @@ import {Link, useRouteMatch} from 'react-router-dom';
 import {mainAxios} from "../../../components/Axios/axios";
 
 function ViewStaff() {
-    const {params: {id}} = useRouteMatch('/viewStaff/:id');
+    const {params: {id}} = useRouteMatch('/staff/view/:id');
 
     const [key, setKey] = useState('home');
 
@@ -131,7 +131,7 @@ function ViewStaff() {
                 <Container fluid>
                     <div className="title-block flex">
                         <div className="title flex-center">
-                            <Link to="/staffSchedule" className="flex">
+                            <Link to="/staff" className="flex">
                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M23.3333 14H7.58333M12.25 8.75L7 14L12.25 19.25" stroke="#193651"
@@ -144,7 +144,7 @@ function ViewStaff() {
                         <Tab eventKey="home" title="Ümumi məlumatlar">
                             <div className="block">
                                 <div className="flex-end view-top">
-                                    <Link to={`/editStaff/${id}`} className="btn-border">
+                                    <Link to={`/staff/edit/${id}`} className="btn-border">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <g opacity="0.8" clipPath="url(#clip0)">
@@ -442,7 +442,7 @@ function ViewStaff() {
                         <Tab eventKey="knowledge" title="İxtisas bilikləri">
                             <div className="block">
                                 <div className="flex-end view-top">
-                                    <Link to={`/editStaff/${id}`} className="btn-border">
+                                    <Link to={`/staff/edit/${id}`} className="btn-border">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <g opacity="0.8" clipPath="url(#clip0)">

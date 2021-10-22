@@ -82,7 +82,7 @@ function CreateOperation() {
     const [selectedReason, setSelectedReason] = useState(null);
     const [selectedVacationReason, setSelectedVacationReason] = useState(null);
     const [year, setYear] = useState(new Date().getFullYear());
-    const [save, setSave] = useState(false)
+    const [save, setSave] = useState(false);
 
     const [firedReason, setFiredReason] = useState('');
     const [compensation, setCompensation] = useState('');
@@ -441,7 +441,7 @@ function CreateOperation() {
                 <Container fluid>
                     <div className="title-block flex">
                         <div className="title flex-center">
-                            <Link to="/operationSchedule" className="flex">
+                            <Link to="/operation" className="flex">
                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M23.3333 14H7.58333M12.25 8.75L7 14L12.25 19.25" stroke="#193651"
@@ -8556,7 +8556,6 @@ function CreateOperation() {
                                                             setSelectedMonth(arr);
                                                         }}
                                                         options={monthOptions}
-                                                        /*getOptionLabel={(option) => (option.key)}*/
                                                         styles={customStyles}
                                                     />
                                                 </Form.Group>

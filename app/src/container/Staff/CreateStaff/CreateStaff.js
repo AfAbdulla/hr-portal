@@ -98,7 +98,6 @@ function CreateStaff() {
     const [employeePosition, setEmployeePosition] = useState([]);
     const [workAddress, setWorkAddress] = useState([]);
     const [obeyDepartment, setObeyDepartment] = useState('');
-    //const [additionalSalary, setAdditionalSalary] = useState('');
     const [vacancyCount, setVacancyCount] = useState('');
     const [areaExperience, setAreaExperience] = useState('');
     const [leaderExperience, setLeaderExperience] = useState('');
@@ -109,12 +108,21 @@ function CreateStaff() {
     const [skillLanguageArr, setSkillLanguageArr] = useState([{level: '', name: ''}]);
     const [showHeight, setShowHeight] = useState(false);
     const [key, setKey] = useState('home');
-    const [dataVal, setDataVal] = useState('')
-    //const [showOtherInstitution, setShowOtherInstitution] = useState(false);
-    //const [showOtherDepartment, setShowOtherDepartment] = useState(false);
-    //const [showOtherVacancy, setShowOtherVacancy] = useState(false);
-    //const [showOtherSalary, setShowOtherSalary] = useState(false);
-    //const [showOtherFamilyJob, setShowOtherFamilyJob] = useState(false);
+    const [dataVal, setDataVal] = useState('');
+    const [loadingIndicator, setLoadingIndicator] = useState(false);
+    const [errors, setErrors] = useState({
+        departmentName: '',
+        fullNameAndPosition: '',
+        institutionName: '',
+        jobFamily: '',
+        subDepartmentName: '',
+        vacancyCategory: '',
+        vacancyCount: '',
+        vacancyName: '',
+        workCondition: '',
+        workMode: '',
+        workPlace: ''
+    });
 
     const [selectedInstitution, setSelectedInstitution] = useState(null);
     const [selectedDepartment, setSelectedDepartment] = useState(null);
@@ -124,9 +132,7 @@ function CreateStaff() {
     const [selectedSubWorkPaid, setSelectedSubWorkPaid] = useState(null);
     const [selectedSalary, setSelectedSalary] = useState(null);
     const [selectedWorkAddress, setSelectedWorkAddress] = useState(null);
-    //const [selectedSkill, setSelectedSkill] = useState(null);
     const [selectedRequiredFile, setSelectedRequiredFile] = useState(null);
-    //const [selectedEvaluation, setSelectedEvaluation] = useState(null);
 
     const [selectedWorkCondition, setSelectedWorkCondition] = useState(null);
     const [selectedWorkMode, setSelectedWorkMode] = useState(null);
@@ -387,8 +393,8 @@ function CreateStaff() {
     }
 
     const sendData = () => {
+        setLoadingIndicator(true);
         let data = {
-            //"additionalSalary": parseFloat(additionalSalary),
             "areaExperience": parseFloat(areaExperience),
             "departmentName": selectedDepartment !== null ? selectedDepartment.name : "",
             "educationDegree": selectedEducationDegree !== null ? selectedEducationDegree.value : "",
@@ -426,8 +432,12 @@ function CreateStaff() {
             },
             data: data
         }).then((res) => {
+            setLoadingIndicator(false);
             setKey('profile')
             setDataVal(res.data.data);
+        }).catch((error)=>{
+            setLoadingIndicator(false);
+            setErrors(error.response.data.message);
         });
     }
 
@@ -468,7 +478,7 @@ function CreateStaff() {
                 <Container fluid>
                     <div className="title-block flex">
                         <div className="title flex-center">
-                            <Link to="/staffSchedule" className="flex">
+                            <Link to="/staff" className="flex">
                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M23.3333 14H7.58333M12.25 8.75L7 14L12.25 19.25" stroke="#193651"
@@ -502,15 +512,18 @@ function CreateStaff() {
                                                             getOptionValue={(option) => option.name}
                                                             styles={customStyles}
                                                         />
-                                                        {/*
-                                                            <span className="text-validation flex-start">Müəssənin adı boş qoyula bilməz</span>
-*/}
+                                                        <div className="validation-block flex-start">
+                                                            {
+                                                                errors.institutionName !== '' ?
+                                                                    <span className="text-validation">{errors.institutionName}</span>
+                                                                    : null
+                                                            }
+                                                        </div>
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
                                                     <Form.Group>
-                                                            <span
-                                                                className="input-title">Struktur vahidinin adı *</span>
+                                                        <span className="input-title">Struktur vahidinin adı *</span>
                                                         <Select
                                                             placeholder="Struktur vahidinin adını seçin"
                                                             value={selectedDepartment}
@@ -522,12 +535,18 @@ function CreateStaff() {
                                                             getOptionLabel={(option) => (option.name)}
                                                             styles={customStyles}
                                                         />
+                                                        <div className="validation-block flex-start">
+                                                            {
+                                                                errors.departmentName !== '' ?
+                                                                    <span className="text-validation">{errors.departmentName}</span>
+                                                                    : null
+                                                            }
+                                                        </div>
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
                                                     <Form.Group>
-                                                                    <span
-                                                                        className="input-title">Struktur bölmənin adı</span>
+                                                        <span className="input-title">Struktur bölmənin adı *</span>
                                                         <Select
                                                             placeholder="Struktur bölmənin adını seçin"
                                                             value={selectedSubDepartment}
@@ -538,12 +557,19 @@ function CreateStaff() {
                                                             getOptionLabel={(option) => (option.name)}
                                                             styles={customStyles}
                                                         />
+                                                        <div className="validation-block flex-start">
+                                                            {
+                                                                errors.subDepartmentName !== '' ?
+                                                                    <span className="text-validation">{errors.subDepartmentName}</span>
+                                                                    : null
+                                                            }
+                                                        </div>
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
                                                     <Form.Group>
                                                             <span
-                                                                className="input-title">Tabe struktur bölmənin adı *</span>
+                                                                className="input-title">Tabe struktur bölmənin adı</span>
                                                         <Form.Label>
                                                             <Form.Control
                                                                 placeholder="Tabe struktur bölmənin adını daxil edin"
@@ -564,6 +590,13 @@ function CreateStaff() {
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.name)}
                                                         />
+                                                        <div className="validation-block flex-start">
+                                                            {
+                                                                errors.vacancyName !== '' ?
+                                                                    <span className="text-validation">{errors.departmentName}</span>
+                                                                    : null
+                                                            }
+                                                        </div>
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
@@ -576,6 +609,13 @@ function CreateStaff() {
                                                                               setVacancyCount(e.target.value);
                                                                           })}/>
                                                         </Form.Label>
+                                                        <div className="validation-block flex-start">
+                                                            {
+                                                                errors.vacancyCount !== '' ?
+                                                                    <span className="text-validation">{errors.vacancyCount}</span>
+                                                                    : null
+                                                            }
+                                                        </div>
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
@@ -606,7 +646,7 @@ function CreateStaff() {
                                                 <Col xs={4}>
                                                     <Form.Group>
                                                             <span
-                                                                className="input-title">Ştat üzrə əsas əmək haqqı *</span>
+                                                                className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Select
                                                             placeholder="Əmək haqqını seçin"
                                                             defaultValue={selectedSalary}
@@ -629,6 +669,13 @@ function CreateStaff() {
                                                             options={workConditionOptions}
                                                             styles={customStyles}
                                                         />
+                                                        <div className="validation-block flex-start">
+                                                            {
+                                                                errors.workCondition !== '' ?
+                                                                    <span className="text-validation">{errors.workCondition}</span>
+                                                                    : null
+                                                            }
+                                                        </div>
                                                     </Form.Group>
                                                 </Col>
                                                {/* <Col xs={4}>
@@ -652,6 +699,13 @@ function CreateStaff() {
                                                             options={WorkModeOptions}
                                                             styles={customStyles}
                                                         />
+                                                        <div className="validation-block flex-start">
+                                                            {
+                                                                errors.workMode !== '' ?
+                                                                    <span className="text-validation">{errors.workMode}</span>
+                                                                    : null
+                                                            }
+                                                        </div>
                                                     </Form.Group>
                                                 </Col>
 
@@ -666,6 +720,13 @@ function CreateStaff() {
                                                             options={vacancyCategoryOptions}
                                                             styles={customStyles}
                                                         />
+                                                        <div className="validation-block flex-start">
+                                                            {
+                                                                errors.vacancyCategory !== '' ?
+                                                                    <span className="text-validation">{errors.vacancyCategory}</span>
+                                                                    : null
+                                                            }
+                                                        </div>
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
@@ -681,6 +742,13 @@ function CreateStaff() {
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.name)}
                                                         />
+                                                        <div className="validation-block flex-start">
+                                                            {
+                                                                errors.jobFamily !== '' ?
+                                                                    <span className="text-validation">{errors.jobFamily}</span>
+                                                                    : null
+                                                            }
+                                                        </div>
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
@@ -694,11 +762,18 @@ function CreateStaff() {
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.key)}
                                                         />
+                                                        <div className="validation-block flex-start">
+                                                            {
+                                                                errors.workPlace !== '' ?
+                                                                    <span className="text-validation">{errors.workPlace}</span>
+                                                                    : null
+                                                            }
+                                                        </div>
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
                                                     <Form.Group>
-                                                        <span className="input-title">Struk b. tabe old. kurator rəh. ad, soyad, ata adı, vəzifə</span>
+                                                        <span className="input-title">Struk b. tabe old. kurator rəh. ad, soyad, ata adı, vəzifə *</span>
                                                         <Select
                                                             placeholder="ad, soyad, ata adı, vəzifəni seçin"
                                                             value={selectedEmployeePosition}
@@ -707,6 +782,13 @@ function CreateStaff() {
                                                             styles={customStyles}
                                                             getOptionLabel={(option) => (option.key)}
                                                         />
+                                                        <div className="validation-block flex-start">
+                                                            {
+                                                                errors.fullNameAndPosition !== '' ?
+                                                                    <span className="text-validation">{errors.fullNameAndPosition}</span>
+                                                                    : null
+                                                            }
+                                                        </div>
                                                     </Form.Group>
                                                 </Col>
                                             </Row>

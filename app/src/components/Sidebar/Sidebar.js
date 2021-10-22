@@ -13,7 +13,7 @@ function Sidebar(props) {
                 <Nav variant="pills" defaultActiveKey={active}
                      onSelect={(selectedKey) => setActive(selectedKey)}>
                     <Nav.Item>
-                        <Nav.Link to="/employee" as={NavLink} className="flex-vertical-start">
+                        <Nav.Link to="/employee" as={NavLink} replace className="flex-vertical-start">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.9">
@@ -26,7 +26,7 @@ function Sidebar(props) {
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link to="/staffSchedule" as={NavLink} className="flex-vertical-start">
+                        <Nav.Link to="/staff" as={NavLink} className="flex-vertical-start">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.9" clipPath="url(#clip0)">
@@ -48,7 +48,7 @@ function Sidebar(props) {
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link to="/operationSchedule" as={NavLink} className="flex-vertical-start">
+                        <Nav.Link to="/operation" as={NavLink} className="flex-vertical-start">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.9" clipPath="url(#clip0)">

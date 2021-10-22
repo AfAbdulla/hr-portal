@@ -11,7 +11,12 @@ function Login() {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [passwordBtn, setPasswordBtn] = useState(false);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState({
+        password: '',
+        username: '',
+        userAndPassword: ''
+    });
 
     const togglePassword = () => {
         setPasswordBtn(!passwordBtn)
@@ -34,7 +39,8 @@ function Login() {
             responseType: 'json',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                "Accept-Language": "az"
             },
             data: data
         }).then((res) => {
@@ -42,8 +48,13 @@ function Login() {
             if (res.data.code === 200) {
                 localStorage.setItem('token', res.data.data);
                 history.replace("/employee");
-                // window.location.href='/employeeSchedule'
             }
+        }).catch(error => {
+            setLoading(false)
+            if (error.response.data.code === 304) {
+                setErrors({userAndPassword: error.response.data.message})
+            } else
+                setErrors(error.response.data.message);
         });
     }
     return (
@@ -72,6 +83,13 @@ function Login() {
                                     <Col xl={{span: 8, offset: 2}} lg={{span: 10, offset: 1}}
                                          md={{span: 8, offset: 2}}>
                                         <h2 className="text-center">Log in to Youdoit</h2>
+                                        {
+                                            errors.userAndPassword !== '' ?
+                                                <div>
+                                                    <span className="text-validation text-center">{errors.userAndPassword}</span>
+                                                </div>
+                                                : null
+                                        }
                                         <Form className="form-list" onSubmit={sendData}>
                                             <Form.Group controlId="formBasicName">
                                                 <span className="input-title">Email</span>
@@ -79,6 +97,13 @@ function Login() {
                                                     <Form.Control type="text" placeholder="Emailinizi daxil edin"
                                                                   onChange={(event) => setEmail(event.target.value)}/>
                                                 </Form.Label>
+                                                <div className="validation-block flex-start">
+                                                    {
+                                                        errors.username !== '' ?
+                                                            <span className="text-validation">{errors.username}</span>
+                                                            : null
+                                                    }
+                                                </div>
                                             </Form.Group>
                                             <Form.Group controlId="formBasicPassword">
                                                 <span className="input-title">Password</span>
@@ -110,6 +135,13 @@ function Login() {
                                                         }
                                                     </Button>
                                                 </Form.Label>
+                                                <div className="validation-block flex-start">
+                                                    {
+                                                        errors.password !== '' ?
+                                                            <span className="text-validation">{errors.password}</span>
+                                                            : null
+                                                    }
+                                                </div>
                                             </Form.Group>
                                             <Button className={['btn-effect', loading ? 'loading' : ''].join(' ')}
                                                     type="submit">
