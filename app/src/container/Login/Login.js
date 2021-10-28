@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import Aux from "../../hoc/Auxiliary";
-import {Container, Row, Col, Form, Button} from 'react-bootstrap';
+import {Container, Row, Col, Form, Button, Image} from 'react-bootstrap';
 import {Link, useHistory} from 'react-router-dom';
 import {mainAxios} from "../../components/Axios/axios";
 import Spinner from 'react-bootstrap/Spinner'
+import DatePicker from "react-datepicker";
 
 
 function Login() {
@@ -67,7 +68,8 @@ function Login() {
                                 <Col xl={{span: 8, offset: 2}} lg={{span: 10, offset: 1}}>
                                     <div className="logo">
                                         <Link to="/">
-                                            <img src={require('../../assets/img/logo.svg').default} alt="special"/>
+                                            <Image src={require('../../assets/img/Port-of-Baku.png').default}/>
+                                            {/*<img src={require('../../assets/img/logo.svg').default} alt="special"/>*/}
                                         </Link>
                                     </div>
                                     <div className="short-desc">
@@ -80,9 +82,8 @@ function Login() {
                         <Col className="right">
                             <div className="login-right-body">
                                 <Row>
-                                    <Col xl={{span: 8, offset: 2}} lg={{span: 10, offset: 1}}
-                                         md={{span: 8, offset: 2}}>
-                                        <h2 className="text-center">Log in to Youdoit</h2>
+                                    <Col xl={{span: 8, offset: 2}} lg={{span: 10, offset: 1}} md={{span: 8, offset: 2}}>
+                                        <h2 className="text-center">Log in to HR</h2>
                                         {
                                             errors.userAndPassword !== '' ?
                                                 <div>
@@ -91,7 +92,7 @@ function Login() {
                                                 : null
                                         }
                                         <Form className="form-list" onSubmit={sendData}>
-                                            <Form.Group controlId="formBasicName">
+                                            <Form.Group className="form-group">
                                                 <span className="input-title">Email</span>
                                                 <Form.Label>
                                                     <Form.Control type="text" placeholder="Emailinizi daxil edin"
@@ -105,7 +106,7 @@ function Login() {
                                                     }
                                                 </div>
                                             </Form.Group>
-                                            <Form.Group controlId="formBasicPassword">
+                                            <Form.Group className="form-group">
                                                 <span className="input-title">Password</span>
                                                 <Form.Label>
                                                     <Form.Control placeholder="Password daxil edin"

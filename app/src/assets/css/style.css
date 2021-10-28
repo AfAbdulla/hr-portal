@@ -332,6 +332,10 @@ label {
     justify-content: center;
 }
 
+.header .logo img {
+    width: 75%;
+}
+
 .btn-gray {
     background: rgba(4, 6, 71, 0.04);
     border-radius: 4px;
@@ -428,7 +432,7 @@ label {
 }
 
 .header {
-    padding: 20px 25px;
+    padding: 10px 25px;
     background: #FFFFFF;
     position: fixed;
     width: 100%;
@@ -472,7 +476,7 @@ label {
     border: none;
     padding: 0;
     min-width: 155px;
-    top: 12px !important;
+    /*top: 12px !important;*/
 }
 
 .btn-check:active + .btn-primary, .btn-check:checked + .btn-primary,
@@ -582,6 +586,10 @@ label {
     background-color: #FFFFFF;
     text-align: left;
     vertical-align: middle;
+}
+
+.table>:not(:first-child) {
+    border: none;
 }
 
 .table-hover > tbody > tr {
@@ -1282,7 +1290,7 @@ td {
 }
 
 .calendar .fc .fc-scrollgrid-liquid {
-    height: 60%;
+    height: 55%;
 }
 
 .calendar th.fc-col-header-cell:first-child {
@@ -1399,6 +1407,90 @@ td {
 
 .modal-sure .btn-block li:not(:last-child) {
     margin-right: 15px;
+}
+
+.setting .nav-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.setting .nav-tabs .nav-link, .setting .nav-item {
+    width: 100%;
+}
+
+.setting .nav-tabs .nav-link {
+    margin-right: 0;
+}
+
+.setting .block {
+    padding: 30px 60px;
+}
+
+.setting .dropdown .dropdown-toggle, .setting .dropdown .dropdown-toggle:active , .setting .dropdown .dropdown-toggle:active:focus {
+    background: #FAFCFF;
+    border: 1px solid rgba(4, 6, 71, 0.1);
+    box-sizing: border-box;
+    border-radius: 2px;
+    width: 100%;
+    color: #181818;
+    text-align: left;
+    height: 44px;
+    padding: 10px 20px;
+}
+
+.setting .dropdown .dropdown-toggle.active {
+    background: rgba(46, 208, 106, 0.06);
+    border: 1px solid rgba(46, 208, 106, 0.15);
+}
+
+.setting .dropdown-menu.show {
+    display: block;
+    width: 100%;
+    padding: 0;
+}
+
+.setting .dropdown-item {
+    font-size: 16px;
+    padding: 10px 20px;
+    text-align: left;
+    position: relative;
+    color: #181818;
+}
+
+.setting .dropdown-item .btn-delete {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.setting .dropdown-item .btn-delete svg {
+    margin: 0;
+}
+
+.setting .block-title {
+    margin-bottom: 10px;
+}
+
+.setting .addition {
+    margin-top: 20px;
+}
+
+.setting .btn-color {
+    margin: 6px 0 0;
+    font-weight: 500;
+}
+
+.setting .addition .btn-transparent {
+    font-size: 18px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    color: #193651;
+}
+
+.setting .block-inn {
+    margin-bottom: 30px;
 }
 
 @media only screen and (min-width: 1600px){

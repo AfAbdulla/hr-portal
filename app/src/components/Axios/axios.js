@@ -2,23 +2,8 @@ import axios from 'axios'
 
 const mainAxios = axios.create({
     baseURL: 'https://hr-portal-api.herokuapp.com'
+   /* baseURL: 'http://hr01.pob.portofbaku.com:8080/hrportal'*/
 });
-
-
-/*let token = localStorage.getItem('token');
-console.log(localStorage.getItem('token'));
-console.log(token)*/
-/*mainAxios.interceptors.response.use(function (response) {
-    return response;
-}, function (error) {
-    if (error.response.status === 401) {
-        localStorage.clear();
-        window.location.reload();
-    } else if (error.response.status === 406) {
-
-    }
-    return Promise.reject(error);
-});*/
 
 mainAxios.interceptors.response.use(
     response => response,

@@ -14,7 +14,7 @@ function CalendarDayModal(props) {
             centered>
             <Modal.Body>
                 <h4>Səbəb əlavə et </h4>
-                <Form.Group>
+                <Form.Group className="form-group">
                     <span className="input-title">Səbəb adı</span>
                     <Form.Label>
                         <Form.Control placeholder="Səbəb adı"

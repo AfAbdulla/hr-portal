@@ -14,11 +14,11 @@ function Header() {
         <Aux>
             <div className="header">
                 <Container fluid>
-                    <Row>
+                    <Row className="flex-center">
                         <Col xs={6}>
                             <div className="flex-vertical-start">
-                                <div className="logo">
-                                    <Image src={require('../../assets/img/logo.svg').default}/>
+                                <div className="logo flex">
+                                    <Image src={require('../../assets/img/Port-of-Baku.png').default}/>
                                 </div>
                             </div>
                         </Col>

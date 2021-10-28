@@ -687,7 +687,7 @@ function EditStaff() {
                                             </div>
                                             <Row>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Müəssənin adı *</span>
                                                         <Select
                                                             placeholder="Müəssənin adını seçin"
@@ -704,7 +704,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Struktur vahidinin adı *</span>
                                                         <Select
@@ -721,7 +721,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                                     <span
                                                                         className="input-title">Struktur bölmənin adı</span>
                                                         <Select
@@ -737,7 +737,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Tabe struktur bölmənin adı *</span>
                                                         <Form.Label>
@@ -749,7 +749,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat vahidinin adı *</span>
                                                         <Select
                                                             placeholder="Ştat vahidin adını seçin"
@@ -764,7 +764,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat vahidinin sayı *</span>
                                                         <Form.Label>
                                                             <Form.Control type="number"
@@ -776,7 +776,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Əməyin ödənilməsi dərəcəsi</span>
                                                         <Select
@@ -791,7 +791,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span
                                                             className="input-title">Əməyin ödənilməsi üzrə alt dərəcə</span>
                                                         <Select
@@ -804,7 +804,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Ştat üzrə əsas əmək haqqı *</span>
                                                         <Select
@@ -820,7 +820,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Əmək şəraiti *</span>
                                                         <Select
                                                             placeholder="Əmək şəraitini seçin"
@@ -832,7 +832,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat üzrə əmək şəraitinə görə əlavə əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control type="number"
@@ -843,7 +843,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Ştat vahidinin iş rejimi *</span>
                                                         <Select
@@ -857,7 +857,7 @@ function EditStaff() {
                                                 </Col>
 
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Ştat vahidinin kateqoriyası *</span>
                                                         <Select
@@ -872,7 +872,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">İş ailəsi *</span>
                                                         <Select
                                                             placeholder="İş ailəsini seçin"
@@ -887,7 +887,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">İş yerinin ünvanı *</span>
                                                         <Select
                                                             placeholder="İş yerinin ünvanını seçin"
@@ -900,7 +900,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Struk b. tabe old. kurator rəh. ad, soyad, ata adı, vəzifə</span>
                                                         <Select
                                                             placeholder="ad, soyad, ata adı, vəzifəni seçin"
@@ -947,7 +947,7 @@ function EditStaff() {
                                                             }
                                                             <Row>
                                                                 <Col xs={6}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                         <span className="input-title">Vəzifənin tələb etdiyi kompetensiyalar</span>
                                                                         <Select
                                                                             placeholder="Kompetensiyaları seçin"
@@ -963,7 +963,7 @@ function EditStaff() {
                                                                     </Form.Group>
                                                                 </Col>
                                                                 <Col xs={6}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                         <span className="input-title">Tələb olunan səviyyə</span>
                                                                         <Select
                                                                             value={item.level}
@@ -1001,7 +1001,7 @@ function EditStaff() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Rəhbər üzrə staj tələbi</span>
                                                         <Form.Label>
                                                             <Form.Control type="number"
@@ -1012,7 +1012,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Sahə üzrə staj tələbi</span>
                                                         <Form.Label>
                                                             <Form.Control type="number"
@@ -1023,7 +1023,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Təhsil pilləsi</span>
                                                         <Select
                                                             placeholder="Təhsil pilləsini seçin"
@@ -1036,7 +1036,7 @@ function EditStaff() {
                                                 </Col>
 
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Təhsil ixtisası</span>
                                                         <Form.Label>
                                                             <Form.Control type="text"
@@ -1047,7 +1047,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Sertifikat tələbi</span>
                                                         <Select
                                                             placeholder="Sertifikat tələbini seçin"
@@ -1059,7 +1059,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Boy tələbi</span>
                                                         <Select
                                                             value={selectedOption}
@@ -1074,7 +1074,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Hərbi mükəlləfiyyət tələbi</span>
                                                         <Select
@@ -1089,7 +1089,7 @@ function EditStaff() {
                                                 {
                                                     showHeight ?
                                                         <Col xs={12}>
-                                                            <Form.Group>
+                                                            <Form.Group className="form-group">
                                                                 <span className="input-title">Boy tələbi</span>
                                                                 <Form.Label>
                                                                     <Form.Control type="number"
@@ -1102,7 +1102,7 @@ function EditStaff() {
                                                         : null
                                                 }
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Sağlamlıq tələbi</span>
                                                         <Select
                                                             placeholder="Sağlamlıq tələbini seçin"
@@ -1114,7 +1114,7 @@ function EditStaff() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Cinsiyyət tələbi</span>
                                                         <Select
                                                             placeholder="Cinsiyyət tələbini seçin"
@@ -1160,7 +1160,7 @@ function EditStaff() {
                                                             }
                                                             <Row key={index}>
                                                                 <Col xs={12}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                         <span className="input-title">Vəzifə funksiyaları *</span>
                                                                         <Form.Label>
                                                                             <Form.Control as="textarea"
@@ -1242,7 +1242,7 @@ function EditStaff() {
                                                         }
                                                         <Row key={index}>
                                                             <Col xs={6}>
-                                                                <Form.Group>
+                                                                <Form.Group className="form-group">
                                                                     <span className="input-title">Proqram adı</span>
                                                                     <Select
                                                                         value={item.name}
@@ -1257,7 +1257,7 @@ function EditStaff() {
                                                                 </Form.Group>
                                                             </Col>
                                                             <Col xs={6}>
-                                                                <Form.Group>
+                                                                <Form.Group className="form-group">
                                                                     <span className="input-title">Bilik səviyyəsi</span>
                                                                     <Select
                                                                         value={item.level}
@@ -1325,7 +1325,7 @@ function EditStaff() {
                                                         }
                                                         <Row>
                                                             <Col xs={6}>
-                                                                <Form.Group>
+                                                                <Form.Group className="form-group">
                                                                     <span
                                                                         className="input-title">Qanunvericilik aktları</span>
                                                                     <Select
@@ -1341,7 +1341,7 @@ function EditStaff() {
                                                                 </Form.Group>
                                                             </Col>
                                                             <Col xs={6}>
-                                                                <Form.Group>
+                                                                <Form.Group className="form-group">
                                                                     <span className="input-title">Bilik səviyyəsi</span>
                                                                     <Select
                                                                         value={item.level}
@@ -1409,7 +1409,7 @@ function EditStaff() {
                                                         }
                                                         <Row>
                                                             <Col xs={6}>
-                                                                <Form.Group>
+                                                                <Form.Group className="form-group">
                                                                     <span className="input-title">Dil biliyi</span>
                                                                     <Select
                                                                         placeholder="Dil biliyini seçin"
@@ -1424,7 +1424,7 @@ function EditStaff() {
                                                                 </Form.Group>
                                                             </Col>
                                                             <Col xs={6}>
-                                                                <Form.Group>
+                                                                <Form.Group className="form-group">
                                                                     <span className="input-title">Bilik səviyyəsi</span>
                                                                     <Select
                                                                         value={item.level}

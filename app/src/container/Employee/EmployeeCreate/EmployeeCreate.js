@@ -548,7 +548,7 @@ function EmployeeCreate() {
             "addressHome": home,
             "addressStreet": street,
             "addressVillage": settlement,
-            "birthday": moment(startBirthDate).format("MM-DD-YYYY"),
+            "birthday": startBirthDate!== null ? moment(startBirthDate).format("MM-DD-YYYY")  : null,
             "birthplace": countryBirth,
             "bloodGroup": selectedBloodType !== null ? selectedBloodType.value : "",
             "businessMailAddress": emailBusiness,
@@ -556,19 +556,19 @@ function EmployeeCreate() {
             "citizenCountry": selectedCitizenControl !== null ? selectedCitizenControl.name : "",
             "familyCondition": selectedFamilyCondition !== null ? selectedFamilyCondition.value : "",
             "familyMembers": familyMemberArr,
-            "foreignPassportEndDate": moment(expiredPassportDate).format("MM-DD-YYYY"),
+            "foreignPassportEndDate": expiredPassportDate!==null ? moment(expiredPassportDate).format("MM-DD-YYYY") : null,
             "foreignPassportNumber": passportNumber,
             "foreignPassportSeries": selectedPassportSerial !== null ? selectedPassportSerial.value : null,
-            "foreignPassportStartDate": moment(startPassportDate).format("MM-DD-YYYY"),
+            "foreignPassportStartDate": startPassportDate!==null ? moment(startPassportDate).format("MM-DD-YYYY") : null,
             "fullName": fullName,
             "gender": selectedGender !== null ? selectedGender.value : "",
             "homePhone": phoneNumber,
-            "idcardEndDate": moment(expiredIdDate).format("MM-DD-YYYY"),
+            "idcardEndDate": expiredIdDate!==null ? moment(expiredIdDate).format("MM-DD-YYYY") : null,
             "idcardNumber": idCardNumber,
             "idcardOrganization": idCardOrganization,
             "idcardPin": idCardPin,
             "idcardSeries": selectedSerial !== null ? selectedSerial.value : null,
-            "idcardStartDate": moment(startIdDate).format("MM-DD-YYYY"),
+            "idcardStartDate": startIdDate!==null ? moment(startIdDate).format("MM-DD-YYYY") : null,
             "internalBusinessPhone": businessInternalPhone,
             "mobilePhone1": mobileNumber1,
             "mobilePhone2": mobileNumber2,
@@ -739,7 +739,7 @@ function EmployeeCreate() {
                                             </div>
                                             <Row>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Seriya və nömrə *</span>
                                                         <InputGroup>
                                                             <div className="input-add">
@@ -775,7 +775,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">FİN kod *</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="FIN kodu daxil edin"
@@ -793,7 +793,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ailə vəziyyəti</span>
                                                         <Select
                                                             placeholder="Ailə vəziyyəti seçin"
@@ -808,7 +808,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Şəxsiy. vəs. verilmə tarixi *</span>
                                                         <Form.Label className="relative m-0">
@@ -871,7 +871,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span
                                                             className="input-title">Şəxsiy. vəs. qüvvədə olma tarixi *</span>
                                                         <Form.Label className="relative m-0">
@@ -933,7 +933,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Soyadı, adı, ata adı *</span>
                                                         <Form.Label>
                                                             <Form.Control type="text"
@@ -954,7 +954,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Doğum tarixi *</span>
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={startBirthDate}
@@ -1015,7 +1015,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Doğum yeri *</span>
                                                         <Form.Control type="text"
                                                                       placeholder="Doğum yerini daxil edin"
@@ -1032,7 +1032,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Vətəndaşlığı olduğu ölkə *</span>
                                                         <Select
@@ -1057,7 +1057,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Cinsi *</span>
                                                         <Select
                                                             placeholder="Cinsini seçin"
@@ -1077,7 +1077,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Qan qrupu</span>
                                                         <Select
                                                             placeholder="Qan qrupunu seçin"
@@ -1089,7 +1089,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Vəsiqə və ya müvəqqəti yaşamaq icazəsi</span>
                                                         <Form.Label>
                                                             <Form.Control type="text"
@@ -1100,7 +1100,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Şəxsiy. vəs. verən orqan *</span>
                                                         <Form.Label>
@@ -1129,7 +1129,7 @@ function EmployeeCreate() {
                                                     </div>
                                                     <Row>
                                                         <Col xs={4}>
-                                                            <Form.Group>
+                                                            <Form.Group className="form-group">
                                                                 <span className="input-title">Seriyası *</span>
                                                                 <Form.Label>
                                                                     <Form.Control placeholder="Seriyanı daxil edin"
@@ -1153,7 +1153,7 @@ function EmployeeCreate() {
                                                             </Form.Group>
                                                         </Col>
                                                         <Col xs={4}>
-                                                            <Form.Group>
+                                                            <Form.Group className="form-group">
                                                                 <span className="input-title">Nömrəsi *</span>
                                                                 <Form.Label>
                                                                     <Form.Control placeholder="Nömrəni daxil edin"
@@ -1163,7 +1163,7 @@ function EmployeeCreate() {
                                                             </Form.Group>
                                                         </Col>
                                                         <Col xs={4}>
-                                                            <Form.Group>
+                                                            <Form.Group className="form-group">
                                                                 <span
                                                                     className="input-title">İş icazəsinin müddəti * *</span>
                                                                 <Form.Label className="relative m-0">
@@ -1175,7 +1175,7 @@ function EmployeeCreate() {
                                                             </Form.Group>
                                                         </Col>
                                                         <Col xs={6}>
-                                                            <Form.Group>
+                                                            <Form.Group className="form-group">
                                                                     <span
                                                                         className="input-title">Verilmə tarixi *</span>
                                                                 <Form.Label className="relative m-0">
@@ -1237,7 +1237,7 @@ function EmployeeCreate() {
                                                             </Form.Group>
                                                         </Col>
                                                         <Col xs={6}>
-                                                            <Form.Group>
+                                                            <Form.Group className="form-group">
                                                                 <span className="input-title">Bitmə tarixi *</span>
                                                                 <Form.Label className="relative m-0">
                                                                     <DatePicker selected={expiredWorkPermissionDate}
@@ -1307,7 +1307,7 @@ function EmployeeCreate() {
                                             </div>
                                             <Row>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Seriya və nömrə *</span>
                                                         <InputGroup>
                                                             <div className="input-add">
@@ -1329,7 +1329,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Verilmə tarixi *</span>
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={startPassportDate}
@@ -1390,7 +1390,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Bitmə tarixi *</span>
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={expiredPassportDate}
@@ -1458,7 +1458,7 @@ function EmployeeCreate() {
                                             </div>
                                             <Row>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ölkə *</span>
                                                         <Select
                                                             placeholder="Ölkə seçin"
@@ -1481,7 +1481,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Şəhər *</span>
                                                         <Select
                                                             placeholder="Şəhər seçin"
@@ -1504,7 +1504,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Rayon *</span>
                                                         <Select
                                                             placeholder="Rayon seçin"
@@ -1527,7 +1527,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Qəsəbə *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1546,7 +1546,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Küçə *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1565,7 +1565,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Məhəllə *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1584,7 +1584,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Mənzil *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1603,7 +1603,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ev *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1630,7 +1630,7 @@ function EmployeeCreate() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ev nömrəsi *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1650,7 +1650,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Mobil nömrəsi 1 *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1670,7 +1670,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Mobil nömrəsi 2 *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1690,7 +1690,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">İş nömrəsi  *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1710,7 +1710,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">İş nömrəsi ( daxili) *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1730,7 +1730,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">E-mail ünvanı (şəxsi) *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1749,7 +1749,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">E-mail ünvanı (iş) *</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -1807,7 +1807,7 @@ function EmployeeCreate() {
                                                             }
                                                             <Row>
                                                                 <Col xs={6}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                         <span
                                                                             className="input-title">Ailə üzvü  *</span>
                                                                         <Form.Label>
@@ -1825,7 +1825,7 @@ function EmployeeCreate() {
                                                                     </Form.Group>
                                                                 </Col>
                                                                 <Col xs={6}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                         <span className="input-title">Soyadı, adı, ata adı</span>
                                                                         <Form.Label>
                                                                             <Form.Control
@@ -1838,7 +1838,7 @@ function EmployeeCreate() {
                                                                     </Form.Group>
                                                                 </Col>
                                                                 <Col xs={6}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                         <span
                                                                             className="input-title">Doğum tarixi</span>
                                                                         <Form.Label className="relative m-0">
@@ -1905,7 +1905,7 @@ function EmployeeCreate() {
                                                                     </Form.Group>
                                                                 </Col>
                                                                 <Col xs={6}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                             <span
                                                                                 className="input-title">Doğum yeri</span>
                                                                         <Form.Label>
@@ -1919,7 +1919,7 @@ function EmployeeCreate() {
                                                                     </Form.Group>
                                                                 </Col>
                                                                 <Col xs={4}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                         <span className="input-title">İş yeri</span>
                                                                         <Form.Label>
                                                                             <Form.Control
@@ -1932,7 +1932,7 @@ function EmployeeCreate() {
                                                                     </Form.Group>
                                                                 </Col>
                                                                 <Col xs={4}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                             <span
                                                                                 className="input-title">Vəzifəsi</span>
                                                                         <Form.Label>
@@ -1946,7 +1946,7 @@ function EmployeeCreate() {
                                                                     </Form.Group>
                                                                 </Col>
                                                                 <Col xs={4}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                         <span className="input-title">Yaşayış</span>
                                                                         <Form.Label>
                                                                             <Form.Control
@@ -1995,7 +1995,7 @@ function EmployeeCreate() {
                                         <div className="block-inn">
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">İşçinin işlədiyi şirkət</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Şirkət daxil et"
@@ -2005,7 +2005,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Struktur bölmə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Struktur bölmə daxil et"
@@ -2015,7 +2015,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Alt struktur bölmə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Alt struktur  bölmə daxil et"
@@ -2025,7 +2025,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">İşçinin işlədiyi vəzifə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Struktur bölmə daxil et"
@@ -2035,7 +2035,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">İşə qəbul tarixi *</span>
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={startJobDate}
@@ -2096,7 +2096,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">İşdən azad tarixi *</span>
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={endJobDate}
@@ -2157,7 +2157,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">İşdən azad olma maddəsi</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -2214,7 +2214,7 @@ function EmployeeCreate() {
                                         <div className="block-inn">
                                             <Row>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title"> Verilmə tarixi</span>
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={startAcademicDegreeDate}
@@ -2275,7 +2275,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Sənədin nömrəsi</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Sənədin nömrəsi daxil et"
@@ -2285,7 +2285,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Verən orqan</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Verən orqan daxil et"
@@ -2304,7 +2304,7 @@ function EmployeeCreate() {
                                         <div className="block-inn">
                                             <Row>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Təhsil müəssəsinin adı</span>
                                                         <Select
                                                             placeholder="Təhsil müəssəsini seçin"
@@ -2319,7 +2319,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Fakültə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Fakültə daxil et"
@@ -2329,7 +2329,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">İstiqamət</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="İstiqamət daxil et"
@@ -2340,7 +2340,7 @@ function EmployeeCreate() {
                                                 </Col>
 
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title"> İxtisas</span>
                                                         <Form.Label className="relative m-0">
                                                             <Form.Control placeholder="İxtisas daxil et"
@@ -2350,7 +2350,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title"> Daxil olma tarixi</span>
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={startGraduateDate}
@@ -2411,7 +2411,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title"> Bitmə tarixi</span>
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={endGraduateDate}
@@ -2473,7 +2473,7 @@ function EmployeeCreate() {
                                                 </Col>
 
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Təhsil dərəcəsi</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Təhsil dərəcəsi daxil et"
@@ -2483,7 +2483,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Sənədin nömrəsi</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Sənədin nömrəsi daxil et"
@@ -2493,7 +2493,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={4}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title"> Sənədin verilmə tarixi</span>
                                                         <Form.Label className="relative m-0">
                                                             <DatePicker selected={startGraduateFile}
@@ -2555,7 +2555,7 @@ function EmployeeCreate() {
                                                 </Col>
 
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Təhsil forması</span>
                                                         <Select
                                                             placeholder="Təhsil forması seçin"
@@ -2571,7 +2571,7 @@ function EmployeeCreate() {
                                                 </Col>
                                                 <Col xs={6
                                                 }>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Nostrifikasiya şəhadətnaməsinin nömrəsi</span>
                                                         <Form.Label>
                                                             <Form.Control
@@ -2623,7 +2623,7 @@ function EmployeeCreate() {
                                                             }
                                                             <Row>
                                                                 <Col xs={6}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                         <span className="input-title">Sertifikatın (vəsiqənin) adı</span>
                                                                         <Form.Label>
                                                                             <Form.Control
@@ -2637,7 +2637,7 @@ function EmployeeCreate() {
                                                                 </Col>
 
                                                                 <Col xs={6}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                 <span
                                                                     className="input-title">Qüvvədə olma müddəti</span>
                                                                         <Form.Label className="relative m-0">
@@ -2762,7 +2762,7 @@ function EmployeeCreate() {
                                                             }
                                                             <Row key={index}>
                                                                 <Col xs={4}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                         <span
                                                                             className="input-title">Təltifin adı</span>
                                                                         <Form.Label>
@@ -2780,7 +2780,7 @@ function EmployeeCreate() {
                                                                     </Form.Group>
                                                                 </Col>
                                                                 <Col xs={4}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Təltifi verən orqanın adı</span>
                                                                         <Form.Label>
@@ -2798,7 +2798,7 @@ function EmployeeCreate() {
                                                                     </Form.Group>
                                                                 </Col>
                                                                 <Col xs={4}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                 <span
                                                                     className="input-title">Təltifin verilmə tarixi</span>
                                                                         <Form.Label className="relative m-0">
@@ -2889,7 +2889,7 @@ function EmployeeCreate() {
                                         <div className="block-inn">
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Kateqoriya</span>
                                                         <Form.Label>
                                                             <Select
@@ -2907,7 +2907,7 @@ function EmployeeCreate() {
                                                 </Col>
 
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                                 <span
                                                                     className="input-title">Qüvvədə olma müddəti</span>
                                                         <Form.Label className="relative m-0">
@@ -2979,7 +2979,7 @@ function EmployeeCreate() {
                                         <div className="block-inn">
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">S.s şəhadətnaməsinin nömrəsi</span>
                                                         <Form.Label>
@@ -2991,7 +2991,7 @@ function EmployeeCreate() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                                 <span
                                                                     className="input-title">İşçinin aid oldu kvota üzrə məlumatlar</span>
                                                         <Form.Label className="relative m-0">

@@ -161,7 +161,7 @@ function SalaryEmployee() {
                         </div>
                         <ul className="btn-block flex-end list-unstyled m-0">
                             <li>
-                                <Form.Group className="m-0">
+                                <Form.Group className="m-0 form-group">
                                     <Select
                                         defaultValue={{label: currentYear, value: currentYear}}
                                         value={selectedYear.label}
@@ -176,7 +176,7 @@ function SalaryEmployee() {
                                 </Form.Group>
                             </li>
                             <li>
-                                <Form.Group className="m-0">
+                                <Form.Group className="m-0 form-group">
                                     <Select
                                         defaultValue={monthOptions[currentMonth - 1]}
                                         value={selectedMonth.label}

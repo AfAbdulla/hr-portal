@@ -455,7 +455,7 @@ function CreateOperation() {
                         <Form className="form-list">
                             <Row>
                                 <Col xs={12}>
-                                    <Form.Group>
+                                    <Form.Group className="form-group">
                                         <span className="input-title">Əmrin adı *</span>
                                         <Select
                                             placeholder="Vəzifə dəyişikliyi"
@@ -482,7 +482,7 @@ function CreateOperation() {
                                     <Tab eventKey="1" title="" disabled={tab !== "1"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşçinin nömrəsi</span>
                                                     <Select
                                                         placeholder="İşçinin nömrəsini seç"
@@ -499,7 +499,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əmrin əsası</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -509,7 +509,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştat cədvəli dəyişiklik edilən struktur bölmə: </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -519,7 +519,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Tabe struktur bölmənin adı </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Tabe struktur bölmənin adı"
@@ -529,7 +529,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştat vahidinin adı (vəzifə) </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Ştat vahidinin adı (vəzifə)"
@@ -539,7 +539,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştat vahidi (say) </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Ştat vahidi (say)  "
@@ -549,7 +549,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əmək haqqı AZN(vergilər və digər ödənişlər daxil olmaqla)</span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -559,7 +559,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İş rejimi</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İş rejimi"
@@ -568,7 +568,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Təsis edilən vəzifənin kateqoriyası</span>
                                                     <Form.Label>
@@ -579,7 +579,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İş yerinin ünvanı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İş yerinin ünvanı"
@@ -593,7 +593,7 @@ function CreateOperation() {
                                     <Tab eventKey="2" title="" disabled={tab !== "2"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşçinin nömrəsi</span>
                                                     <Select
                                                         placeholder="İşçinin nömrəsini seç"
@@ -610,7 +610,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əmrin əsası</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -620,7 +620,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştat cədvəli dəyişiklik edilən struktur bölmə: </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -630,7 +630,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Tabe struktur bölmənin adı </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Tabe struktur bölmənin adı"
@@ -640,7 +640,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştat vahidinin adı (vəzifə) </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Ştat vahidinin adı (vəzifə)"
@@ -650,7 +650,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştat vahidi (say) </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Ştat vahidi (say)  "
@@ -660,7 +660,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əmək haqqı AZN(vergilər və digər ödənişlər daxil olmaqla)</span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -670,7 +670,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İş rejimi</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İş rejimi"
@@ -679,7 +679,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İş yerinin ünvanı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İş yerinin ünvanı"
@@ -693,7 +693,7 @@ function CreateOperation() {
                                     <Tab eventKey="7" title="" disabled={tab !== "7"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əsaslandırma</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -703,7 +703,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin adı, soyadı, atasının adı *</span>
                                                     <Select
@@ -722,7 +722,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştatın nömrəsi</span>
                                                     <Select
                                                         placeholder="İşçinin nömrəsini seç"
@@ -739,7 +739,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşə qəbul olduğu struktur bölmə </span>
                                                     <Form.Label>
@@ -750,7 +750,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşə qəbul olduğu alt struktur bölmə </span>
                                                     <Form.Label>
@@ -761,7 +761,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşə qəbul olduğu vəzifə </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşə qəbul olduğu vəzifə"
@@ -771,7 +771,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşə qəbul tarixi *</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={joinDate}
@@ -832,7 +832,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Sınaq müddəti </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Sınaq müddəti"
@@ -843,7 +843,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
@@ -853,7 +853,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmək şəraitinə görə əlavə"
@@ -863,7 +863,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Digər fərdi əlavə </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Digər fərdi əlavə"
@@ -879,7 +879,7 @@ function CreateOperation() {
                                     <Tab eventKey="8" title="" disabled={tab !== "8"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əmrin əsası</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -889,7 +889,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin adı, soyadı, atasının adı *</span>
                                                     <Select
@@ -908,7 +908,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi struktur bölmənin adı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Struktur bölmənin adı daxil edin"
@@ -917,7 +917,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmənin adı *</span>
                                                     <Form.Label>
@@ -927,7 +927,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşçinin vəzifəsi *</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Alt struktur bölmənin adı daxil edin"
@@ -936,7 +936,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşdən azad olma tarixi *</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={firedDate}
@@ -997,7 +997,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşdən azad olma səbəbi *</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşdən azad olma səbəbini daxil edin"
@@ -1007,7 +1007,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İstifadə edilməmiş məzuniyyət gününə görə kompensasiya *</span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -1053,7 +1053,7 @@ function CreateOperation() {
                                                         }
                                                         <Row>
                                                             <Col xs={12}>
-                                                                <Form.Group>
+                                                                <Form.Group className="form-group">
                                                                     <span className="input-title">Qeyd</span>
                                                                     <Form.Label>
                                                                         <Form.Control as="textarea"
@@ -1077,7 +1077,7 @@ function CreateOperation() {
                                     <Tab eventKey="9" title="" disabled={tab !== "9"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin adı, soyadı, atasının adı *</span>
                                                     <Select
@@ -1096,7 +1096,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştatın nömrəsi</span>
                                                     <Select
                                                         placeholder="İşçinin nömrəsini seç"
@@ -1113,7 +1113,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Struktur bölmənin adı daxil edin"
@@ -1122,7 +1122,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi vəzifəsi</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Alt struktur bölmənin adı daxil edin"
@@ -1131,7 +1131,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Dəyişiklik tarixi *</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={changeDate}
@@ -1192,7 +1192,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Keçirildiyi struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
@@ -1202,7 +1202,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Keçirildiyi vəzifə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi vəzifə"
@@ -1218,7 +1218,7 @@ function CreateOperation() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
@@ -1227,7 +1227,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
@@ -1237,7 +1237,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
@@ -1254,7 +1254,7 @@ function CreateOperation() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
@@ -1265,7 +1265,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
@@ -1276,7 +1276,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
@@ -1294,7 +1294,7 @@ function CreateOperation() {
                                     <Tab eventKey="10" title="" disabled={tab !== "10"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin adı, soyadı, atasının adı *</span>
                                                     <Select
@@ -1313,7 +1313,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -1324,7 +1324,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
@@ -1333,7 +1333,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Dəyişiklik tarixi *</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={changeDate}
@@ -1400,7 +1400,7 @@ function CreateOperation() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
@@ -1409,7 +1409,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
@@ -1419,7 +1419,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
@@ -1436,7 +1436,7 @@ function CreateOperation() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
@@ -1447,7 +1447,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
@@ -1458,7 +1458,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
@@ -1476,7 +1476,7 @@ function CreateOperation() {
                                     <Tab eventKey="11" title="" disabled={tab !== "11"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin adı, soyadı, atasının adı *</span>
                                                     <Select
@@ -1495,7 +1495,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -1506,7 +1506,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
@@ -1515,7 +1515,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Dəyişiklik tarixi *</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={changeDate}
@@ -1582,7 +1582,7 @@ function CreateOperation() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
@@ -1591,7 +1591,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
@@ -1608,7 +1608,7 @@ function CreateOperation() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
@@ -1619,7 +1619,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
@@ -1636,7 +1636,7 @@ function CreateOperation() {
                                     <Tab eventKey="12" title="" disabled={tab !== "12"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, ata adı *</span>
                                                     <Select
@@ -1655,7 +1655,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -1666,7 +1666,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin işlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -1677,7 +1677,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
@@ -1686,7 +1686,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">İşçinin faktiki iş rejimi *</span>
                                                     <Form.Label>
@@ -1696,7 +1696,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">İşçinin keçirildiyi iş rejimi *</span>
                                                     <Select
@@ -1709,7 +1709,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title"> Faktiki əmək haqqı: AZN (vergilər və digər ödənişlər daxil olmaqla)</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder=" Faktiki əmək haqqı"
@@ -1718,7 +1718,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Dəyişiklik edilən əmək haqqı Azn (vergilər və digər ödənişlər daxil olmaqla</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Dəyişiklik edilən əmək haqqı"
@@ -1735,7 +1735,7 @@ function CreateOperation() {
                                     <Tab eventKey="13" title="" disabled={tab !== "13"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, ata adı *</span>
                                                     <Select
@@ -1754,7 +1754,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştatın nömrəsi</span>
                                                     <Select
                                                         placeholder="İşçinin nömrəsini seç"
@@ -1771,7 +1771,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -1782,7 +1782,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
@@ -1791,7 +1791,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Dəyişiklik tarixi *</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={changeDate}
@@ -1852,7 +1852,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Keçirildiyi struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
@@ -1862,7 +1862,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Keçirildiyi alt struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
@@ -1872,7 +1872,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Keçirildiyi iş yeri</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi iş yeri"
@@ -1888,7 +1888,7 @@ function CreateOperation() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
@@ -1897,7 +1897,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
@@ -1907,7 +1907,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
@@ -1924,7 +1924,7 @@ function CreateOperation() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
@@ -1934,7 +1934,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
@@ -1945,7 +1945,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
@@ -1963,7 +1963,7 @@ function CreateOperation() {
                                     <Tab eventKey="14" title="" disabled={tab !== "14"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin adı, soyadı, atasının adı *</span>
                                                     <Select
@@ -1982,7 +1982,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştatın nömrəsi</span>
                                                     <Select
                                                         placeholder="İşçinin nömrəsini seç"
@@ -1999,7 +1999,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Struktur bölmənin adı daxil edin"
@@ -2008,7 +2008,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi vəzifəsi</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Alt struktur bölmənin adı daxil edin"
@@ -2017,7 +2017,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Dəyişiklik tarixi *</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={changeDate}
@@ -2078,7 +2078,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Keçirildiyi müddət</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi müddət"
@@ -2090,7 +2090,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Keçirildiyi struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
@@ -2100,7 +2100,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Keçirildiyi alt struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
@@ -2110,7 +2110,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Keçirildiyi iş yeri</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi iş yeri"
@@ -2126,7 +2126,7 @@ function CreateOperation() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
@@ -2135,7 +2135,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
@@ -2145,7 +2145,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
@@ -2162,7 +2162,7 @@ function CreateOperation() {
                                             </div>
                                             <Row>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Ştat üzrə əsas əmək haqqı</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Ştat üzrə əsas əmək haqqı"
@@ -2172,7 +2172,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Əmək şəraitinə görə əlavə </span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Əmək şəraitinə görə əlavə"
@@ -2183,7 +2183,7 @@ function CreateOperation() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col xs={6}>
-                                                    <Form.Group>
+                                                    <Form.Group className="form-group">
                                                         <span className="input-title">Digər fərdi əlavə</span>
                                                         <Form.Label>
                                                             <Form.Control placeholder="Digər fərdi əlavə daxil edin"
@@ -2201,7 +2201,7 @@ function CreateOperation() {
                                     <Tab eventKey="15" title="" disabled={tab !== "15"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -2220,7 +2220,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştatın nömrəsi</span>
                                                     <Select
                                                         placeholder="İşçinin nömrəsini seç"
@@ -2237,7 +2237,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -2248,7 +2248,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
@@ -2257,7 +2257,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Dəyişiklik tarixi *</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={changeDate}
@@ -2318,7 +2318,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Həvalə müddəti</span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -2446,7 +2446,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Həvalə olunan vəzifə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Həvalə olunan vəzifə"
@@ -2456,7 +2456,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Həvalə olunan vəzifənin aid olduğu struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -2467,7 +2467,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Həvalə olunan vəzifənin aid olduğu alt struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -2478,7 +2478,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Keçirildiyi iş yeri</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi iş yeri"
@@ -2489,7 +2489,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əvəz edən işçinin əmək haqqı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əvəz edən işçinin əmək haqqı"
@@ -2499,7 +2499,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əvəz edilən  işçinin əmək haqqı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
@@ -2511,7 +2511,7 @@ function CreateOperation() {
                                             {
                                                 positionSalary > salary ?
                                                     <Col xs={6}>
-                                                        <Form.Group>
+                                                        <Form.Group className="form-group">
                                                             <span
                                                                 className="input-title">Əvəz edən işçinin əmək haqqı</span>
                                                             <Form.Label>
@@ -2530,7 +2530,7 @@ function CreateOperation() {
                                     <Tab eventKey="16" title="" disabled={tab !== "16"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -2549,7 +2549,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ştatın nömrəsi</span>
                                                     <Select
                                                         placeholder="İşçinin nömrəsini seç"
@@ -2566,7 +2566,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -2577,7 +2577,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
@@ -2586,7 +2586,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Dəyişiklik tarixi *</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={changeDate}
@@ -2647,7 +2647,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əvəzetmə müddəti</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əvəzetmə müddəti"
@@ -2659,7 +2659,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əvəz olunan vəzifə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi vəzifə"
@@ -2669,7 +2669,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əvəz olunan vəzifənin aid olduğu struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
@@ -2679,7 +2679,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əvəz olunan vəzifənin aid olduğu alt struktur bölmə</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
@@ -2689,7 +2689,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əvəz edən işçinin əmək haqqı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
@@ -2699,7 +2699,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əvəz edən vəzifənin  əmək haqqı</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Keçirildiyi struktur bölmə"
@@ -2715,7 +2715,7 @@ function CreateOperation() {
                                     <Tab eventKey="17" title="" disabled={tab !== "17"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -2734,7 +2734,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -2745,7 +2745,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -2756,7 +2756,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -2765,7 +2765,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Məzuniyyətə buraxılma tarixləri  </span>
                                                     <div className="flex">
@@ -2894,7 +2894,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşə başlama tarixi </span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={joinDate}
@@ -2955,7 +2955,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Məzuniyyət müddəti</span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -2974,7 +2974,7 @@ function CreateOperation() {
                                     <Tab eventKey="18" title="" disabled={tab !== "18"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -2993,7 +2993,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -3004,7 +3004,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -3015,7 +3015,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -3024,7 +3024,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Təhsil (və ya yaradıcılıq) məzuniyyətinə buraxılma tarixləri   </span>
                                                     <div className="flex">
@@ -3153,7 +3153,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Təhsil (yaradıcılıq) məzuniyyətinin müddəti (gün) </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -3166,7 +3166,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşə başlama tarixi </span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={joinDate}
@@ -3232,7 +3232,7 @@ function CreateOperation() {
                                     <Tab eventKey="19" title="" disabled={tab !== "19"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -3251,7 +3251,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -3262,7 +3262,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -3273,7 +3273,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -3282,7 +3282,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Məzuniyyət müddəti</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Məzuniyyət müddəti "
@@ -3294,7 +3294,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Məzuniyyətə buraxılma tarixləri</span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -3422,7 +3422,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşə başlama tarixi </span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={joinDate}
@@ -3489,7 +3489,7 @@ function CreateOperation() {
                                     <Tab eventKey="20" title="" disabled={tab !== "20"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı</span>
                                                     <Select
@@ -3508,7 +3508,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -3519,7 +3519,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -3530,7 +3530,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -3539,7 +3539,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Məzuniyyət müddəti</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Məzuniyyət müddəti "
@@ -3551,7 +3551,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Məzuniyyətə buraxılma tarixləri</span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -3679,7 +3679,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşə başlama tarixi </span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={joinDate}
@@ -3746,7 +3746,7 @@ function CreateOperation() {
                                     <Tab eventKey="21" title="" disabled={tab !== "21"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı</span>
                                                     <Select
@@ -3765,7 +3765,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -3776,7 +3776,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -3787,7 +3787,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -3796,7 +3796,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Məzuniyyət müddəti</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Məzuniyyət müddəti "
@@ -3808,7 +3808,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Məzuniyyətə buraxılma tarixləri</span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -3936,7 +3936,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşə başlama tarixi </span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={joinDate}
@@ -4003,7 +4003,7 @@ function CreateOperation() {
                                     <Tab eventKey="22" title="" disabled={tab !== "22"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı</span>
                                                     <Select
@@ -4022,7 +4022,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Struktur bölmə </span>
                                                     <Form.Label>
@@ -4033,7 +4033,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Alt struktur bölmə </span>
                                                     <Form.Label>
@@ -4044,7 +4044,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -4053,7 +4053,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ödənişli istirahət müddəti</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Məzuniyyət müddəti "
@@ -4065,7 +4065,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ödənişli istirahətə buraxılma tarixləri</span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -4193,7 +4193,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşə başlama tarixi </span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={joinDate}
@@ -4254,7 +4254,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Ödənişli istirahət verilməsinin səbəbi </span>
                                                     <Select
@@ -4276,7 +4276,7 @@ function CreateOperation() {
                                     <Tab eventKey="23" title="" disabled={tab !== "23"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı</span>
                                                     <Select
@@ -4295,7 +4295,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -4306,7 +4306,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -4317,7 +4317,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -4326,7 +4326,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Məzuniyyətə buraxıldığı müddət</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Məzuniyyət müddəti "
@@ -4338,7 +4338,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Məzuniyyətə buraxılma tarixləri</span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -4466,7 +4466,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Məzuniyyətin keçirildiyi tarixlər</span>
                                                     <div className="flex">
@@ -4595,7 +4595,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Məzuniyyətin keçirildiyi müddət</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Məzuniyyət müddəti "
@@ -4607,7 +4607,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşə başlama tarixi </span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={joinDate}
@@ -4674,7 +4674,7 @@ function CreateOperation() {
                                     <Tab eventKey="24" title="" disabled={tab !== "24"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı</span>
                                                     <Select
@@ -4693,7 +4693,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -4704,7 +4704,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -4715,7 +4715,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -4724,7 +4724,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Məzuniyyətə buraxıldığı  tarixləri</span>
                                                     <div className="flex">
@@ -4853,7 +4853,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Geri çağırılma tarixi </span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={callBackDate}
@@ -4914,7 +4914,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Geri çağırılma səbəbi</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Geri çağırılma səbəbi"
@@ -4930,7 +4930,7 @@ function CreateOperation() {
                                     <Tab eventKey="25" title="" disabled={tab !== "25"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Geri çağırılan işçinin soyadı, adı, atasının adı</span>
                                                     <Select
@@ -4949,7 +4949,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -4960,7 +4960,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin işlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -4971,7 +4971,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
@@ -4980,7 +4980,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Məzuniyyətə buraxıldığı tarixləri</span>
                                                     <div className="flex">
@@ -5110,7 +5110,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Geri çağırılma tarixi</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={callBackDate}
@@ -5172,7 +5172,7 @@ function CreateOperation() {
                                             </Col>
 
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Geri çağırılma səbəbi </span>
                                                     <Form.Label>
@@ -5216,7 +5216,7 @@ function CreateOperation() {
                                                             }
                                                             <Row>
                                                                 <Col xs={12}>
-                                                                    <Form.Group>
+                                                                    <Form.Group className="form-group">
                                                                         <span
                                                                             className="input-title">Əlavə qeydlər</span>
                                                                         <Form.Label>
@@ -5243,7 +5243,7 @@ function CreateOperation() {
                                     <Tab eventKey="26" title="" disabled={tab !== "26"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı</span>
                                                     <Select
@@ -5262,7 +5262,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -5273,7 +5273,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -5284,7 +5284,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -5298,7 +5298,7 @@ function CreateOperation() {
                                     <Tab eventKey="27" title="" disabled={tab !== "27"}>
                                         <Row>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <Form.Label>
                                                         <Form.Control
                                                             className="resize"
@@ -5313,7 +5313,7 @@ function CreateOperation() {
                                     <Tab eventKey="28" title="" disabled={tab !== "28"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Təlimə göndərilmə zərurəti </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -5324,7 +5324,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -5343,7 +5343,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -5354,7 +5354,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -5365,7 +5365,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -5374,7 +5374,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Təlimin əhatə etdiyi dövrlər  </span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -5503,7 +5503,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Təlimin adı  </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Təlimin adı  daxil edin"
@@ -5519,7 +5519,7 @@ function CreateOperation() {
                                     <Tab eventKey="29" title="" disabled={tab !== "29"}>
                                         <Row>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <Form.Label>
                                                         <Form.Control
                                                             className="resize"
@@ -5529,7 +5529,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <Form.Label>
                                                         <Form.Control
                                                             className="resize"
@@ -5545,7 +5545,7 @@ function CreateOperation() {
                                     <Tab eventKey="30" title="" disabled={tab !== "30"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Ezamiyyənin məqsədi  </span>
                                                     <Form.Label>
@@ -5556,7 +5556,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -5575,7 +5575,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -5586,7 +5586,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -5597,7 +5597,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
@@ -5607,7 +5607,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezam olunduğu ölkə\şəhər\rayon </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -5619,7 +5619,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezam olunma tarixi  </span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -5747,7 +5747,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezamiyyət müddəti </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -5760,7 +5760,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezamiyyə müddətində işçinin yolda keçirdiyi istirahət gününə təsadüf etdiyi tarix:</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={nonWorkDay}
@@ -5821,7 +5821,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezamiyyə müddətində yolda keçirilmiş istirahət gününün əvəzinə verilmiş istirahət günü</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={givenNonWorkDay}
@@ -5882,7 +5882,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşçinin işə başlama tarixi</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={joinDate}
@@ -5976,7 +5976,7 @@ function CreateOperation() {
                                                         }
                                                         <Row>
                                                             <Col xs={12}>
-                                                                <Form.Group>
+                                                                <Form.Group className="form-group">
                                                                     <span className="input-title">Qeyd</span>
                                                                     <Form.Label>
                                                                         <Form.Control as="textarea"
@@ -6001,7 +6001,7 @@ function CreateOperation() {
                                     <Tab eventKey="31" title="" disabled={tab !== "31"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Ezamiyyənin uzadılmasının məqsədi   </span>
                                                     <Form.Label>
@@ -6012,7 +6012,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -6031,7 +6031,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -6042,7 +6042,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -6053,7 +6053,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
@@ -6063,7 +6063,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezam olunduğu ölkə\şəhər\rayon </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -6075,7 +6075,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezam olunma tarixi  </span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -6203,7 +6203,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezamiyyət müddəti </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -6216,7 +6216,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezamiyyə müddətində işçinin yolda keçirdiyi istirahət gününə təsadüf etdiyi tarix:</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={nonWorkDay}
@@ -6277,7 +6277,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezamiyyə müddətində yolda keçirilmiş istirahət gününün əvəzinə verilmiş istirahət günü</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={givenNonWorkDay}
@@ -6338,7 +6338,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşçinin işə başlama tarixi</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={joinDate}
@@ -6432,7 +6432,7 @@ function CreateOperation() {
                                                         }
                                                         <Row>
                                                             <Col xs={12}>
-                                                                <Form.Group>
+                                                                <Form.Group className="form-group">
                                                                     <span className="input-title">Qeyd</span>
                                                                     <Form.Label>
                                                                         <Form.Control as="textarea"
@@ -6457,7 +6457,7 @@ function CreateOperation() {
                                     <Tab eventKey="32" title="" disabled={tab !== "32"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Ezamiyyədən geri çağırılmanın məqsədi  </span>
                                                     <Form.Label>
@@ -6468,7 +6468,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -6487,7 +6487,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -6498,7 +6498,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -6509,7 +6509,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
@@ -6519,7 +6519,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezam olunduğu ölkə\şəhər\rayon </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -6531,7 +6531,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezam olunma tarixi  </span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -6659,7 +6659,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezamiyyət müddəti </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -6672,7 +6672,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ezamiyyətdən geri çağırıldığı və işə başladığı tarix:</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={callBackDate}
@@ -6766,7 +6766,7 @@ function CreateOperation() {
                                                         }
                                                         <Row>
                                                             <Col xs={12}>
-                                                                <Form.Group>
+                                                                <Form.Group className="form-group">
                                                                     <span className="input-title">Qeyd</span>
                                                                     <Form.Label>
                                                                         <Form.Control as="textarea"
@@ -6790,7 +6790,7 @@ function CreateOperation() {
                                     <Tab eventKey="33" title="" disabled={tab !== "33"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əsaslandırma</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -6800,7 +6800,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, ata adı *</span>
                                                     <Select
@@ -6819,7 +6819,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -6830,7 +6830,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin işlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -6841,7 +6841,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
@@ -6850,7 +6850,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Maddi yardımın məbləği (vergilər və digər ödənişər xaric olmaqla) </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Maddi yardımın məbləği "
@@ -6867,7 +6867,7 @@ function CreateOperation() {
                                     <Tab eventKey="34" title="" disabled={tab !== "34"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əsaslandırma</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -6877,7 +6877,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Mükafatlandırılan işçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -6896,7 +6896,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -6907,7 +6907,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -6918,7 +6918,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
@@ -6927,7 +6927,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Mükafatın məbləği Azn (vergilər və digər ödənişlər daxil olmaqla və ya xaric olmaqla):  </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Mükafatın məbləği  məbləği "
@@ -6944,7 +6944,7 @@ function CreateOperation() {
                                     <Tab eventKey="35" title="" disabled={tab !== "35"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əsaslandırma</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -6954,7 +6954,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -6973,7 +6973,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -6984,7 +6984,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -6995,7 +6995,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşlədiyi vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İşlədiyi vəzifəsi"
@@ -7004,7 +7004,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Fərdi əlavənin məbləği Azn:  </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="300 AZN"
@@ -7021,7 +7021,7 @@ function CreateOperation() {
                                     <Tab eventKey="36" title="" disabled={tab !== "36"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əsaslandırma</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -7031,7 +7031,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -7050,7 +7050,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -7061,7 +7061,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -7072,7 +7072,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -7081,7 +7081,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Seçkidə iştirak edəcəyi tarixlər</span>
                                                     <div className="flex">
@@ -7210,7 +7210,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Seçkidə iştirak edəcəyi müddət (gün)  </span>
                                                     <Form.Label>
@@ -7229,7 +7229,7 @@ function CreateOperation() {
                                     <Tab eventKey="37" title="" disabled={tab !== "37"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əsaslandırma</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -7239,7 +7239,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -7258,7 +7258,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -7269,7 +7269,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -7280,7 +7280,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -7289,7 +7289,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Müvəqqəti azad olunma müddəti</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Müvəqqəti azad olunma müddəti"
@@ -7306,7 +7306,7 @@ function CreateOperation() {
                                     <Tab eventKey="38" title="" disabled={tab !== "38"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əsaslandırma</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -7316,7 +7316,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -7335,7 +7335,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -7346,7 +7346,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -7357,7 +7357,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -7366,7 +7366,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Təlim-məşq toplantısında iştirak edəcəyi tarixlər </span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -7495,7 +7495,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Təlim-məşq toplantısında iştirak edəcəyi günlər  </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder=""
@@ -7513,7 +7513,7 @@ function CreateOperation() {
                                     <Tab eventKey="39" title="" disabled={tab !== "39"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əsaslandırma</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -7523,7 +7523,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -7542,7 +7542,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -7553,7 +7553,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -7564,7 +7564,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -7573,7 +7573,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İstirahət tarixi</span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -7702,7 +7702,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İstirahətin müddəti </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İstirahətin müddəti "
@@ -7714,7 +7714,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşçinin işə başlama tarixi</span>
                                                     <Form.Label className="relative m-0">
                                                         <DatePicker selected={joinDate}
@@ -7781,7 +7781,7 @@ function CreateOperation() {
                                     <Tab eventKey="40" title="" disabled={tab !== "40"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Əsaslandırma</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -7791,7 +7791,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -7810,7 +7810,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Struktur bölmə </span>
                                                     <Form.Label>
@@ -7821,7 +7821,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşçinin Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -7830,7 +7830,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ödənilmə başlanılan tarix</span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -7959,7 +7959,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Ödəncin məbləği </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="İstirahətin müddəti "
@@ -7976,7 +7976,7 @@ function CreateOperation() {
                                     <Tab eventKey="41" title="" disabled={tab !== "41"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin işdən kənarlaşdırılması səbəbi </span>
                                                     <Form.Label>
@@ -7987,7 +7987,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -8006,7 +8006,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -8017,7 +8017,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -8028,7 +8028,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={4}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -8037,7 +8037,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Kənarlaşdırma müddəti </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder=""
@@ -8054,7 +8054,7 @@ function CreateOperation() {
                                     <Tab eventKey="42" title="" disabled={tab !== "42"}>
                                         <Row>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <Form.Label>
                                                         <Form.Control
                                                             className="resize"
@@ -8070,7 +8070,7 @@ function CreateOperation() {
                                     <Tab eventKey="43" title="" disabled={tab !== "43"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -8089,7 +8089,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin işlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -8100,7 +8100,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin işlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -8111,7 +8111,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin vəzifəsi </span>
                                                     <Form.Label>
@@ -8121,7 +8121,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşçinin faktiki iş vaxtı</span>
                                                     <div className="flex">
                                                         <Form.Label className="relative m-0">
@@ -8257,7 +8257,7 @@ function CreateOperation() {
                                     <Tab eventKey="45" title="" disabled={tab !== "45"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçiyə xəbərdarlıq edilməsinin səbəbi </span>
                                                     <Form.Label>
@@ -8268,7 +8268,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Xəbərdarlıq edilən işçinin və ya işçilərin soyadı, adı, atasının adı: *</span>
                                                     <Select
@@ -8299,7 +8299,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -8310,7 +8310,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin və ya işçilərin vəzifəsi </span>
                                                     <Form.Label>
@@ -8320,7 +8320,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Təqdimat sahibinin soyadı, adı, atasının adı  </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -8332,7 +8332,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Struktur bölmə  </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Struktur bölmə daxil edin"
@@ -8343,7 +8343,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi  </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi  daxil edin"
@@ -8360,7 +8360,7 @@ function CreateOperation() {
                                     <Tab eventKey="44" title="" disabled={tab !== "44"}>
                                         <Row>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşə cəlb edilmə səbəbi </span>
                                                     <Select
@@ -8377,7 +8377,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşə cəlb edilmə zərurəti  </span>
                                                     <Form.Label>
@@ -8388,7 +8388,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşə cəlb edilən işçinin və ya işçilərin soyadı, adı, atasının adı </span>
                                                     <Select
@@ -8407,7 +8407,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşə cəlb edilən işçi və ya işçilərin işlədiyi struktur bölmə</span>
                                                     <Form.Label>
@@ -8418,7 +8418,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşə cəlb edilən işçi və ya işçilərin vəzifəsi </span>
                                                     <Form.Label>
@@ -8428,7 +8428,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Struktur bölmə rəhbərinin soyadı, adı, atasının adı  </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -8440,7 +8440,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Struktur bölmənin adı </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Struktur bölmənin adı"
@@ -8451,7 +8451,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi  </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəni  daxil edin"
@@ -8467,7 +8467,7 @@ function CreateOperation() {
                                     <Tab eventKey="46" title="" disabled={tab !== "46"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">Əmək haqqından tutulma səbəbi </span>
                                                     <Form.Label>
@@ -8479,7 +8479,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -8498,7 +8498,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -8509,7 +8509,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -8520,7 +8520,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -8529,7 +8529,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Tutulma məbləği  </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Tutulma məbləği"
@@ -8541,7 +8541,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Tutulacağı aylar </span>
                                                     <Select
                                                         placeholder="Tutulacağı ayları seçin"
@@ -8566,7 +8566,7 @@ function CreateOperation() {
                                     <Tab eventKey="47" title="" disabled={tab !== "47"}>
                                         <Row>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İşçiyə intizam tənbehinin verilməsinin səbəbi</span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Əmrin əsası daxil edin"
@@ -8576,7 +8576,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşçinin soyadı, adı, atasının adı *</span>
                                                     <Select
@@ -8595,7 +8595,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi struktur bölmə </span>
                                                     <Form.Label>
@@ -8606,7 +8606,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span
                                                         className="input-title">İşlədiyi alt struktur bölmə </span>
                                                     <Form.Label>
@@ -8617,7 +8617,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi"
@@ -8626,7 +8626,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">İntizam tənbehinin növü *</span>
                                                     <Select
                                                         placeholder="İntizam tənbehinin növünü seçin"
@@ -8638,7 +8638,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Təqdimat sahibinin soyadı, adı, atasının adı  </span>
                                                     <Form.Label>
                                                         <Form.Control
@@ -8650,7 +8650,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Struktur bölmə  </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Struktur bölmə daxil edin"
@@ -8661,7 +8661,7 @@ function CreateOperation() {
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={6}>
-                                                <Form.Group>
+                                                <Form.Group className="form-group">
                                                     <span className="input-title">Vəzifəsi  </span>
                                                     <Form.Label>
                                                         <Form.Control placeholder="Vəzifəsi  daxil edin"
